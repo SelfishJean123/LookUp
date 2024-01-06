@@ -1,0 +1,77 @@
+.header-component {
+  position: relative;
+  z-index: 20;
+
+  .navbar {
+    .container {
+      .navbar-brand {
+        img {
+          max-width: 200px;
+          margin-top: 10px;
+        }
+      }
+
+      button.navbar-toggler {
+        margin-right: 10px;
+      }
+
+      .navbar-collapse {
+        @media (max-width: 767px) {
+          padding-top: 10px;
+        }
+
+        form {
+          margin: 0 auto;
+          max-width: 200px;
+          height: 40px;
+
+          input {
+            margin-right: 5px;
+          }
+
+          button {
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+
+            svg {
+              width: 20px;
+            }
+          }
+        }
+
+        ul.navbar-nav {
+          align-items: center;
+          padding: 10px 0;
+
+          .nav-item {
+            text-align: center;
+
+            &.dropdown {
+              a.dropdown-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                svg {
+                  width: 30px;
+                  margin: 0 8px;
+                }
+              }
+
+              .dropdown-menu {
+                text-align: center;
+
+                .dropdown-item {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

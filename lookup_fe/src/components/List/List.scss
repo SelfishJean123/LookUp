@@ -1,0 +1,12 @@
+.list-component {
+  .list-items {
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .list-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+}

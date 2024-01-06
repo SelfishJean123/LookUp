@@ -1,0 +1,14 @@
+.notification-component {
+  .alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+
+    svg {
+      width: 20px;
+      margin: 2px 0 0 10px;
+    }
+  }
+}

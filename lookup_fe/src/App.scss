@@ -1,0 +1,25 @@
+.app-component {
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url("../public/assets/images/backgrounds/bg.jpg");
+    background-size: 100% auto;
+    background-position: left top;
+    background-repeat: repeat;
+    opacity: 0.6;
+  }
+
+  .main-content-wrapper {
+    min-height: calc(100vh - 9.05rem);
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

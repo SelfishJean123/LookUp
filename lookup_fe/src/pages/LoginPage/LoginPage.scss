@@ -1,0 +1,15 @@
+.login-page {
+  .modal {
+    background: rgba(0, 0, 0, 0.6);
+    display: block;
+    z-index: 100;
+
+    .modal-dialog {
+      margin: 100px 20px;
+
+      @media (min-width: 576px) {
+        margin: 120px auto;
+      }
+    }
+  }
+}
