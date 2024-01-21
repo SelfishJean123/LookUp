@@ -1,6 +1,6 @@
 interface Product {
   _id: string;
-  userId: string;
+  user: string;
   image: string;
   name: string;
   subname: string;
