@@ -10,7 +10,8 @@ type RatingProps = {
 
 const Rating: React.FC<RatingProps> = ({ rating, reviews, color }) => {
   const iconsArray = [];
-  for (let i = 0; i < 5; i++) iconsArray.push(i < Math.round(rating) ? <SolidStarIcon /> : <OutlineStarIcon />);
+  for (let i = 0; i < 5; i++)
+    iconsArray.push(i < Math.round(rating) ? <SolidStarIcon key={i} /> : <OutlineStarIcon key={i} />);
 
   return (
     <div className='rating-component'>

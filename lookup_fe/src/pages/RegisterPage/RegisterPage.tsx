@@ -4,13 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/actions/usersActions";
 import Spinner from "../../components/Spinner/Spinner";
 import Notification from "../../components/Notification/Notification";
-import "./LoginPage.scss";
+import "./RegisterPage.scss";
 
-type LoginPageProps = {
+type RegisterPageProps = {
   pathname: string;
 };
 
-const LoginPage: React.FC<LoginPageProps> = ({ pathname }) => {
+const RegisterPage: React.FC<RegisterPageProps> = ({ pathname }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { userData, loading, error } = useSelector((state: any) => state.userLoginReducer);
@@ -30,7 +30,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ pathname }) => {
   };
 
   return (
-    <div className='login-page'>
+    <div className='register-page'>
       {loading ? (
         <Spinner />
       ) : error ? (
@@ -82,7 +82,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ pathname }) => {
                       Submit
                     </button>
                     <button type='submit' className='btn btn-primary'>
-                      <Link to='/register'>Register instead</Link>
+                      <Link to='/'>Register instead</Link>
                     </button>
                     <button type='button' className='btn btn-secondary' data-bs-dismiss='modal'>
                       Close
@@ -98,4 +98,4 @@ const LoginPage: React.FC<LoginPageProps> = ({ pathname }) => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

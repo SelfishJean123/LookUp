@@ -2,6 +2,7 @@ import React from "react";
 import ListTile from "../ListTile/ListTile";
 import Product from "../../models/Product.model";
 import "./List.scss";
+import { Link } from "react-router-dom";
 
 type ListProps = {
   items: Product[];
@@ -18,39 +19,39 @@ const List: React.FC<ListProps> = ({ items }) => {
       <div className='list-pagination'>
         <ul className='pagination pagination-md'>
           <li className='page-item disabled'>
-            <a className='page-link' href='#'>
+            <Link className='page-link' to='#'>
               &laquo;
-            </a>
+            </Link>
           </li>
           <li className='page-item active'>
-            <a className='page-link' href='#'>
+            <Link className='page-link' to='#'>
               1
-            </a>
+            </Link>
           </li>
           <li className='page-item'>
-            <a className='page-link' href='#'>
+            <Link className='page-link' to='#'>
               2
-            </a>
+            </Link>
           </li>
           <li className='page-item'>
-            <a className='page-link' href='#'>
+            <Link className='page-link' to='#'>
               3
-            </a>
+            </Link>
           </li>
           <li className='page-item'>
-            <a className='page-link' href='#'>
+            <Link className='page-link' to='#'>
               4
-            </a>
+            </Link>
           </li>
           <li className='page-item'>
-            <a className='page-link' href='#'>
+            <Link className='page-link' to='#'>
               5
-            </a>
+            </Link>
           </li>
           <li className='page-item'>
-            <a className='page-link' href='#'>
+            <Link className='page-link' to='#'>
               &raquo;
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

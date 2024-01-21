@@ -1,10 +1,11 @@
 .home-page {
   .buttons-wrapper {
     .btn-success,
-    .btn-secondary {
+    .btn-primary {
       margin: 0 10px;
-      padding: 10px 30px;
+      padding: 10px 30px 12px 30px;
       transition: all 0.3s ease-in-out;
+      text-transform: uppercase;
     }
   }
 }

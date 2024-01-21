@@ -1,5 +1,6 @@
 interface Product {
-  user: string;
+  _id: string;
+  userId: string;
   image: string;
   name: string;
   subname: string;
@@ -18,7 +19,6 @@ interface Product {
   rating: number;
   numReviews: number;
   createdAt: Date;
-  _id: string;
 }
 
 export default Product;

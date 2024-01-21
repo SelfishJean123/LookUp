@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../store/actions/usersActions";
 import UserIcon from "../_icons/UserIcon";
@@ -6,8 +6,11 @@ import SearchIcon from "../_icons/SearchIcon";
 import "./Header.scss";
 
 const Header = () => {
-  const { user } = useSelector((state: any) => state.userLoginReducer);
+  const { userData } = useSelector((state: any) => state.userLoginReducer);
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const currentLocation = location.pathname;
   const logoutHandler = () => dispatch<any>(logoutUser());
 
   return (
@@ -59,31 +62,29 @@ const Header = () => {
                   Articles
                 </Link>
               </li>
-              {user ? (
+              {userData ? (
                 <li className='nav-item dropdown'>
-                  <Link
+                  <button
                     className='nav-link dropdown-toggle'
                     data-bs-toggle='dropdown'
-                    to='/aa'
-                    role='button'
                     aria-haspopup='true'
                     aria-expanded='false'>
-                    {user.name}
+                    {userData.name}
                     <UserIcon />
-                  </Link>
+                  </button>
 
                   <div className='dropdown-menu'>
                     <Link className='dropdown-item' to='/profile'>
                       My Profile
                     </Link>
-                    <li className='dropdown-item' onClick={logoutHandler}>
+                    <button className='dropdown-item' onClick={logoutHandler}>
                       Sign Out
-                    </li>
+                    </button>
                   </div>
                 </li>
               ) : (
                 <li className='nav-item'>
-                  <Link className='nav-link' to='/login'>
+                  <Link to='/login' state={{ from: currentLocation }} className='nav-link'>
                     Sign In
                   </Link>
                 </li>

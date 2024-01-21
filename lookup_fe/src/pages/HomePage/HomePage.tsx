@@ -5,12 +5,12 @@ const HomePage = () => {
   return (
     <div className='home-page'>
       <div className='buttons-wrapper'>
-        <Link to='/login' type='button' className='btn btn-success'>
-          Log In
+        <Link to='/login' state={{ from: "/" }} type='button' className='btn btn-lg btn-success'>
+          Sign In
         </Link>
 
-        <Link to='/register' type='button' className='btn btn-secondary'>
-          Register
+        <Link to='/register' state={{ from: "/" }} type='button' className='btn btn-lg btn-primary'>
+          Sign Up
         </Link>
       </div>
     </div>
