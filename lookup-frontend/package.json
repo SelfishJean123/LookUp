@@ -14,11 +14,13 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.4",
     "@mui/material": "^5.16.4",
+    "autosuggest-highlight": "^3.3.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
+    "@types/autosuggest-highlight": "^3.2.3",
     "@types/node": "^20.14.11",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

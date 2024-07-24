@@ -26,7 +26,7 @@ const routes = createBrowserRouter([
         element: <ContentPageLayout />,
         children: [
           {
-            path: "user",
+            path: "user-account",
             element: <UserAccountPage />,
           },
           {
