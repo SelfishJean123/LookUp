@@ -1,0 +1,15 @@
+@import "@styles/colors.scss";
+
+.content-page-layout {
+  width: calc(100% - 65px);
+  min-height: calc(100vh - 70px);
+  background-color: $beige;
+  position: relative;
+  padding: 0 0 100px 0;
+
+  .content-layout-logo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+  }
+}
