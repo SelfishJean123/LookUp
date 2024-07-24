@@ -10,13 +10,7 @@ interface ContactTileCmpProps {
   link: string;
 }
 
-const ContactTileCmp: FC<{ heading: string; subHeading: string; bgColor: string; icon: ReactNode; link: string }> = ({
-  heading,
-  subHeading,
-  bgColor,
-  icon,
-  link,
-}: ContactTileCmpProps) => {
+const ContactTileCmp: FC<ContactTileCmpProps> = ({ heading, subHeading, bgColor, icon, link }: ContactTileCmpProps) => {
   return (
     <NavLink to={link} className="contact-tile-component">
       <div className="contact-icon" style={{ background: bgColor }}>

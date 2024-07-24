@@ -7,11 +7,7 @@ interface LabelButtonCmpProps {
   onClick: () => void;
 }
 
-const LabelButtonCmp: FC<{ label: string; bgColor: string; onClick: any }> = ({
-  label,
-  bgColor,
-  onClick,
-}: LabelButtonCmpProps) => {
+const LabelButtonCmp: FC<LabelButtonCmpProps> = ({ label, bgColor, onClick }: LabelButtonCmpProps) => {
   return (
     <Button
       className="label-button-component"

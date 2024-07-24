@@ -10,7 +10,7 @@ interface ListToolbarCmpProps {
   addOnClick: () => void;
 }
 
-const ListToolbarCmp: FC<{ addLabel: string; addOnClick: any }> = ({ addLabel, addOnClick }: ListToolbarCmpProps) => {
+const ListToolbarCmp: FC<ListToolbarCmpProps> = ({ addLabel, addOnClick }: ListToolbarCmpProps) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

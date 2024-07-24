@@ -5,7 +5,7 @@ interface TopDescriptionCmpProps {
   descriptionText: string;
 }
 
-const TopDescriptionCmp: FC<{ descriptionText: string }> = ({ descriptionText }: TopDescriptionCmpProps) => {
+const TopDescriptionCmp: FC<TopDescriptionCmpProps> = ({ descriptionText }: TopDescriptionCmpProps) => {
   return <p className="top-description-component">{descriptionText}</p>;
 };
 

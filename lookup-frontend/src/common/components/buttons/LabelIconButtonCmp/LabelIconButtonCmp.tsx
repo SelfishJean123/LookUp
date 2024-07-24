@@ -8,7 +8,7 @@ interface LabelIconButtonCmpProps {
   onClick: () => void;
 }
 
-const LabelIconButtonCmp: FC<{ label: string; icon: ReactNode; bgColor: string; onClick: any }> = ({
+const LabelIconButtonCmp: FC<LabelIconButtonCmpProps> = ({
   label,
   icon,
   bgColor,

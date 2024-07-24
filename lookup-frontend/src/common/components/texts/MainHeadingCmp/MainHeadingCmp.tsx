@@ -5,7 +5,7 @@ interface MainHeadingCmpProps {
   headingText: string;
 }
 
-const MainHeadingCmp: FC<{ headingText: string }> = ({ headingText }: MainHeadingCmpProps) => {
+const MainHeadingCmp: FC<MainHeadingCmpProps> = ({ headingText }: MainHeadingCmpProps) => {
   return <h2 className="main-heading-component">{headingText}</h2>;
 };
 
