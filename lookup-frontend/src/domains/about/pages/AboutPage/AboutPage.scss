@@ -1,18 +1,22 @@
 .about-page {
-  img {
-    margin: 0 auto;
+  img.about-img {
+    margin: 30px auto 0 auto;
     display: block;
     width: 40%;
     border-radius: 10px;
   }
 
-  h3,
-  h4 {
+  h3.about-ceo-name,
+  h4.about-ceo-position {
     margin: 0;
     text-align: center;
   }
 
-  h3 {
-    padding: 20px 0 10px 0;
+  h3.about-ceo-name {
+    padding: 20px 0 0 0;
+  }
+
+  h4.about-ceo-position {
+    padding: 10px 0 30px 0;
   }
 }
