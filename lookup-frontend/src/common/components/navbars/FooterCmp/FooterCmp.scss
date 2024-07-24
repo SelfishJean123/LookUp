@@ -1,0 +1,23 @@
+@import "@styles/colors.scss";
+
+.footer-component {
+  background-color: $green;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .footer-navlink {
+    img {
+      margin: 20px 20px 8px 30px;
+    }
+  }
+
+  p {
+    color: $white;
+    margin: 0 95px 0 0;
+    font-size: small;
+  }
+}
