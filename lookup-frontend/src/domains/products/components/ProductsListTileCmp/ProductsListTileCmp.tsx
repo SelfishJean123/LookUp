@@ -42,7 +42,7 @@ const ProductsListTileCmp: FC<ProductsListTileCmpProps> = ({ name, reviewsNumber
     <div className="product-list-tile-component" ref={tileRef}>
       <div className="product-list-tile-top">
         <div className="product-list-tile-img-wrapper">
-          <img src={`/public/assets/products/${imgSrc}`} alt={name} className="product-list-tile-img" />
+          <img src={`/assets/products/${imgSrc}`} alt={name} className="product-list-tile-img" />
         </div>
 
         <div className="product-list-tile-rating">

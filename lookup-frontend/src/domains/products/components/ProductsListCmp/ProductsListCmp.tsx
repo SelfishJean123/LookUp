@@ -56,8 +56,9 @@ const ProductsListCmp = () => {
   return (
     <div className="products-list-component">
       <div className="products-list-tiles">
-        {products.map((product) => (
+        {products.map((product, index) => (
           <ProductsListTileCmp
+            key={index}
             name={product.name}
             reviewsNumber={product.reviewsNumber}
             rating={product.rating}
