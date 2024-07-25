@@ -4,14 +4,16 @@ import { FC } from "react";
 interface LabelButtonCmpProps {
   label: string;
   bgColor: string;
-  onClick: () => void;
+  type: "button" | "submit" | undefined;
+  onClick?: () => void;
 }
 
-const LabelButtonCmp: FC<LabelButtonCmpProps> = ({ label, bgColor, onClick }: LabelButtonCmpProps) => {
+const LabelButtonCmp: FC<LabelButtonCmpProps> = ({ label, bgColor, type, onClick }: LabelButtonCmpProps) => {
   return (
     <Button
       className="label-button-component"
       variant="contained"
+      type={type}
       onClick={onClick}
       sx={{
         backgroundColor: bgColor,
