@@ -33,6 +33,8 @@ const LabelIconButtonCmp: FC<LabelIconButtonCmpProps> = ({
       sx={{
         color: color || "#000",
         backgroundColor: bgColor || "transparent",
+        textTransform: "capitalize",
+        fontWeight: 700,
       }}
     >
       {label}

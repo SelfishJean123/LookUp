@@ -3,12 +3,13 @@ import { FC } from "react";
 
 interface LabelButtonCmpProps {
   label: string;
-  bgColor: string;
+  color?: string;
+  bgColor?: string;
   type: "button" | "submit" | undefined;
   onClick?: () => void;
 }
 
-const LabelButtonCmp: FC<LabelButtonCmpProps> = ({ label, bgColor, type, onClick }: LabelButtonCmpProps) => {
+const LabelButtonCmp: FC<LabelButtonCmpProps> = ({ label, color, bgColor, type, onClick }: LabelButtonCmpProps) => {
   return (
     <Button
       className="label-button-component"
@@ -16,7 +17,10 @@ const LabelButtonCmp: FC<LabelButtonCmpProps> = ({ label, bgColor, type, onClick
       type={type}
       onClick={onClick}
       sx={{
-        backgroundColor: bgColor,
+        color: color || "#000",
+        backgroundColor: bgColor || "transparent",
+        textTransform: "capitalize",
+        fontWeight: 700,
       }}
     >
       {label}

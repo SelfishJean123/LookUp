@@ -1,6 +1,9 @@
+@import "@styles/colors.scss";
+
 .image-carousel-component {
   .carousel-image {
     img {
+      background-color: $white;
       width: 100%;
     }
   }
@@ -21,6 +24,7 @@
         height: 100%;
 
         img {
+          background-color: $white;
           width: 100%;
         }
       }

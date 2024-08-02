@@ -2,6 +2,7 @@
   .contact-tiles {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     margin: 20px auto 0 auto;
   }
