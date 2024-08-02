@@ -1,4 +1,4 @@
-import aboutImg from "@assets/about-look-up.avif";
+import aboutImg from "/assets/about-look-up.avif";
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
 import TopDescriptionCmp from "../../../../common/components/texts/TopDescriptionCmp/TopDescriptionCmp";
 import "./AboutPage.scss";

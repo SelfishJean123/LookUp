@@ -1,15 +1,19 @@
 import FooterCmp from "../../components/navbars/FooterCmp/FooterCmp";
-import logo from "@assets/logo-mini-black.svg";
-import { NavLink, Outlet } from "react-router-dom";
+import logo from "/assets/logo-mini-black.svg";
+import { Link, Outlet } from "react-router-dom";
 import "./ContentPageLayout.scss";
 
 const ContentPageLayout = () => {
   return (
     <div className="content-page-layout">
-      <NavLink to="/" className="content-layout-logo">
+      <Link to="/" className="content-layout-logo">
         <img src={logo} alt="look-up-logo" />
-      </NavLink>
-      <Outlet />
+      </Link>
+
+      <div className="content-layout-inner-wrapper">
+        <Outlet />
+      </div>
+
       <FooterCmp />
     </div>
   );

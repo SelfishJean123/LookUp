@@ -36,11 +36,11 @@ const routes = createBrowserRouter([
             element: <ProductsListPage />,
           },
           {
-            path: "products-catalogue/details/:productId",
+            path: "products-catalogue/:productId",
             element: <ProductDetailsPage />,
           },
           {
-            path: "products-catalogue/details/:productId/reviews",
+            path: "products-catalogue/:productId/reviews",
             element: <ProductReviewsPage />,
           },
           {
