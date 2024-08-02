@@ -1,0 +1,96 @@
+@import "@styles/colors.scss";
+
+@keyframes slideBottom {
+  0% {
+    top: calc(var(--tile-width) - 40px);
+  }
+  100% {
+    top: var(--tile-width);
+  }
+}
+
+@keyframes slideTop {
+  0% {
+    top: var(--tile-width);
+  }
+  100% {
+    top: calc(var(--tile-width) - 40px);
+  }
+}
+
+.product-list-tile-component {
+  margin: 10px;
+  width: 100%;
+  max-width: 220px;
+
+  :root {
+    --tile-width: calc(100% - 20px);
+  }
+
+  a {
+    text-decoration: none;
+
+    .product-list-tile-top {
+      position: relative;
+
+      .product-list-tile-img-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $white;
+        width: var(--tile-width);
+        height: var(--tile-width);
+        overflow: hidden;
+
+        img.product-list-tile-img {
+          width: 100%;
+        }
+      }
+
+      .product-list-tile-rating {
+        display: flex;
+        position: absolute;
+        top: calc(var(--tile-width) - 40px);
+        justify-content: space-between;
+        align-items: center;
+        opacity: 0.8;
+        background-color: $white;
+        padding: 10px;
+        width: calc(100% - 20px);
+
+        @media (min-width: 768px) {
+          top: var(--tile-width);
+          animation: 0.5s ease-in-out forwards slideBottom;
+        }
+
+        .product-list-tile-starts-box {
+          svg {
+            color: $yellow;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    .product-list-tile-info {
+      position: relative;
+      z-index: 100;
+      background-color: $apricot;
+      padding: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      h5.product-list-tile-name {
+        display: inline;
+        color: $brick;
+      }
+    }
+
+    @media (min-width: 768px) {
+      &:hover .product-list-tile-rating {
+        animation: 0.5s ease-in-out forwards slideTop;
+      }
+    }
+  }
+}
