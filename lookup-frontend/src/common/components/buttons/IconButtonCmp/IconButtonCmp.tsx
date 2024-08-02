@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material";
 
 interface IconButtonCmpProps {
   icon: ReactNode;
-  color: string;
+  color?: string;
   onClick?: () => void;
 }
 
@@ -12,7 +12,7 @@ const IconButtonCmp: FC<IconButtonCmpProps> = ({ icon, color, onClick }: IconBut
     <IconButton
       className="icon-button-component"
       sx={{
-        color,
+        color: color || "#000",
       }}
       onClick={onClick}
     >
