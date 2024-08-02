@@ -1,0 +1,20 @@
+button.label-icon-button-component {
+  padding: 6px 10px 5px 10px;
+  min-height: 30px;
+  font-size: 12px;
+  line-height: 1;
+  text-transform: capitalize;
+
+  @media (min-width: 768px) {
+    height: 38px;
+    font-size: 16px;
+  }
+
+  @media (min-width: 992px) {
+    padding: 6px 12px 5px 12px;
+  }
+
+  .MuiButton-startIcon {
+    margin-right: 4px;
+  }
+}

@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
 import { FC, ReactNode } from "react";
+import "./LabelIconButtonCmp.scss";
 
 interface LabelIconButtonCmpProps {
   label: string;
@@ -7,6 +8,7 @@ interface LabelIconButtonCmpProps {
   iconPosition: "start" | "end";
   color?: string;
   bgColor?: string;
+  hoverBgColor?: string;
   type: "button" | "submit" | undefined;
   variant: "outlined" | "contained" | "text";
   onClick?: () => void;
@@ -18,6 +20,7 @@ const LabelIconButtonCmp: FC<LabelIconButtonCmpProps> = ({
   iconPosition,
   color,
   bgColor,
+  hoverBgColor,
   type,
   variant,
   onClick,
@@ -33,8 +36,9 @@ const LabelIconButtonCmp: FC<LabelIconButtonCmpProps> = ({
       sx={{
         color: color || "#000",
         backgroundColor: bgColor || "transparent",
-        textTransform: "capitalize",
-        fontWeight: 700,
+        ":hover": {
+          backgroundColor: hoverBgColor,
+        },
       }}
     >
       {label}

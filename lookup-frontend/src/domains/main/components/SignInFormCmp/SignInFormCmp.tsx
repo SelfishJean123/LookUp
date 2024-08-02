@@ -40,7 +40,7 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
         slotProps={{ input: { id: "password", "aria-label": "password" } }}
       />
 
-      <LabelButtonCmp label="Sign In" bgColor="" type="submit" variant="contained" />
+      <LabelButtonCmp label="Sign In" type="button" variant="contained" />
     </form>
     // </FormProvider>
   );

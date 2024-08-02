@@ -13,9 +13,8 @@ import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import { debounce } from "@mui/material/utils";
 import { useEffect, useMemo, useRef, useState } from "react";
+import "./SearchBarCmp.scss";
 
-// This key was created specifically for the demo in mui.com.
-// You need to create a new one for your application.
 const GOOGLE_MAPS_API_KEY = "AIzaSyC3aviU6KHXAjoSnxcw6qbOhjnFctbxPkE";
 
 function loadScript(src: string, position: HTMLElement | null, id: string) {
