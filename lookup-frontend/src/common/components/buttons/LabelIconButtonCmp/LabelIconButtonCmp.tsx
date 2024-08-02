@@ -4,27 +4,35 @@ import { FC, ReactNode } from "react";
 interface LabelIconButtonCmpProps {
   label: string;
   icon: ReactNode;
-  bgColor: string;
+  iconPosition: "start" | "end";
+  color?: string;
+  bgColor?: string;
   type: "button" | "submit" | undefined;
+  variant: "outlined" | "contained" | "text";
   onClick?: () => void;
 }
 
 const LabelIconButtonCmp: FC<LabelIconButtonCmpProps> = ({
   label,
   icon,
+  iconPosition,
+  color,
   bgColor,
   type,
+  variant,
   onClick,
 }: LabelIconButtonCmpProps) => {
   return (
     <Button
       className="label-icon-button-component"
-      variant="contained"
+      variant={variant}
       type={type}
-      startIcon={icon}
+      startIcon={iconPosition === "start" ? icon : undefined}
+      endIcon={iconPosition === "end" ? icon : undefined}
       onClick={onClick}
       sx={{
-        backgroundColor: bgColor,
+        color: color || "#000",
+        backgroundColor: bgColor || "transparent",
       }}
     >
       {label}
