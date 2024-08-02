@@ -1,9 +1,9 @@
 .main-page {
+  background-image: url("/assets/main-bg.jpeg");
+  background-position: center;
+  background-size: cover;
   width: 100%;
   min-height: 100vh;
-  background-image: url("@assets/main-bg.png");
-  background-size: cover;
-  background-position: center;
 
   img {
     position: absolute;

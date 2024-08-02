@@ -1,15 +1,38 @@
 @import "@styles/colors.scss";
 
 .content-page-layout {
-  width: calc(100% - 65px);
-  min-height: calc(100vh - 70px);
-  background-color: $beige;
   position: relative;
-  padding: 0 0 100px 0;
+  background-color: $beige;
+  width: calc(100% - 58px);
+  min-height: calc(100vh - 70px);
+
+  @media (min-width: 768px) {
+    width: calc(100% - 65px);
+  }
 
   .content-layout-logo {
     position: absolute;
     top: 30px;
-    left: 30px;
+    left: calc(50% - 30px);
+    width: 60px;
+
+    @media (min-width: 768px) {
+      left: 30px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .content-layout-inner-wrapper {
+    margin: 0 auto;
+    padding: 120px 0;
+    width: 90%;
+
+    @media (min-width: 768px) {
+      padding: 80px 0 140px 0;
+      width: 80%;
+    }
   }
 }

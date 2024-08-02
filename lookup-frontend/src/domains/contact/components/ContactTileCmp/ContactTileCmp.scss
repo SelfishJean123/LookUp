@@ -1,0 +1,35 @@
+@import "@styles/colors.scss";
+
+.contact-tile-component {
+  margin: 20px;
+  text-decoration: none;
+  color: $black;
+
+  .contact-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin: 0 auto;
+
+    svg {
+      font-size: 60px;
+    }
+  }
+
+  h5 {
+    text-align: center;
+    margin: 0;
+
+    &.contact-heading {
+      padding: 20px 0 10px 0;
+    }
+
+    &.contact-sub-heading {
+      font-weight: 900;
+    }
+  }
+}

@@ -1,6 +1,4 @@
 import AboutPage from "../domains/about/pages/AboutPage/AboutPage";
-import AddIngredientModalCmp from "../domains/ingredients/components/AddIngredientModalCmp/AddIngredientModalCmp";
-import AddProductModalCmp from "../domains/products/components/AddProductModalCmp/AddProductModalCmp";
 import ContactPage from "../domains/contact/pages/ContactPage/ContactPage";
 import ContentPageLayout from "../common/layouts/ContentPageLayout/ContentPageLayout";
 import IngredientDetailsPage from "../domains/ingredients/pages/IngredientDetailsPage/IngredientDetailsPage";
@@ -26,7 +24,7 @@ const routes = createBrowserRouter([
         element: <ContentPageLayout />,
         children: [
           {
-            path: "user",
+            path: "user-account",
             element: <UserAccountPage />,
           },
           {
@@ -36,30 +34,18 @@ const routes = createBrowserRouter([
           {
             path: "products-catalogue",
             element: <ProductsListPage />,
-            children: [
-              {
-                path: "products-catalogue/add-product",
-                element: <AddProductModalCmp />,
-              },
-            ],
           },
           {
-            path: "products-catalogue/details/:productId",
+            path: "products-catalogue/:productId",
             element: <ProductDetailsPage />,
           },
           {
-            path: "products-catalogue/details/:productId/reviews",
+            path: "products-catalogue/:productId/reviews",
             element: <ProductReviewsPage />,
           },
           {
             path: "inci-encyclopedia",
             element: <IngredientsListPage />,
-            children: [
-              {
-                path: "inci-encyclopedia/add-ingredient",
-                element: <AddIngredientModalCmp />,
-              },
-            ],
           },
           {
             path: "inci-encyclopedia/details/:ingredientId",

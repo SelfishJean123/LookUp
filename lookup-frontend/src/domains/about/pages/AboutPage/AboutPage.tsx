@@ -1,4 +1,4 @@
-import aboutImg from "@assets/about-look-up.avif";
+import aboutImg from "/assets/about-look-up.avif";
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
 import TopDescriptionCmp from "../../../../common/components/texts/TopDescriptionCmp/TopDescriptionCmp";
 import "./AboutPage.scss";
@@ -28,9 +28,9 @@ const AboutPage = () => {
       quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non"
       />
 
-      <img src={aboutImg} alt="Look Up CEO image" />
-      <h3>Joanna Hornung</h3>
-      <h4>Look Up CEO</h4>
+      <img src={aboutImg} alt="Look Up CEO image" className="about-img" />
+      <h3 className="about-ceo-name">Joanna Hornung</h3>
+      <h4 className="about-ceo-position">Look Up CEO</h4>
     </div>
   );
 };
