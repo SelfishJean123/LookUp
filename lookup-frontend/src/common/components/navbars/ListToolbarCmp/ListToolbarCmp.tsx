@@ -1,5 +1,6 @@
+import AddProductFormCmp from "../../../../domains/products/components/AddProductFormCmp/AddProductFormCmp";
+import BasicModalCmp from "../../modals/BasicModalCmp/BasicModalCmp";
 import ChipButtonCmp from "../../buttons/ChipButtonCmp/ChipButtonCmp";
-import LabelButtonCmp from "../../buttons/LabelButtonCmp/LabelButtonCmp";
 import LabelIconButtonCmp from "../../buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import SearchBarCmp from "../SearchBarCmp/SearchBarCmp";
 import { FC, useState } from "react";
@@ -64,14 +65,16 @@ const ListToolbarCmp: FC<ListToolbarCmpProps> = ({ addLabel, addOnClick }: ListT
 
         <div className="list-toolbar-search-add">
           <SearchBarCmp />
-          <LabelButtonCmp
-            label={addLabel}
-            color="#fff"
-            bgColor="#387323"
-            hoverBgColor="#124500"
-            type="button"
-            variant="contained"
-            onClick={() => addOnClick}
+          <BasicModalCmp
+            modalOpenButtonText={addLabel}
+            modalOpenButtonTextColor="#fff"
+            modalOpenButtonBgColor="#387323"
+            modalOpenButtonBgHoverColor="#124500"
+            modalOpenButtonVariant="contained"
+            modalHeadingText="Add New Product"
+            modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając okolice oczu. Dokładnie wmasuj do całkowitego wchłonięcia. Stosuj na oczyszczoną skórę rano lub/i wieczorem, w zależności od potrzeb. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
+            InnerFormCmp={AddProductFormCmp}
+            // innerFormCmpProps={}
           />
         </div>
       </Toolbar>

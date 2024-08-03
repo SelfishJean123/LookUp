@@ -1,0 +1,12 @@
+.ingredients-list-component {
+  margin: 40px auto;
+
+  .ingredients-list-tiles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+  }
+}

@@ -41,21 +41,21 @@ const ProductTileCmp: FC<ProductTileCmpProps> = ({ id, name, reviewsNumber, rati
   }
 
   return (
-    <div className="product-list-tile-component" ref={tileRef}>
+    <div className="product-tile-component" ref={tileRef}>
       <Link to={id}>
-        <div className="product-list-tile-top">
-          <div className="product-list-tile-img-wrapper">
-            <img src={`/assets/products/${imgSrc}`} alt={name} className="product-list-tile-img" />
+        <div className="product-tile-top">
+          <div className="product-tile-img-wrapper">
+            <img src={`/assets/products/${imgSrc}`} alt={name} className="product-tile-img" />
           </div>
 
-          <div className="product-list-tile-rating">
-            <h5 className="product-list-tile-reviews">REVIEWS: {reviewsNumber}</h5>
-            <div className="product-list-tile-starts-box">{starsArray}</div>
+          <div className="product-tile-rating">
+            <h5 className="product-tile-reviews">REVIEWS: {reviewsNumber}</h5>
+            <div className="product-tile-starts-box">{starsArray}</div>
           </div>
         </div>
 
-        <div className="product-list-tile-info">
-          <h5 className="product-list-tile-name" title={name}>
+        <div className="product-tile-info">
+          <h5 className="product-tile-name" title={name}>
             {name}
           </h5>
         </div>

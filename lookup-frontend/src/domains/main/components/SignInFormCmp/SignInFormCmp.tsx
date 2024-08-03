@@ -1,4 +1,4 @@
-import LabelButtonCmp from "../../../../common/components/buttons/LabelButtonCmp/LabelButtonCmp";
+import LabelIconButtonCmp from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import { Button, FormLabel, Input, Tooltip } from "@mui/material";
 import { CancelOutlined } from "@mui/icons-material";
 import { FC } from "react";
@@ -40,7 +40,7 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
         slotProps={{ input: { id: "password", "aria-label": "password" } }}
       />
 
-      <LabelButtonCmp label="Sign In" type="button" variant="contained" />
+      <LabelIconButtonCmp label="Sign In" type="button" variant="contained" />
     </form>
     // </FormProvider>
   );

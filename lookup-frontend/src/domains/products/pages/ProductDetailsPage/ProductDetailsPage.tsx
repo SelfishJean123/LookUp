@@ -115,7 +115,7 @@ const ProductDetailsPage = () => {
             onClick={() => {}}
           />
           <ChipButtonCmp
-            label={"Shea Butter Ethyl Esters "}
+            label={"Shea Butter Ethyl Esters"}
             component={"a"}
             href={"/inci-encyclopedia/0009"}
             variant="filled"
