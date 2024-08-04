@@ -1,6 +1,6 @@
-import ListToolbarCmp from "../../../../common/components/navbars/ListToolbarCmp/ListToolbarCmp";
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
 import ProductsListCmp from "../../components/ProductsListCmp/ProductsListCmp";
+import ProductsListToolbarCmp from "../../components/ProductsListToolbarCmp/ProductsListToolbarCmp";
 import TopDescriptionCmp from "../../../../common/components/texts/TopDescriptionCmp/TopDescriptionCmp";
 
 const ProductsListPage = () => {
@@ -14,12 +14,7 @@ const ProductsListPage = () => {
         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
         laborum."
       />
-      <ListToolbarCmp
-        addLabel="Add Product"
-        addOnClick={() => {
-          console.log("Add Product button clicked");
-        }}
-      />
+      <ProductsListToolbarCmp />
       <ProductsListCmp />
     </div>
   );

@@ -48,7 +48,7 @@ const routes = createBrowserRouter([
             element: <IngredientsListPage />,
           },
           {
-            path: "inci-encyclopedia/details/:ingredientId",
+            path: "inci-encyclopedia/:ingredientId",
             element: <IngredientDetailsPage />,
           },
           {

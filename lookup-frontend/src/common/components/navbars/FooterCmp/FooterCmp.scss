@@ -1,13 +1,13 @@
 @import "@styles/colors.scss";
 
 .footer-component {
-  background-color: $green;
-  width: 100%;
+  display: flex;
   position: absolute;
   bottom: 0;
-  display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: $green;
+  width: 100%;
 
   .footer-link {
     img {
@@ -16,7 +16,7 @@
   }
 
   p {
-    color: $white;
     margin: 0 95px 0 0;
+    color: $white;
   }
 }

@@ -1,0 +1,16 @@
+@import "@styles/colors.scss";
+
+.search-bar-component {
+  display: flex;
+  align-items: center;
+  border: 1px solid $gray;
+
+  @media (min-width: 768px) {
+    height: 38px;
+  }
+
+  input {
+    font-weight: 700;
+    font-size: 14px;
+  }
+}

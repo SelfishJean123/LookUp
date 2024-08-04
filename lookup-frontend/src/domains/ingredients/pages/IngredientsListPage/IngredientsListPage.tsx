@@ -1,5 +1,5 @@
 import IngredientsListCmp from "../../components/IngredientsListCmp/IngredientsListCmp";
-import ListToolbarCmp from "../../../../common/components/navbars/ListToolbarCmp/ListToolbarCmp";
+import IngredientsListToolbarCmp from "../../components/IngredientsListToolbarCmp/IngredientsListToolbarCmp";
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
 import TopDescriptionCmp from "../../../../common/components/texts/TopDescriptionCmp/TopDescriptionCmp";
 
@@ -14,12 +14,7 @@ const IngredientsListPage = () => {
         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
         laborum."
       />
-      <ListToolbarCmp
-        addLabel="Add Ingredient"
-        addOnClick={() => {
-          console.log("Add Ingredient button clicked");
-        }}
-      />
+      <IngredientsListToolbarCmp />
       <IngredientsListCmp />
     </div>
   );

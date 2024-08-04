@@ -6,10 +6,18 @@ interface ChipButtonCmpProps {
   component: ElementType;
   href?: string;
   variant: "filled" | "outlined";
+  onDelete?: () => void;
   onClick?: () => void;
 }
 
-const ChipButtonCmp: FC<ChipButtonCmpProps> = ({ label, component, href, variant, onClick }: ChipButtonCmpProps) => {
+const ChipButtonCmp: FC<ChipButtonCmpProps> = ({
+  label,
+  component,
+  href,
+  variant,
+  onDelete,
+  onClick,
+}: ChipButtonCmpProps) => {
   return (
     <Chip
       className="chip-button-component"
@@ -19,6 +27,7 @@ const ChipButtonCmp: FC<ChipButtonCmpProps> = ({ label, component, href, variant
       variant={variant}
       size="small"
       clickable
+      onDelete={onDelete}
       onClick={onClick}
     />
   );

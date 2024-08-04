@@ -13,10 +13,7 @@ const ProductDetailsPage = () => {
     <div className="product-details-page">
       <h3 className="product-details-heading">Product details</h3>
       <MainHeadingCmp headingText="Trehalozowy krem przywracający równowagę" />
-      <SubHeadingCmp
-        subHeadingText="3% ksylitolu, 2% inozytolu, neuropeptyd SNAP-8, o bogatej konsystencji,
-odżywienie i nawilżenie"
-      />
+      <SubHeadingCmp subHeadingText="3% ksylitolu, 2% inozytolu, neuropeptyd SNAP-8, o bogatej konsystencji, odżywienie i nawilżenie" />
 
       <div className="product-details-top">
         <div className="product-details-main">
@@ -81,83 +78,137 @@ odżywienie i nawilżenie"
 
       <div className="product-details-inci">
         <h3>INCI</h3>
-        <Stack direction="row" spacing={1} flexWrap="wrap">
-          <ChipButtonCmp label={"Aqua"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
+        <Stack spacing={1} direction="row" useFlexGap flexWrap="wrap">
           <ChipButtonCmp
-            label={"Cetearyl Alcohol"}
+            label={"Aqua"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
-          <ChipButtonCmp label={"C15-19 Alkane"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
+          <ChipButtonCmp
+            label={"Cetearyl Alcohol"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
+          <ChipButtonCmp
+            label={"C15-19 Alkane"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
           <ChipButtonCmp
             label={"Butyrospermum Parkii Butter"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
           <ChipButtonCmp
             label={"Persea Gratissima Seed Oil"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
           <ChipButtonCmp
-            label={"Shea Butter Ethyl Esters "}
+            label={"Shea Butter Ethyl Esters"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
-          <ChipButtonCmp label={"Xylitol"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
-          <ChipButtonCmp label={"Trehalose"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
-          <ChipButtonCmp label={"Inositol"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
-          <ChipButtonCmp label={"Inositol"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
+          <ChipButtonCmp
+            label={"Xylitol"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
+          <ChipButtonCmp
+            label={"Trehalose"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
+          <ChipButtonCmp
+            label={"Inositol"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
+          <ChipButtonCmp
+            label={"Inositol"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
           <ChipButtonCmp
             label={"Vitis Vinifera Seed Oil"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
-          <ChipButtonCmp label={"Glycerin"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
+          <ChipButtonCmp
+            label={"Glycerin"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
           <ChipButtonCmp
             label={"Pentylene Glycol"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
-          <ChipButtonCmp label={"Potassium Cetyl"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
-          <ChipButtonCmp label={"Phosphate Coco"} component={"a"} href={"/0009"} variant="filled" onClick={() => {}} />
+          <ChipButtonCmp
+            label={"Potassium Cetyl"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
+          <ChipButtonCmp
+            label={"Phosphate Coco"}
+            component={"a"}
+            href={"/inci-encyclopedia/0009"}
+            variant="filled"
+            onClick={() => {}}
+          />
           <ChipButtonCmp
             label={"Caprylate/Caprate Cetyl"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
           <ChipButtonCmp
             label={"Palmitate Acetyl Octapeptide-3"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
           <ChipButtonCmp
             label={"Borago Officinalis Seed Oil"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />
           <ChipButtonCmp
             label={"Cannabis Sativa Seed Oil"}
             component={"a"}
-            href={"/0009"}
+            href={"/inci-encyclopedia/0009"}
             variant="filled"
             onClick={() => {}}
           />

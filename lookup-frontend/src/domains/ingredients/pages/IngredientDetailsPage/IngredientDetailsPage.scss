@@ -1,0 +1,146 @@
+@import "@styles/colors.scss";
+
+.ingredient-details-page {
+  margin: 0 auto;
+  max-width: 1200px;
+
+  h3.ingredient-details-heading {
+    padding: 0 0 10px 0;
+    color: $red;
+    font-weight: 900;
+  }
+
+  .main-heading-component {
+    padding: 0 0 10px 0;
+
+    @media (min-width: 768px) {
+      padding: 0 0 20px 0;
+    }
+  }
+
+  .ingredient-details-top {
+    @media (min-width: 768px) {
+      position: relative;
+    }
+
+    .ingredient-details-main {
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+      }
+
+      &::before {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+        z-index: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        background-color: $green;
+        width: 100%;
+        height: 100%;
+        content: "";
+
+        @media (min-width: 768px) {
+          clip-path: polygon(0 0, 80% 0, 100% 70%, 100% 100%, 30% 100%, 0 45%);
+        }
+
+        @media (min-width: 992px) {
+          clip-path: polygon(0 0, 80% 0, 100% 70%, 100% 100%, 30% 100%, 0 45%);
+        }
+      }
+
+      .details-main-images-wrapper {
+        z-index: 10;
+        padding: 20px 0 0 0;
+        width: 100%;
+        max-width: 400px;
+
+        @media (min-width: 768px) {
+          padding: 0 20px 0 0;
+          width: 40%;
+        }
+      }
+
+      .details-main-info {
+        position: relative;
+        width: 100%;
+
+        @media (min-width: 768px) {
+          width: calc(60% - 20px);
+        }
+
+        .details-basic-info,
+        .details-updates {
+          @media (min-width: 768px) {
+            padding: 0 20px 20px 0;
+          }
+
+          h4,
+          h5 {
+            color: $black;
+
+            @media (min-width: 768px) {
+              text-align: right;
+            }
+          }
+        }
+
+        .details-updates {
+          padding: 10px 0 0 0;
+
+          @media (min-width: 768px) {
+            padding: 0 20px 0 0;
+          }
+        }
+      }
+    }
+
+    .details-actions {
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      align-items: flex-start;
+      border-bottom: 1px solid $purple;
+      padding: 20px 0;
+
+      @media (min-width: 992px) {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-bottom: none;
+      }
+
+      button {
+        padding: 0;
+        width: fit-content;
+        font-size: 14px;
+
+        @media (min-width: 992px) {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .ingredient-details-description,
+  .ingredient-details-concerns {
+    h3 {
+      padding: 30px 0 10px 0;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    p {
+      text-align: justify;
+    }
+  }
+}
