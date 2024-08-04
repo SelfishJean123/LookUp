@@ -23,7 +23,7 @@ const AuthModalBaseCmp = <T,>({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="auth-modal-base-component">
+    <div className="auth-modal-base-component shadow">
       <ListItemButton
         sx={{
           minHeight: 48,

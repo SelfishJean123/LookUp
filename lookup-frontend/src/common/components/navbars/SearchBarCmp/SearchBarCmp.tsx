@@ -149,7 +149,7 @@ const SearchBarCmp = () => {
   }, [value, inputValue, fetch]);
 
   return (
-    <Search className="search-bar-component">
+    <Search className="search-bar-component shadow">
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>

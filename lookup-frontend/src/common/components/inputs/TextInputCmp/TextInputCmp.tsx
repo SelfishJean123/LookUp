@@ -7,19 +7,23 @@ interface TextInputCmpProps {
   required: boolean;
   multiline?: boolean;
   maxRows?: number;
+  width: number;
 }
 
-const TextInputCmp: FC<TextInputCmpProps> = ({ id, label, required, multiline, maxRows }: TextInputCmpProps) => {
+const TextInputCmp: FC<TextInputCmpProps> = ({ id, label, required, multiline, maxRows, width }: TextInputCmpProps) => {
   return (
     <TextField
+      className="text-input-component"
       id={id}
       label={label}
       variant="outlined"
       size="small"
-      fullWidth
       required={required}
       multiline={multiline}
       maxRows={maxRows}
+      sx={{
+        width: width < 100 ? `calc(${width}% - 5px)` : `${width}%`,
+      }}
     />
   );
 };

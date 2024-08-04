@@ -49,7 +49,7 @@ const BasicModalCmp = <T,>({
       />
 
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Box className="basic-modal-body">
+        <Box className="basic-modal-body shadow">
           <ModalHeadingCmp headingText={modalHeadingText} />
           <ModalDescriptionCmp descriptionText={modalDescriptionText} />
           <InnerFormCmp {...(innerFormCmpProps as T)} close={() => setIsModalOpen(false)} />

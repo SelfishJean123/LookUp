@@ -5,18 +5,18 @@ interface NumberInputCmpProps {
   id: string;
   label: string;
   required: boolean;
+  width: number;
 }
 
-const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required }: NumberInputCmpProps) => {
-  const [value, setValue] = useState<number | null>(null);
+const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required, width }: NumberInputCmpProps) => {
+  const [value, setValue] = useState<number | string>("");
   const [error, setError] = useState<string | null>(null);
 
   const changeValue = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.valueAsNumber;
 
-    if (isNaN(newValue)) {
-      setError("Invalid number");
-    } else {
+    if (isNaN(newValue)) setError("Invalid number");
+    else {
       setError(null);
       setValue(newValue);
     }
@@ -24,17 +24,20 @@ const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required }: Number
 
   return (
     <TextField
+      className="number-input-component"
       id={id}
       label={label}
       variant="outlined"
       size="small"
-      fullWidth
       required={required}
       type="number"
       value={value}
       onChange={changeValue}
       error={Boolean(error)}
       helperText={error || ""}
+      sx={{
+        width: width < 100 ? `calc(${width}% - 5px)` : `${width}%`,
+      }}
     />
   );
 };

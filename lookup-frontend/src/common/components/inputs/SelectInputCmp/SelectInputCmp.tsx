@@ -11,18 +11,31 @@ interface SelectInputCmpProps {
   label: string;
   required: boolean;
   options: SelectOption[];
+  width: number;
 }
 
-const SelectInputCmp: FC<SelectInputCmpProps> = ({ id, label, required, options }: SelectInputCmpProps) => {
+const SelectInputCmp: FC<SelectInputCmpProps> = ({ id, label, required, options, width }: SelectInputCmpProps) => {
   const [value, setValue] = useState("");
   const changeValue = (event: SelectChangeEvent) => setValue(event.target.value);
 
   return (
-    <FormControl variant="outlined" size="small" fullWidth required={required}>
+    <FormControl
+      className="select-input-component"
+      variant="outlined"
+      size="small"
+      required={required}
+      sx={{
+        width: width < 100 ? `calc(${width}% - 5px)` : `${width}%`,
+      }}
+    >
       <InputLabel id={`${id}-label`}>{label}</InputLabel>
       <Select labelId={`${id}-label`} id={id} value={value} onChange={changeValue} label={label}>
         {options.map((option) => {
-          return <MenuItem value={option.value}>{option.name}</MenuItem>;
+          return (
+            <MenuItem key={id} value={option.value}>
+              {option.name}
+            </MenuItem>
+          );
         })}
       </Select>
     </FormControl>
