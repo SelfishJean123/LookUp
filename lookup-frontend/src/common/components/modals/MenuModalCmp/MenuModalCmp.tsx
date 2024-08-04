@@ -1,29 +1,34 @@
-import ModalHeadingCmp from "../../../../common/components/texts/ModalHeadingCmp/ModalHeadingCmp";
+import ModalDescriptionCmp from "../../texts/ModalDescriptionCmp/ModalDescriptionCmp";
+import ModalHeadingCmp from "../../texts/ModalHeadingCmp/ModalHeadingCmp";
 import { Box, ListItemButton, ListItemIcon, ListItemText, Modal } from "@mui/material";
 import { ComponentType, ReactNode, useState } from "react";
-import "./AuthModalBaseCmp.scss";
+import "./MenuModalCmp.scss";
 
-interface AuthModalBaseCmpProps<T> {
-  modalHeadingText: string;
+interface MenuModalCmpProps<T> {
   modalOpenButtonText: string;
+  modalOpenButtonTextColor: string;
   modalOpenButtonIcon: ReactNode;
+  modalHeadingText: string;
+  modalDescriptionText: string;
   InnerFormCmp: ComponentType<T>;
   innerFormCmpProps?: T;
   isDrawerOpen: boolean;
 }
 
-const AuthModalBaseCmp = <T,>({
-  modalHeadingText,
+const MenuModalCmp = <T,>({
   modalOpenButtonText,
+  modalOpenButtonTextColor,
   modalOpenButtonIcon,
+  modalHeadingText,
+  modalDescriptionText,
   InnerFormCmp,
   innerFormCmpProps,
   isDrawerOpen,
-}: AuthModalBaseCmpProps<T>) => {
+}: MenuModalCmpProps<T>) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="auth-modal-base-component shadow">
+    <div className="menu-modal-component">
       <ListItemButton
         sx={{
           minHeight: 48,
@@ -41,11 +46,16 @@ const AuthModalBaseCmp = <T,>({
         >
           {modalOpenButtonIcon}
         </ListItemIcon>
-        <ListItemText primary={modalOpenButtonText} sx={{ opacity: isDrawerOpen ? 1 : 0, color: "#fff" }} />
+        <ListItemText
+          primary={modalOpenButtonText}
+          sx={{ opacity: isDrawerOpen ? 1 : 0, color: { modalOpenButtonTextColor } }}
+        />
       </ListItemButton>
+
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Box className="auth-modal-base-body">
+        <Box className="menu-modal-body shadow">
           <ModalHeadingCmp headingText={modalHeadingText} />
+          <ModalDescriptionCmp descriptionText={modalDescriptionText} />
           <InnerFormCmp {...(innerFormCmpProps as T)} close={() => setIsModalOpen(false)} />
         </Box>
       </Modal>
@@ -53,4 +63,4 @@ const AuthModalBaseCmp = <T,>({
   );
 };
 
-export default AuthModalBaseCmp;
+export default MenuModalCmp;

@@ -1,4 +1,4 @@
-import AuthModalBaseCmp from "../AuthModalBaseCmp/AuthModalBaseCmp";
+import MenuModalCmp from "../../../../common/components/modals/MenuModalCmp/MenuModalCmp";
 import MuiDrawer from "@mui/material/Drawer";
 import SignInFormCmp from "../SignInFormCmp/SignInFormCmp";
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import "./MainMenuCmp.scss";
+
 import {
   AccountCircle,
   AlternateEmail,
@@ -46,6 +47,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 
 const MainMenuCmp = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const menuElements = [
     {
       name: "Sign Out",
@@ -109,11 +111,14 @@ const MainMenuCmp = () => {
 
       <List className="main-menu-list">
         <ListItem key="sign-in" disablePadding sx={{ display: "block" }}>
-          <AuthModalBaseCmp
+          <MenuModalCmp
             modalOpenButtonText="Sign In"
+            modalOpenButtonTextColor="#fff"
             modalOpenButtonIcon={<Login />}
             modalHeadingText="Sign In"
+            modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając okolice oczu. Dokładnie wmasuj do całkowitego wchłonięcia. Stosuj na oczyszczoną skórę rano lub/i wieczorem, w zależności od potrzeb. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
             InnerFormCmp={SignInFormCmp}
+            //  innerFormCmpProps={}
             isDrawerOpen={isDrawerOpen}
           />
         </ListItem>
