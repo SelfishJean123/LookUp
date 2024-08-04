@@ -6,10 +6,10 @@ import "./MenuModalCmp.scss";
 
 interface MenuModalCmpProps<T> {
   modalOpenButtonText: string;
-  modalOpenButtonTextColor: string;
+  modalOpenButtonTextColor?: string;
   modalOpenButtonIcon: ReactNode;
   modalHeadingText: string;
-  modalDescriptionText: string;
+  modalDescriptionText?: string;
   InnerFormCmp: ComponentType<T>;
   innerFormCmpProps?: T;
   isDrawerOpen: boolean;
@@ -48,14 +48,14 @@ const MenuModalCmp = <T,>({
         </ListItemIcon>
         <ListItemText
           primary={modalOpenButtonText}
-          sx={{ opacity: isDrawerOpen ? 1 : 0, color: { modalOpenButtonTextColor } }}
+          sx={{ color: modalOpenButtonTextColor || "#000", opacity: isDrawerOpen ? 1 : 0 }}
         />
       </ListItemButton>
 
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box className="menu-modal-body shadow">
           <ModalHeadingCmp headingText={modalHeadingText} />
-          <ModalDescriptionCmp descriptionText={modalDescriptionText} />
+          {modalDescriptionText && <ModalDescriptionCmp descriptionText={modalDescriptionText} />}
           <InnerFormCmp {...(innerFormCmpProps as T)} close={() => setIsModalOpen(false)} />
         </Box>
       </Modal>

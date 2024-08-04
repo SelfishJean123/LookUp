@@ -1,6 +1,7 @@
 import MenuModalCmp from "../../../../common/components/modals/MenuModalCmp/MenuModalCmp";
 import MuiDrawer from "@mui/material/Drawer";
-import SignInFormCmp from "../SignInFormCmp/SignInFormCmp";
+import SignInFormCmp from "../../../user/components/SignInFormCmp/SignInFormCmp";
+import SignOutFormCmp from "../../../user/components/SignOutFormCmp/SignOutFormCmp";
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Icon } from "@mui/material";
 import { NavLink } from "react-router-dom";
@@ -49,11 +50,6 @@ const MainMenuCmp = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const menuElements = [
-    {
-      name: "Sign Out",
-      link: "sign-out",
-      icon: <Logout />,
-    },
     {
       name: "User Account",
       link: "user-account",
@@ -116,9 +112,19 @@ const MainMenuCmp = () => {
             modalOpenButtonTextColor="#fff"
             modalOpenButtonIcon={<Login />}
             modalHeadingText="Sign In"
-            modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając okolice oczu. Dokładnie wmasuj do całkowitego wchłonięcia. Stosuj na oczyszczoną skórę rano lub/i wieczorem, w zależności od potrzeb. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
+            modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając a oczy. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
             InnerFormCmp={SignInFormCmp}
-            //  innerFormCmpProps={}
+            isDrawerOpen={isDrawerOpen}
+          />
+        </ListItem>
+
+        <ListItem key="sign-out" disablePadding sx={{ display: "block" }}>
+          <MenuModalCmp
+            modalOpenButtonText="Sign Out"
+            modalOpenButtonTextColor="#fff"
+            modalOpenButtonIcon={<Logout />}
+            modalHeadingText="Are you sure you want to sign out?"
+            InnerFormCmp={SignOutFormCmp}
             isDrawerOpen={isDrawerOpen}
           />
         </ListItem>
