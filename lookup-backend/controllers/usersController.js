@@ -1,73 +1,102 @@
-const { v4: uuidv4 } = require("uuid");
 const { validationResult } = require("express-validator");
 const HttpError = require("../models/HttpError");
+const User = require("../models/User");
 
-const DUMMY_USERS = [
-  {
-    userId: "9820",
-    isAdmin: true,
-    accessToken: "", 
-    refreshToken: "",
-    firstName: "Joanna",
-    lastName: "Hornung",
-    userName: "SelfishJean",
-    email: "joanna.hornung@gmail.com",
-    password: "1234",
-    addedProducts: 23,
-    favourites: [""],
-  },
-];
-
-const signUpUser = (req, res, next) => {
+const signUpUser = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
-    throw new HttpError("Invalid input provided. Check your data", 422);
+    const error = new HttpError("Invalid input provided. Check your data.", 422);
+    return next(error);
   }
 
-  const { firstName, lastName, userName, email, password } = req.body;
+  const { firstName, lastName, userName, avatar, email, password } = req.body;
 
-  const alreadyExistingUserEmail = DUMMY_USERS.find((user) => user.email === email);
-  if (alreadyExistingUserEmail) throw new HttpError("User with provided email already exists", 422);
+  let alreadyExistingUserEmail;
+  try {
+    alreadyExistingUserEmail = await User.findOne({ email: email });
+  } catch (err) {
+    const error = new HttpError("Failed", 500);
+    return next(error); // w async-await używamy next a nie throw
+  }
 
-  const alreadyExistingUserName = DUMMY_USERS.find((user) => user.userName === userName);
-  if (alreadyExistingUserName) throw new HttpError("User with provided user name already exists", 422);
+  if (alreadyExistingUserEmail) {
+    const error = new HttpError("User already exists. Login instead.", 500);
+    return next(error);
+  }
 
-  const newUser = {
-    userId: uuidv4(),
+  const newUser = new User({
     firstName,
     lastName,
     userName,
+    avatar,
     email,
     password,
-  };
+    favourites: [],
+  });
 
-  DUMMY_USERS.push(newUser);
-  res.status(201).json({ user: newUser });
+  try {
+    await newUser.save();
+  } catch (err) {
+    const error = new HttpError("Failed trying to save", 500);
+    return next(error);
+  }
+
+  res.status(201).json({ user: newUser.toObject({ getters: true }) });
 };
 
-const signInUser = (req, res, next) => {
+const signInUser = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const identifiedUser = DUMMY_USERS.find((user) => user.email === email);
-  if (!identifiedUser || identifiedUser.password !== password)
-    throw new HttpError("Could not find user with the provided email", 404);
+  let identifiedUser;
+  try {
+    identifiedUser = await User.findOne({ email: email });
+  } catch (err) {
+    const error = new HttpError("Failed when fetichng user.", 500);
+    return next(error);
+  }
 
-  res.json({ message: "User signed in" });
+  if (!identifiedUser || identifiedUser.password !== password) {
+    const error = new HttpError("Could not find user with the provided email or password is incorrenct.", 401);
+    return next(error);
+  }
+
+  res.json({ message: "User signed in." });
 };
 
 const signOutUser = (req, res, next) => {};
 const recoverUserPassword = (req, res, next) => {};
 const changeUserPassword = (req, res, next) => {};
-const deleteUser = (req, res, next) => {};
 
-const getUserByUserId = (req, res, next) => {
+const deleteUser = async (req, res, next) => {
   const userId = req.params.userId;
-  const user = DUMMY_USERS.find((user) => {
-    return user.userId === userId;
-  });
 
-  res.json({ user: user });
+  try {
+    await User.findByIdAndDelete(userId);
+  } catch (err) {
+    const error = new HttpError("Removing user failed.", 500);
+    return next(error);
+  }
+
+  res.status(200).json({ message: "User deleted" });
+};
+
+const getUserByUserId = async (req, res, next) => {
+  const userId = req.params.userId;
+
+  let user;
+  try {
+    user = await user.findById(userId);
+  } catch (err) {
+    const error = new HttpError("Fetching user failed.", 500);
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError("Could not find user for provided user id.", 404);
+    return next(error);
+  }
+
+  res.json({ user: user.toObject({ getters: true }) });
 };
 
 exports.signUpUser = signUpUser;
