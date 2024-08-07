@@ -1,55 +1,7 @@
-const { v4: uuidv4 } = require("uuid");
 const { validationResult } = require("express-validator");
 const Product = require("../models/Product");
+const User = require("../models/User");
 const HttpError = require("../models/HttpError");
-
-let DUMMY_PRODUCTS = [
-  {
-    productId: "011",
-    userId: "ddecv332s",
-    lastEditedByUserId: "ddecv332s",
-    inci: [
-      {
-        ingredientId: "23",
-        name: "Disodium EDTA",
-        position: "",
-      },
-    ],
-    reviews: [
-      {
-        reviewId: "",
-        userId: "",
-        title: "",
-        rating: 4,
-        packages: 4,
-        reviewText: "",
-        createdAt: "",
-        lastEditedAt: "",
-      },
-    ],
-    primaryImage: "",
-    secondaryImage: "",
-    tertiaryImage: "",
-    name: "name",
-    subname: "",
-    producer: "basic lab",
-    brand: "",
-    subbrand: "",
-    category: "",
-    subcategory: "",
-    ean: 12345678910123,
-    volumes: [0.5, 10.0, 30.0],
-    price: 15.5,
-    vegan: true,
-    crueltyFree: true,
-    description: "",
-    howToUse: "",
-    rating: 3.9,
-    numberOfReviews: 92,
-    createdAt: "",
-    lastEditedAt: "",
-  },
-];
 
 const getProducts = async (req, res, next) => {
   const products = await Product.find().exec();
@@ -58,25 +10,37 @@ const getProducts = async (req, res, next) => {
 
 const getProductById = async (req, res, next) => {
   const productId = req.params.productId;
-  const product = DUMMY_PRODUCTS.find((product) => product.productId === productId);
 
-  if (!product) throw new HttpError("Could not find product for provided product id", 404);
-  res.json({ product: product });
+  let product;
+
+  try {
+    product = await Product.findById(productId);
+  } catch (err) {
+    const error = new HttpError("Fetching product failed.", 500);
+    return next(error);
+  }
+
+  if (!product) {
+    const error = new HttpError("Could not find product for provided product id.", 404);
+    return next(error);
+  }
+
+  res.json({ product: product.toObject({ getters: true }) });
 };
 
 const addProduct = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
-    throw new HttpError("Invalid input provided. Check your data", 422);
+    const error = new HttpError("Invalid input provided. Check your data.", 422);
+    return next(error);
   }
 
   const {
-    userId,
+    createdByUserId,
     inci,
-    primaryImage,
-    secondaryImage,
-    tertiaryImage,
+    image1,
+    image2,
+    image3,
     name,
     subname,
     producer,
@@ -86,21 +50,34 @@ const addProduct = async (req, res, next) => {
     subcategory,
     ean,
     volumes,
-    price,
     vegan,
     crueltyFree,
     description,
     howToUse,
-    createdAt,
   } = req.body;
 
+  let user;
+  try {
+    user = await User.findById(createdByUserId);
+  } catch (err) {
+    const error = new HttpError("Fail when fetching user.", 500);
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError("No such user in the db", 404);
+    return next(error);
+  }
+
   const newProduct = new Product({
-    productId: uuidv4(),
-    userId,
+    createdByUserId,
+    lastEditedByUserId: createdByUserId,
+    createdAt: new Date(),
+    lastEditAt: createdAt,
     inci,
-    primaryImage,
-    secondaryImage,
-    tertiaryImage,
+    image1,
+    image2,
+    image3,
     name,
     subname,
     producer,
@@ -110,37 +87,51 @@ const addProduct = async (req, res, next) => {
     subcategory,
     ean,
     volumes,
-    price,
     vegan,
     crueltyFree,
     description,
     howToUse,
-    createdAt,
+    numberOfReviews: 0,
+    rating: undefined,
   });
 
   try {
     const result = await newProduct.save();
-    res.status(201).json(result);
+    res.status(201).json(result); // transaction & sessions - lesson 139
   } catch (err) {
     const error = new HttpError("Adding new product faild.", 500);
     return next(error);
   }
 };
 
-const editProduct = (req, res, next) => {
-  const productId = req.params.productId;
-
+const editProduct = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
-    throw new HttpError("Invalid input provided. Check your data", 422);
+    const error = new HttpError("Invalid input provided. Check your data", 422);
+    return next(error);
+  }
+
+  const productId = req.params.productId;
+
+  let editedProduct;
+  try {
+    editedProduct = await Product.findById(productId);
+  } catch (err) {
+    const error = new HttpError("Fetching product failed.", 500);
+    return next(error);
+  }
+
+  if (!editedProduct) {
+    const error = new HttpError("Could not find product for provided product id.", 404);
+    return next(error);
   }
 
   const {
+    lastEditedByUserId,
     inci,
-    primaryImage,
-    secondaryImage,
-    tertiaryImage,
+    image1,
+    image2,
+    image3,
     name,
     subname,
     producer,
@@ -150,20 +141,31 @@ const editProduct = (req, res, next) => {
     subcategory,
     ean,
     volumes,
-    price,
     vegan,
     crueltyFree,
     description,
     howToUse,
   } = req.body;
 
-  const editedProduct = { ...DUMMY_PRODUCTS.find((product) => product.productId === productId) };
-  const productIndex = DUMMY_PRODUCTS.findIndex((product) => product.productId === productId);
+  let user;
+  try {
+    user = await User.findById(createdByUserId);
+  } catch (err) {
+    const error = new HttpError("Fail when fetching user.", 500);
+    return next(error);
+  }
 
+  if (!user) {
+    const error = new HttpError("No such user in the db", 404);
+    return next(error);
+  }
+
+  editedProduct.lastEditedByUserId = lastEditedByUserId;
+  editedProduct.lastEditAt = new Date();
   editedProduct.inci = inci;
-  editedProduct.primaryImage = primaryImage;
-  editedProduct.secondaryImage = secondaryImage;
-  editedProduct.tertiaryImage = tertiaryImage;
+  editedProduct.image1 = image1;
+  editedProduct.image2 = image2;
+  editedProduct.image3 = image3;
   editedProduct.name = name;
   editedProduct.subname = subname;
   editedProduct.producer = producer;
@@ -173,29 +175,53 @@ const editProduct = (req, res, next) => {
   editedProduct.subcategory = subcategory;
   editedProduct.ean = ean;
   editedProduct.volumes = volumes;
-  editedProduct.price = price;
   editedProduct.vegan = vegan;
   editedProduct.crueltyFree = crueltyFree;
   editedProduct.description = description;
   editedProduct.howToUse = howToUse;
 
-  DUMMY_PRODUCTS[productIndex] = editedProduct;
-  res.status(200).json({ product: editedProduct });
+  let result;
+
+  try {
+    result = await editedProduct.save();
+  } catch (err) {
+    const error = new HttpError("Editing product faild.", 500);
+    return next(error);
+  }
+
+  res.status(200).json({ product: result.toObject({ getters: true }) });
 };
 
-const deleteProduct = (req, res, next) => {
+const deleteProduct = async (req, res, next) => {
   const productId = req.params.productId;
-  DUMMY_PRODUCTS = DUMMY_PRODUCTS.filter((product) => product.productId !== productId);
+
+  try {
+    await Product.findByIdAndDelete(productId); // populate("createdByUserId") aby usunąć też referencję
+  } catch (err) {
+    const error = new HttpError("Removing product failed.", 500);
+    return next(error);
+  }
 
   res.status(200).json({ message: "Product deleted" });
 };
 
-const getProductsByUserId = (req, res, next) => {
+const getProductsByUserId = async (req, res, next) => {
   const userId = req.params.userId;
-  const products = DUMMY_PRODUCTS.filter((product) => product.userId === userId);
+  let products;
 
-  if (!products.length) return next(new HttpError("Could not find product for provided user id", 404));
-  res.json({ products });
+  try {
+    products = await Product.find({ createdByUserId: userId });
+  } catch (err) {
+    const error = new HttpError("Fetching products failed", 500);
+    return next(error);
+  }
+
+  if (!products) {
+    const error = new HttpError("Could not find any products for provided product id", 404);
+    return next(error);
+  }
+
+  res.json({ products: products.map((product) => product.toObject({ getters: true })) });
 };
 
 exports.getProducts = getProducts;
