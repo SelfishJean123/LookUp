@@ -5,7 +5,7 @@ interface ModalDescriptionCmpProps {
   descriptionText: string;
 }
 
-const ModalDescriptionCmp: FC<ModalDescriptionCmpProps> = ({ descriptionText }: ModalDescriptionCmpProps) => {
+const ModalDescriptionCmp: FC<ModalDescriptionCmpProps> = ({ descriptionText }) => {
   return <p className="modal-description-component">{descriptionText}</p>;
 };
 

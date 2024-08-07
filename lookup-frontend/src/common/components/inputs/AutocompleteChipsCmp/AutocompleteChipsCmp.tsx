@@ -15,12 +15,7 @@ interface AutocompleteChipsCmpProps {
   width: number;
 }
 
-const AutocompleteChipsCmp: FC<AutocompleteChipsCmpProps> = ({
-  id,
-  label,
-  options,
-  width,
-}: AutocompleteChipsCmpProps) => {
+const AutocompleteChipsCmp: FC<AutocompleteChipsCmpProps> = ({ id, label, options, width }) => {
   return (
     <Stack
       className="autocomplete-input-component"

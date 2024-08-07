@@ -8,7 +8,7 @@ interface NumberInputCmpProps {
   width: number;
 }
 
-const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required, width }: NumberInputCmpProps) => {
+const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required, width }) => {
   const [value, setValue] = useState<number | string>("");
   const [error, setError] = useState<string | null>(null);
 

@@ -5,7 +5,7 @@ interface SubHeadingCmpProps {
   subHeadingText: string;
 }
 
-const SubHeadingCmp: FC<SubHeadingCmpProps> = ({ subHeadingText }: SubHeadingCmpProps) => {
+const SubHeadingCmp: FC<SubHeadingCmpProps> = ({ subHeadingText }) => {
   return <h3 className="sub-heading-component">{subHeadingText}</h3>;
 };
 

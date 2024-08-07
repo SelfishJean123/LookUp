@@ -1,4 +1,4 @@
-import AddProductFormCmp from "../AddIngredientFormCmp/AddIngredientFormCmp";
+import AddIngredientFormCmp from "../AddIngredientFormCmp/AddIngredientFormCmp";
 import BasicModalCmp from "../../../../common/components/modals/BasicModalCmp/BasicModalCmp";
 import ChipButtonCmp from "../../../../common/components/buttons/ChipButtonCmp/ChipButtonCmp";
 import LabelIconButtonCmp from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
@@ -68,7 +68,7 @@ const ProductsListToolbarCmp: FC = () => {
             modalOpenButtonVariant="contained"
             modalHeadingText="Add New Product"
             modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając okolice oczu. Dokładnie wmasuj do całkowitego wchłonięcia. Stosuj na oczyszczoną skórę rano lub/i wieczorem, w zależności od potrzeb. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
-            InnerFormCmp={AddProductFormCmp}
+            InnerFormCmp={AddIngredientFormCmp}
             // innerFormCmpProps={}
           />
         </div>

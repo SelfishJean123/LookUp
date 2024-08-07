@@ -10,14 +10,7 @@ interface ChipButtonCmpProps {
   onClick?: () => void;
 }
 
-const ChipButtonCmp: FC<ChipButtonCmpProps> = ({
-  label,
-  component,
-  href,
-  variant,
-  onDelete,
-  onClick,
-}: ChipButtonCmpProps) => {
+const ChipButtonCmp: FC<ChipButtonCmpProps> = ({ label, component, href, variant, onDelete, onClick }) => {
   return (
     <Chip
       className="chip-button-component"

@@ -9,7 +9,7 @@ interface IconButtonCmpProps {
   onClick?: () => void;
 }
 
-const IconButtonCmp: FC<IconButtonCmpProps> = ({ icon, color, bgColor, hoverBgColor, onClick }: IconButtonCmpProps) => {
+const IconButtonCmp: FC<IconButtonCmpProps> = ({ icon, color, bgColor, hoverBgColor, onClick }) => {
   return (
     <IconButton
       className="icon-button-component"

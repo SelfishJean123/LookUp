@@ -11,15 +11,7 @@ interface TextInputCmpProps {
   width: number;
 }
 
-const TextInputCmp: FC<TextInputCmpProps> = ({
-  id,
-  label,
-  required,
-  type,
-  multiline,
-  maxRows,
-  width,
-}: TextInputCmpProps) => {
+const TextInputCmp: FC<TextInputCmpProps> = ({ id, label, required, type, multiline, maxRows, width }) => {
   return (
     <TextField
       className="text-input-component"
