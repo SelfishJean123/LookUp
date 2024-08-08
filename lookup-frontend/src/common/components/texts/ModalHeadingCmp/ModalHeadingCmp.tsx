@@ -6,7 +6,7 @@ interface ModalHeadingCmpProps {
 }
 
 const ModalHeadingCmp: FC<ModalHeadingCmpProps> = ({ headingText }) => {
-  return <h3 className="modal-heading-component">{headingText}</h3>;
+  return <h2 className="modal-heading-component">{headingText}</h2>;
 };
 
 export default ModalHeadingCmp;

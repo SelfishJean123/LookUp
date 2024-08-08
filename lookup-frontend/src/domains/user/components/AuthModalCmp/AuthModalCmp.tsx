@@ -1,4 +1,5 @@
 import ChangePasswordFormCmp from "../ChangePasswordFormCmp/ChangePasswordFormCmp";
+import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import ModalDescriptionCmp from "../../../../common/components/texts/ModalDescriptionCmp/ModalDescriptionCmp";
 import ModalHeadingCmp from "../../../../common/components/texts/ModalHeadingCmp/ModalHeadingCmp";
 import ModalSecondaryDescriptionCmp from "../../../../common/components/texts/ModalSecondaryDescriptionCmp/ModalSecondaryDescriptionCmp";
@@ -26,28 +27,28 @@ const AuthModalCmp: FC<AuthModalCmpProps> = ({ signForm, isDrawerOpen }) => {
   switch (activeForm) {
     case "sign-in":
       headingText = "Sign In";
-      descriptionText = "";
-      secondaryDescriptionText = "";
+      descriptionText = "Enter your e-mail and password to sign in.";
+      secondaryDescriptionText = "You don't have an account yet?";
       icon = <LoginSharp />;
       break;
 
     case "sign-up":
       headingText = "Sign Up";
-      descriptionText = "";
-      secondaryDescriptionText = "";
+      descriptionText = "Enter your data to sign up.";
+      secondaryDescriptionText = "You already have an account?";
       icon = <ExitToAppSharp />;
       break;
 
     case "sign-out":
       headingText = "Sign Out";
-      descriptionText = "";
+      descriptionText = "Are you sure you want to sign out?";
       secondaryDescriptionText = "";
       icon = <LogoutSharp />;
       break;
 
     case "change-password":
       headingText = "Change Password";
-      descriptionText = "";
+      descriptionText = "Enter your old password  and then the new one.";
       secondaryDescriptionText = "";
       icon = <PasswordSharp />;
       break;
@@ -87,6 +88,12 @@ const AuthModalCmp: FC<AuthModalCmpProps> = ({ signForm, isDrawerOpen }) => {
           <ModalHeadingCmp headingText={headingText} />
           <ModalDescriptionCmp descriptionText={descriptionText} />
           <ModalSecondaryDescriptionCmp secondaryDescriptionText={secondaryDescriptionText} />
+          {activeForm === "sign-in" && (
+            <LabelIconButton label="Sign Up" variant="text" onClick={() => setActiveForm("sign-up")} />
+          )}
+          {activeForm === "sign-up" && (
+            <LabelIconButton label="Sign In" variant="text" onClick={() => setActiveForm("sign-in")} />
+          )}
 
           {activeForm === "sign-in" && <SignInFormCmp close={() => setIsModalOpen(false)} />}
           {activeForm === "sign-up" && <SignUpFormCmp close={() => setIsModalOpen(false)} />}
