@@ -14,7 +14,7 @@ interface SelectInputCmpProps {
   width: number;
 }
 
-const SelectInputCmp: FC<SelectInputCmpProps> = ({ id, label, required, options, width }: SelectInputCmpProps) => {
+const SelectInputCmp: FC<SelectInputCmpProps> = ({ id, label, required, options, width }) => {
   const [value, setValue] = useState("");
   const changeValue = (event: SelectChangeEvent) => setValue(event.target.value);
 

@@ -6,18 +6,34 @@ import TextInputCmp from "../../../../common/components/inputs/TextInputCmp/Text
 import { FC, useContext } from "react";
 import { useForm } from "../../../../common/hooks/formHook";
 import { useHttpClient } from "../../../../common/hooks/httpHook";
-import "./SignInFormCmp.scss";
+import "./SignUpFormCmp.scss";
 
-interface SignInFormCmpProps {
+interface SignUpFormCmpProps {
   close: () => void;
 }
 
-const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
+const SignUpFormCmp: FC<SignUpFormCmpProps> = ({ close }) => {
   const signContext = useContext(SignContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const [formState, inputHandler] = useForm(
     {
+      firstName: {
+        value: "",
+        isValid: false,
+      },
+      lastName: {
+        value: "",
+        isValid: false,
+      },
+      userName: {
+        value: "",
+        isValid: false,
+      },
+      avatar: {
+        value: "",
+        isValid: false,
+      },
       email: {
         value: "",
         isValid: false,
@@ -30,14 +46,18 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
     false
   );
 
-  const signInHandler = async (event: any) => {
+  const signUpHandler = async (event: any) => {
     event.preventDefault();
 
     try {
       const responseData = await sendRequest(
-        "http://localhost:5000/api/users/signin",
+        "http://localhost:5000/api/users/signup",
         "POST",
         JSON.stringify({
+          firstName: formState.inputs.firstName.value,
+          lastName: formState.inputs.lastName.value,
+          userName: formState.inputs.userName.value,
+          avatar: formState.inputs.avatar.value,
           email: formState.inputs.email.value,
           password: formState.inputs.password.value,
         }),
@@ -52,12 +72,16 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
   return (
     <>
       <SnackBarCmp isSnackBarOpen={!!error} message={error} severity="error" variant="filled" onClear={clearError} />
-      <form className="sign-in-form-component" onSubmit={signInHandler}>
+      <form className="sign-up-form-component" onSubmit={signUpHandler}>
         {isLoading && <ProgressBarCmp asOverlay />}
+        <TextInputCmp id="firstName" label="First Name" required={true} type="text" width={100} input={inputHandler} />
+        <TextInputCmp id="lastName" label="Last Name" required={true} type="text" width={100} input={inputHandler} />
+        <TextInputCmp id="userName" label="User Name" required={true} type="text" width={100} input={inputHandler} />
+        <TextInputCmp id="avatar" label="Avatar" required={true} type="text" width={100} input={inputHandler} />
         <TextInputCmp id="email" label="E-mail" required={true} type="email" width={100} input={inputHandler} />
         <TextInputCmp id="password" label="Password" required={true} type="password" width={100} input={inputHandler} />
 
-        <div className="sign-in-form-buttons">
+        <div className="sign-up-form-buttons">
           <LabelIconButton
             label="Close"
             color="#fff"
@@ -68,7 +92,7 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
             onClick={close}
           />
           <LabelIconButton
-            label="Sign In"
+            label="Sign Up"
             color="#fff"
             bgColor="#387323"
             hoverBgColor="#124500"
@@ -82,4 +106,4 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
   );
 };
 
-export default SignInFormCmp;
+export default SignUpFormCmp;

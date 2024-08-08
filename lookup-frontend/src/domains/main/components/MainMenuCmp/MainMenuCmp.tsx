@@ -1,25 +1,12 @@
-import MenuModalCmp from "../../../../common/components/modals/MenuModalCmp/MenuModalCmp";
+import AuthModalCmp from "../../../user/components/AuthModalCmp/AuthModalCmp";
 import MuiDrawer from "@mui/material/Drawer";
-import SignInFormCmp from "../../../user/components/SignInFormCmp/SignInFormCmp";
-import SignOutFormCmp from "../../../user/components/SignOutFormCmp/SignOutFormCmp";
+import { AccountCircle, AlternateEmail, AutoStories, ChevronRight, Feed, Menu, Science } from "@mui/icons-material";
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Icon } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import "./MainMenuCmp.scss";
-
-import {
-  AccountCircle,
-  AlternateEmail,
-  AutoStories,
-  ChevronRight,
-  Feed,
-  Login,
-  Logout,
-  Menu,
-  Science,
-} from "@mui/icons-material";
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
   width: 240,
@@ -107,26 +94,11 @@ const MainMenuCmp = () => {
 
       <List className="main-menu-list">
         <ListItem key="sign-in" disablePadding sx={{ display: "block" }}>
-          <MenuModalCmp
-            modalOpenButtonText="Sign In"
-            modalOpenButtonTextColor="#fff"
-            modalOpenButtonIcon={<Login />}
-            modalHeadingText="Sign In"
-            modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając a oczy. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
-            InnerFormCmp={SignInFormCmp}
-            isDrawerOpen={isDrawerOpen}
-          />
+          <AuthModalCmp signForm="sign-in" isDrawerOpen={isDrawerOpen} />
         </ListItem>
 
         <ListItem key="sign-out" disablePadding sx={{ display: "block" }}>
-          <MenuModalCmp
-            modalOpenButtonText="Sign Out"
-            modalOpenButtonTextColor="#fff"
-            modalOpenButtonIcon={<Logout />}
-            modalHeadingText="Are you sure you want to sign out?"
-            InnerFormCmp={SignOutFormCmp}
-            isDrawerOpen={isDrawerOpen}
-          />
+          <AuthModalCmp signForm="sign-out" isDrawerOpen={isDrawerOpen} />
         </ListItem>
 
         {menuElements.map((element) => (

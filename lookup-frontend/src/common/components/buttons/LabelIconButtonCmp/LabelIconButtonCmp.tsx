@@ -24,7 +24,7 @@ const LabelIconButton: FC<LabelIconButtonProps> = ({
   type,
   variant,
   onClick,
-}: LabelIconButtonProps) => {
+}) => {
   return (
     <Button
       className="label-icon-button-component"
