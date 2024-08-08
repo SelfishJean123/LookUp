@@ -1,6 +1,6 @@
 import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
 import { FC, useEffect, useState } from "react";
+import { Snackbar, SnackbarCloseReason } from "@mui/material";
 import "./SnackBarCmp.scss";
 
 interface SnackBarCmpProps {
@@ -18,8 +18,9 @@ const SnackBarCmp: FC<SnackBarCmpProps> = ({ isSnackBarOpen, message, severity, 
     setIsOpen(isSnackBarOpen);
   }, [isSnackBarOpen]);
 
-  const closeSnackBar = () => {
+  const closeSnackBar = (event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
     onClear();
+    if (reason === "clickaway") return;
     setIsOpen(false);
   };
 
