@@ -20,8 +20,8 @@ body {
   }
 
   .label-icon-button-component:not(form button) {
-    display: block;
-    margin: 0 auto 20px auto;
+    display: flex;
+    margin: 5px auto 20px auto;
     font-size: 14px;
     text-transform: none;
   }

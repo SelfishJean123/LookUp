@@ -1,12 +1,20 @@
 import AuthModalCmp from "../../../user/components/AuthModalCmp/AuthModalCmp";
 import MuiDrawer from "@mui/material/Drawer";
-import { AccountCircle, AlternateEmail, AutoStories, ChevronRight, Feed, Menu, Science } from "@mui/icons-material";
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Icon } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import "./MainMenuCmp.scss";
+import {
+  AccountCircleSharp,
+  AlternateEmailSharp,
+  ChevronRightSharp,
+  ImportContactsSharp,
+  InfoSharp,
+  MenuSharp,
+  ScienceSharp,
+} from "@mui/icons-material";
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
   width: 240,
@@ -40,27 +48,27 @@ const MainMenuCmp = () => {
     {
       name: "User Account",
       link: "user-account",
-      icon: <AccountCircle />,
+      icon: <AccountCircleSharp />,
     },
     {
       name: "About Look Up",
       link: "about",
-      icon: <Feed />,
+      icon: <InfoSharp />,
     },
     {
       name: "Products Catalogue",
       link: "products-catalogue",
-      icon: <AutoStories />,
+      icon: <ImportContactsSharp />,
     },
     {
       name: "INCI Encyclopedia",
       link: "inci-encyclopedia",
-      icon: <Science />,
+      icon: <ScienceSharp />,
     },
     {
       name: "Contact",
       link: "contact",
-      icon: <AlternateEmail />,
+      icon: <AlternateEmailSharp />,
     },
   ];
 
@@ -75,7 +83,7 @@ const MainMenuCmp = () => {
             ...(isDrawerOpen && { display: "none" }),
           }}
         >
-          <Menu />
+          <MenuSharp />
         </Icon>
 
         <Icon
@@ -86,7 +94,7 @@ const MainMenuCmp = () => {
             ...(!isDrawerOpen && { display: "none" }),
           }}
         >
-          <ChevronRight />
+          <ChevronRightSharp />
         </Icon>
       </div>
 
