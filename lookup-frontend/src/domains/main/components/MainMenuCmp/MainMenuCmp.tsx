@@ -93,16 +93,16 @@ const MainMenuCmp = () => {
       <Divider />
 
       <List className="main-menu-list">
-        <ListItem key="sign-in" disablePadding sx={{ display: "block" }}>
+        <ListItem key="sign-in" disablePadding sx={{ display: "block" }} onClick={() => setIsDrawerOpen(false)}>
           <AuthModalCmp signForm="sign-in" isDrawerOpen={isDrawerOpen} />
         </ListItem>
 
-        <ListItem key="sign-out" disablePadding sx={{ display: "block" }}>
+        <ListItem key="sign-out" disablePadding sx={{ display: "block" }} onClick={() => setIsDrawerOpen(false)}>
           <AuthModalCmp signForm="sign-out" isDrawerOpen={isDrawerOpen} />
         </ListItem>
 
         {menuElements.map((element) => (
-          <ListItem key={element.name} disablePadding sx={{ display: "block" }}>
+          <ListItem key={element.name} disablePadding sx={{ display: "block" }} onClick={() => setIsDrawerOpen(false)}>
             <NavLink to={element.link}>
               <ListItemButton
                 sx={{
