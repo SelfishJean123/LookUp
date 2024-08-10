@@ -1,11 +1,11 @@
 import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
-import ProgressBarCmp from "../../../../common/components/modals/ProgressBarCmp/ProgressBarCmp";
+import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
 import SignContext from "../../../../common/contexts/SignContext";
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import TextInputCmp from "../../../../common/components/inputs/TextInputCmp/TextInputCmp";
 import { FC, useContext } from "react";
 import { useForm } from "../../../../common/hooks/formHook";
-import { useHttpClient } from "../../../../common/hooks/httpHook";
+import { useHttpClient } from "../../../../common/hooks/httpClientHook";
 import "./SignUpFormCmp.scss";
 
 interface SignUpFormCmpProps {
@@ -71,9 +71,11 @@ const SignUpFormCmp: FC<SignUpFormCmpProps> = ({ close }) => {
 
   return (
     <>
-      <SnackBarCmp isSnackBarOpen={!!error} message={error} severity="error" variant="filled" onClear={clearError} />
+      {error && (
+        <SnackBarCmp isSnackBarOpen={!!error} message={error} severity="error" variant="filled" onClear={clearError} />
+      )}
       <form className="sign-up-form-component" onSubmit={signUpHandler}>
-        {isLoading && <ProgressBarCmp asOverlay />}
+        {isLoading && <ProgressSpinnerCmp asOverlay />}
         <TextInputCmp id="firstName" label="First Name" required={true} type="text" width={100} input={inputHandler} />
         <TextInputCmp id="lastName" label="Last Name" required={true} type="text" width={100} input={inputHandler} />
         <TextInputCmp id="userName" label="User Name" required={true} type="text" width={100} input={inputHandler} />

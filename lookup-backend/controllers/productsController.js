@@ -5,7 +5,7 @@ const HttpError = require("../models/HttpError");
 
 const getProducts = async (req, res, next) => {
   const products = await Product.find().exec();
-  res.json(products);
+  res.json({ products: products.map((product) => product.toObject({ getters: true })) });
 };
 
 const getProductById = async (req, res, next) => {
@@ -73,7 +73,7 @@ const addProduct = async (req, res, next) => {
     createdByUserId,
     lastEditedByUserId: createdByUserId,
     createdAt: new Date(),
-    lastEditAt: createdAt,
+    lastEditedAt: createdAt,
     inci,
     image1,
     image2,
@@ -92,7 +92,7 @@ const addProduct = async (req, res, next) => {
     description,
     howToUse,
     numberOfReviews: 0,
-    rating: undefined,
+    rating: 0,
   });
 
   try {
@@ -161,7 +161,7 @@ const editProduct = async (req, res, next) => {
   }
 
   editedProduct.lastEditedByUserId = lastEditedByUserId;
-  editedProduct.lastEditAt = new Date();
+  editedProduct.lastEditedAt = new Date();
   editedProduct.inci = inci;
   editedProduct.image1 = image1;
   editedProduct.image2 = image2;

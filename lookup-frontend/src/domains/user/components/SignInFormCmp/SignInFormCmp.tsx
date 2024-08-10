@@ -1,11 +1,11 @@
 import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
-import ProgressBarCmp from "../../../../common/components/modals/ProgressBarCmp/ProgressBarCmp";
+import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
 import SignContext from "../../../../common/contexts/SignContext";
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import TextInputCmp from "../../../../common/components/inputs/TextInputCmp/TextInputCmp";
 import { FC, useContext } from "react";
 import { useForm } from "../../../../common/hooks/formHook";
-import { useHttpClient } from "../../../../common/hooks/httpHook";
+import { useHttpClient } from "../../../../common/hooks/httpClientHook";
 import "./SignInFormCmp.scss";
 
 interface SignInFormCmpProps {
@@ -33,27 +33,27 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
   const signInHandler = async (event: any) => {
     event.preventDefault();
 
-    try {
-      const responseData = await sendRequest(
-        "http://localhost:5000/api/users/signin",
-        "POST",
-        JSON.stringify({
-          email: formState.inputs.email.value,
-          password: formState.inputs.password.value,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-      signContext.signIn(responseData.user.id);
-    } catch (err) {}
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/signin",
+      "POST",
+      JSON.stringify({
+        email: formState.inputs.email.value,
+        password: formState.inputs.password.value,
+      }),
+      {
+        "Content-Type": "application/json",
+      }
+    );
+    signContext.signIn(responseData.user.id);
   };
 
   return (
     <>
-      <SnackBarCmp isSnackBarOpen={!!error} message={error} severity="error" variant="filled" onClear={clearError} />
+      {error && (
+        <SnackBarCmp isSnackBarOpen={!!error} message={error} severity="error" variant="filled" onClear={clearError} />
+      )}
       <form className="sign-in-form-component" onSubmit={signInHandler}>
-        {isLoading && <ProgressBarCmp asOverlay />}
+        {isLoading && <ProgressSpinnerCmp asOverlay />}
         <TextInputCmp id="email" label="E-mail" required={true} type="email" width={100} input={inputHandler} />
         <TextInputCmp id="password" label="Password" required={true} type="password" width={100} input={inputHandler} />
 
