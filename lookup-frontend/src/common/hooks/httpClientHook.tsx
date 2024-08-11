@@ -23,22 +23,13 @@ export const useHttpClient = () => {
         });
 
         const responseData = await response.json();
-        activeHttpRequests.current = activeHttpRequests.current.filter((reqCtrl) => {
-          return reqCtrl !== httpAbortCtrl;
-        });
-
-        if (!response.ok) {
-          throw new Error(responseData.message || "Request failed!");
-        }
-
+        activeHttpRequests.current = activeHttpRequests.current.filter((reqCtrl) => reqCtrl !== httpAbortCtrl);
+        if (!response.ok) throw new Error(responseData.message || "Request failed!");
         setIsLoading(false);
         return responseData;
       } catch (err: any) {
-        if (err.name !== "AbortError") {
-          setError(err.message);
-        } else {
-          console.log("Request was aborted");
-        }
+        if (err.name !== "AbortError") setError(err.message);
+        else console.log("Request was aborted");
         setIsLoading(false);
         throw err;
       }
@@ -50,11 +41,8 @@ export const useHttpClient = () => {
 
   useEffect(() => {
     return () => {
-      activeHttpRequests.current.forEach((abortCtrl, index) => {
-        if (abortCtrl.signal.aborted !== false) {
-          abortCtrl.abort();
-          console.log("Manually aborted request at index:", index);
-        }
+      activeHttpRequests.current.forEach((abortCtrl) => {
+        if (abortCtrl.signal.aborted !== false) abortCtrl.abort();
       });
       activeHttpRequests.current = [];
     };

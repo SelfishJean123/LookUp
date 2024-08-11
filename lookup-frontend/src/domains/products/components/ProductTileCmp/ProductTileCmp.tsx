@@ -33,9 +33,8 @@ const ProductTileCmp: FC<ProductTileCmpProps> = ({ product }) => {
   }, []);
 
   const starsArray: ReactNode[] = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5; i++)
     starsArray.push(i < Math.round(product.rating) ? <StarRateRounded key={i} /> : <StarBorderRounded key={i} />);
-  }
 
   return (
     <div className="product-tile-component" ref={tileRef}>

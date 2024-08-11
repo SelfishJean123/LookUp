@@ -13,8 +13,10 @@ const ProductsListPage = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const responseData = await sendRequest("http://localhost:5000/api/products", "GET");
-      setLoadedProducts(responseData.products);
+      try {
+        const responseData = await sendRequest("http://localhost:5000/api/products", "GET");
+        setLoadedProducts(responseData.products);
+      } catch (err) {}
     };
     fetchProducts();
   }, [sendRequest]);

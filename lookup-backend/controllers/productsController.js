@@ -42,14 +42,15 @@ const addProduct = async (req, res, next) => {
     image2,
     image3,
     name,
-    subname,
+    subName,
     producer,
     brand,
-    subbrand,
+    subBrand,
     category,
-    subcategory,
+    subCategory,
     ean,
     volumes,
+    volumesUnit,
     vegan,
     crueltyFree,
     description,
@@ -79,14 +80,15 @@ const addProduct = async (req, res, next) => {
     image2,
     image3,
     name,
-    subname,
+    subName,
     producer,
     brand,
-    subbrand,
+    subBrand,
     category,
-    subcategory,
+    subCategory,
     ean,
     volumes,
+    volumesUnit,
     vegan,
     crueltyFree,
     description,
@@ -133,14 +135,15 @@ const editProduct = async (req, res, next) => {
     image2,
     image3,
     name,
-    subname,
+    subName,
     producer,
     brand,
-    subbrand,
+    subBrand,
     category,
-    subcategory,
+    subCategory,
     ean,
     volumes,
+    volumesUnit,
     vegan,
     crueltyFree,
     description,
@@ -167,14 +170,15 @@ const editProduct = async (req, res, next) => {
   editedProduct.image2 = image2;
   editedProduct.image3 = image3;
   editedProduct.name = name;
-  editedProduct.subname = subname;
+  editedProduct.subName = subName;
   editedProduct.producer = producer;
   editedProduct.brand = brand;
-  editedProduct.subbrand = subbrand;
+  editedProduct.subBrand = subBrand;
   editedProduct.category = category;
-  editedProduct.subcategory = subcategory;
+  editedProduct.subCategory = subCategory;
   editedProduct.ean = ean;
   editedProduct.volumes = volumes;
+  editedProduct.volumesUnit = volumesUnit;
   editedProduct.vegan = vegan;
   editedProduct.crueltyFree = crueltyFree;
   editedProduct.description = description;

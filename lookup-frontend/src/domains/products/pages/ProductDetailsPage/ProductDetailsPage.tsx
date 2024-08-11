@@ -4,7 +4,7 @@ import ImageCarouselCmp from "../../../../common/components/carousels/ImageCarou
 import LabelIconButtonCmp from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
 import SubHeadingCmp from "../../../../common/components/texts/SubHeadingCmp/SubHeadingCmp";
-import { Favorite, FavoriteBorder, RateReviewSharp, VisibilitySharp } from "@mui/icons-material";
+import { FavoriteBorder, RateReviewSharp, VisibilitySharp } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import "./ProductDetailsPage.scss";
 
@@ -33,7 +33,7 @@ const ProductDetailsPage = () => {
               <h4>Brand: Basic Lab Complemetis</h4>
               <h4>Category: Face creams (moisturizing)</h4>
               <h4>EAN: 76192730431343</h4>
-              <h4>Volume: 40 ml, 30 ml</h4>
+              <h4>Volumes: 40 ml, 30 ml</h4>
               <h4>Price: 25.95 PLN</h4>
               <h4>Vegan: YES</h4>
               <h4>Cruelty Free: YES</h4>

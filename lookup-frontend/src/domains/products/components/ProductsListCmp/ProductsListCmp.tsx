@@ -8,7 +8,6 @@ interface ProductsListCmpProps {
 }
 
 const ProductsListCmp: FC<ProductsListCmpProps> = ({ products }) => {
-  console.log(products);
   return (
     <div className="products-list-component">
       <div className="products-list-tiles">
