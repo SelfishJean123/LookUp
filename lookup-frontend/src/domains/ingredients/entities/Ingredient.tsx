@@ -1,24 +1,24 @@
 interface Ingredient {
+  id: string;
   createdByUserId: string;
   lastEditedByUserId: string;
   createdAt: Date;
   lastEditedAt: Date;
-  inci: Ingredient[];
   image1: string;
   image2: string;
   image3: string;
+  nameLatin: string;
   namePolish: string;
   nameEnglish: string;
-  nameLatin: string;
-  category: string[];
-  subCategory: string[];
+  categories: string[];
+  subCategories: string[];
   origin: string[];
-  form: string[];
+  forms: string[];
   potentiallyAllergenic?: boolean;
   pregnancySafe?: boolean;
   vegan?: boolean;
   description: string;
-  concerns: { type: String; required: false };
+  concerns: string;
 }
 
 export default Ingredient;

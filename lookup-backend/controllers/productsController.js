@@ -46,8 +46,8 @@ const addProduct = async (req, res, next) => {
     producer,
     brand,
     subBrand,
-    category,
-    subCategory,
+    categories,
+    subCategories,
     ean,
     volumes,
     volumesUnit,
@@ -84,8 +84,8 @@ const addProduct = async (req, res, next) => {
     producer,
     brand,
     subBrand,
-    category,
-    subCategory,
+    categories,
+    subCategories,
     ean,
     volumes,
     volumesUnit,
@@ -139,8 +139,8 @@ const editProduct = async (req, res, next) => {
     producer,
     brand,
     subBrand,
-    category,
-    subCategory,
+    categories,
+    subCategories,
     ean,
     volumes,
     volumesUnit,
@@ -174,8 +174,8 @@ const editProduct = async (req, res, next) => {
   editedProduct.producer = producer;
   editedProduct.brand = brand;
   editedProduct.subBrand = subBrand;
-  editedProduct.category = category;
-  editedProduct.subCategory = subCategory;
+  editedProduct.categories = categories;
+  editedProduct.subCategories = subCategories;
   editedProduct.ean = ean;
   editedProduct.volumes = volumes;
   editedProduct.volumesUnit = volumesUnit;

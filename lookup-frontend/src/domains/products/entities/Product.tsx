@@ -15,8 +15,8 @@ interface Product {
   producer: string;
   brand: string;
   subBrand?: string;
-  category: string[];
-  subCategory: string[];
+  categories: string[];
+  subCategories: string[];
   ean: number;
   volumes: number;
   volumesUnit: string;
