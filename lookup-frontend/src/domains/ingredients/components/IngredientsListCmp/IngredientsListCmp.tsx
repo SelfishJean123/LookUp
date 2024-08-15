@@ -1,4 +1,4 @@
-import Ingredient from "../../entities/Ingredient";
+import Ingredient from "../../interfaces/Ingredient.interface";
 import IngredientTileCmp from "../IngredientTileCmp/IngredientTileCmp";
 import { FC } from "react";
 import "./IngredientsListCmp.scss";

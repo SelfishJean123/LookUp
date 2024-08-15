@@ -1,5 +1,5 @@
 import Autocomplete from "@mui/material/Autocomplete";
-import Option from "./../../../interfaces/Option";
+import Option from "../../../interfaces/Option.interface";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { FC } from "react";

@@ -1,4 +1,4 @@
-import Product from "../../entities/Product";
+import Product from "../../interfaces/Product.interface";
 import ProductTileCmp from "../ProductTileCmp/ProductTileCmp";
 import { FC } from "react";
 import "./ProductsListCmp.scss";

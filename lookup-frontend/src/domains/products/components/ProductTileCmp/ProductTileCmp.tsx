@@ -1,4 +1,4 @@
-import Product from "../../entities/Product";
+import Product from "../../interfaces/Product.interface";
 import { FC, ReactNode, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { StarBorderRounded, StarHalfRounded, StarRateRounded } from "@mui/icons-material";

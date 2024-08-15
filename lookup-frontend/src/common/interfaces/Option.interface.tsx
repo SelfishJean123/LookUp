@@ -1,5 +1,5 @@
 interface Option {
-  value: string;
+  value: string | number;
   name: string;
 }
 

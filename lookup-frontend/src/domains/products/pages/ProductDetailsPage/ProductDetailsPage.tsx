@@ -3,7 +3,7 @@ import IconButtonCmp from "../../../../common/components/buttons/IconButtonCmp/I
 import ImageCarouselCmp from "../../../../common/components/carousels/ImageCarouselCmp/ImageCarouselCmp";
 import LabelIconButtonCmp from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
-import Product from "../../entities/Product";
+import Product from "../../interfaces/Product.interface";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import SubHeadingCmp from "../../../../common/components/texts/SubHeadingCmp/SubHeadingCmp";

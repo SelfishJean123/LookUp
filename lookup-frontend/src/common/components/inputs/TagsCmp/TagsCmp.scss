@@ -1,0 +1,11 @@
+.tags-component {
+  .MuiChip-root {
+    margin: 5px 0 10px 0;
+  }
+
+  .tags-input {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}

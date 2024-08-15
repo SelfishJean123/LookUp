@@ -12,7 +12,6 @@ const ingredientSchema = new Schema({
   nameEnglish: { type: String, required: true },
   nameLatin: { type: String, required: true },
   categories: [{ type: String, required: true }],
-  subCategories: [{ type: String, required: true }],
   origin: [{ type: String, required: true }],
   forms: [{ type: String, required: true }],
   potentiallyAllergenic: { type: Boolean, required: false },

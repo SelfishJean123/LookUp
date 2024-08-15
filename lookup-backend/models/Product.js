@@ -17,7 +17,7 @@ const productSchema = new Schema({
   categories: [{ type: String, required: true }],
   subCategories: [{ type: String, required: true }],
   ean: { type: Number, required: true },
-  volumes: { type: Number, required: true },
+  volumes: [{ type: Number, required: true }],
   volumesUnit: { type: String, required: true },
   vegan: { type: Boolean, required: true },
   crueltyFree: { type: Boolean, required: true },

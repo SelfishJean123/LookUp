@@ -1,5 +1,5 @@
 import ImageCarouselCmp from "../../../../common/components/carousels/ImageCarouselCmp/ImageCarouselCmp";
-import Ingredient from "../../entities/Ingredient";
+import Ingredient from "../../interfaces/Ingredient.interface";
 import LabelIconButtonCmp from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
@@ -44,7 +44,6 @@ const IngredientDetailsPage = () => {
               <div className="details-main-info">
                 <div className="details-basic-info">
                   <h4>Categories: {loadedIngredient.categories}</h4>
-                  <h4>Sub categories: {loadedIngredient.subCategories}s</h4>
                   <h4>Origin: {loadedIngredient.origin}</h4>
                   <h4>Forms: {loadedIngredient.forms}</h4>
                   <h4>Potentially allergenic: {loadedIngredient.potentiallyAllergenic}</h4>

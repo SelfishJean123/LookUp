@@ -11,7 +11,6 @@ interface Ingredient {
   namePolish: string;
   nameEnglish: string;
   categories: string[];
-  subCategories: string[];
   origin: string[];
   forms: string[];
   potentiallyAllergenic?: boolean;

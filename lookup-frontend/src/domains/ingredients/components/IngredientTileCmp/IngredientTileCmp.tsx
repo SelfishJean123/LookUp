@@ -1,4 +1,4 @@
-import Ingredient from "../../entities/Ingredient";
+import Ingredient from "../../interfaces/Ingredient.interface";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import "./IngredientTileCmp.scss";

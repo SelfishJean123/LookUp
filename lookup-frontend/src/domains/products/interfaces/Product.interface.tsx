@@ -1,4 +1,4 @@
-import Ingredient from "../../ingredients/entities/Ingredient";
+import Ingredient from "../../ingredients/interfaces/Ingredient.interface";
 
 interface Product {
   id: string;
@@ -18,7 +18,7 @@ interface Product {
   categories: string[];
   subCategories: string[];
   ean: number;
-  volumes: number;
+  volumes: number[];
   volumesUnit: string;
   vegan: boolean;
   crueltyFree: boolean;
