@@ -111,10 +111,11 @@ const ProductDetailsPage = () => {
           <div className="product-details-inci">
             <h3>INCI</h3>
             <Stack spacing={1} direction="row" useFlexGap flexWrap="wrap">
-              {loadedProduct.inci.map((ingredient) => {
+              {loadedProduct.inci.map((ingredient, index) => {
                 return (
                   <ChipButtonCmp
                     label={ingredient.nameLatin}
+                    key={index}
                     component={"a"}
                     href={`/inci-encyclopedia/${ingredient.id}`}
                     variant="filled"

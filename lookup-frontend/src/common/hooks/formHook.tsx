@@ -28,13 +28,13 @@ export const useForm = (initialInputs: any, initialFormValidity: any) => {
     isValid: initialFormValidity,
   });
 
-  const inputHandler = useCallback((id: string, value: string | number, isValid: boolean) => {
+  const inputHandler = useCallback((id: string, value: string | number | [], isValid: boolean) => {
     dispatch({
       value: value,
       isValid: isValid,
       inputId: id,
     });
   }, []);
-  
+
   return [formState, inputHandler];
 };

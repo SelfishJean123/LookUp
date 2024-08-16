@@ -109,8 +109,8 @@ const MainMenuCmp = () => {
           <AuthModalCmp signForm="sign-out" isDrawerOpen={isDrawerOpen} />
         </ListItem>
 
-        {menuElements.map((element) => (
-          <ListItem key={element.name} disablePadding sx={{ display: "block" }} onClick={() => setIsDrawerOpen(false)}>
+        {menuElements.map((element, index) => (
+          <ListItem key={index} disablePadding sx={{ display: "block" }} onClick={() => setIsDrawerOpen(false)}>
             <NavLink to={element.link}>
               <ListItemButton
                 sx={{

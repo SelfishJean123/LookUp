@@ -1,54 +1,52 @@
-import ChipButtonCmp from "../../buttons/ChipButtonCmp/ChipButtonCmp";
-import IconButtonCmp from "../IconButtonCmp/IconButtonCmp";
-import NumberInputCmp from "../NumberInputCmp/NumberInputCmp";
 import Option from "../../../interfaces/Option.interface";
-import Stack from "@mui/material/Stack";
-import { AddSharp } from "@mui/icons-material";
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
+import { ReactTags } from "react-tag-autocomplete";
 import "./TagsCmp.scss";
+import type { Tag, TagSelected } from "react-tag-autocomplete";
 
 interface TagsCmpProps {
   id: string;
   label: string;
+  suggestions: Option[];
   width: number;
   input: (id: string, value: Option[]) => void;
 }
 
-const TagsCmp: FC<TagsCmpProps> = ({ id, label, width, input }) => {
-  const [inputValue, setInputValue] = useState<number | undefined>(undefined);
-  const [tags, setTags] = useState<Option[]>([]);
+const TagsCmp: FC<TagsCmpProps> = ({ id, label, suggestions, width, input }) => {
+  const [selectedTags, setSelectedTags] = useState<TagSelected[]>([]);
 
-  const inputHandler = (id: string, value: number) => {
-    const newValue = value;
-    setInputValue(newValue);
-  };
+  const onAddTag = useCallback(
+    (newTag: Tag) => {
+      const newSelectedTags = [...selectedTags, newTag];
+      setSelectedTags(newSelectedTags);
+      const selectedOptions: Option[] = newSelectedTags.map((tag) => ({ value: tag.value, name: tag.label } as Option));
+      input(id, selectedOptions);
+    },
+    [selectedTags]
+  );
 
-  const handleAddition = () => {
-    inputValue && setTags([...tags, { value: inputValue, name: inputValue.toString() }]);
-    input(id, tags);
-    setInputValue(undefined);
-  };
+  const onDeleteTag = useCallback(
+    (tagIndex: number) => {
+      const newSelectedTags = selectedTags.filter((_, i) => i !== tagIndex);
+      setSelectedTags(newSelectedTags);
+      const selectedOptions: Option[] = newSelectedTags.map((tag) => ({ value: tag.value, name: tag.label } as Option));
+      input(id, selectedOptions);
+    },
+    [selectedTags]
+  );
 
   return (
     <div className="tags-component" style={{ width: width < 100 ? `calc(${width}% - 5px)` : `${width}%` }}>
-      <Stack direction="row" spacing={4}>
-        {tags.map((tagItem, index) => {
-          return (
-            <ChipButtonCmp
-              key={index}
-              label={tagItem.name}
-              component="p"
-              variant="filled"
-              onDelete={() => setTags(tags.filter((tag) => tag.name !== tagItem.name))}
-            />
-          );
-        })}
-      </Stack>
-
-      <div className="tags-input">
-        <NumberInputCmp id={id} label={label} required={false} width={100} input={inputHandler} />
-        <IconButtonCmp icon={<AddSharp />} onClick={handleAddition} />
-      </div>
+      <ReactTags
+        id={id}
+        labelText={label}
+        suggestions={suggestions.map((suggestion) => ({ value: suggestion.value, label: suggestion.name } as Tag))}
+        selected={selectedTags}
+        allowNew={true}
+        placeholderText={label}
+        onAdd={onAddTag}
+        onDelete={onDeleteTag}
+      />
     </div>
   );
 };

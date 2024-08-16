@@ -30,7 +30,7 @@ const AutocompleteChipsCmp: FC<AutocompleteChipsCmpProps> = ({ id, label, option
         getOptionLabel={(option) => option.name}
         filterSelectedOptions
         renderInput={(params) => <TextField {...params} label={label} />}
-        onChange={(event, newValue) => input(id, newValue)}
+        onChange={(_, newValue) => input(id, newValue)}
       />
     </Stack>
   );

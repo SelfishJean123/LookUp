@@ -79,7 +79,7 @@ const AuthModalCmp: FC<AuthModalCmpProps> = ({ signForm, isDrawerOpen }) => {
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box className="auth-modal-body shadow">
           <ModalHeadingCmp headingText={headingText} />
-          <ModalDescriptionCmp descriptionText={descriptionText} />
+          <ModalDescriptionCmp descriptionText={descriptionText} fontSize="large" />
 
           {(activeForm === "sign-in" || activeForm === "sign-up") && (
             <LabelIconButton

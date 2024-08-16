@@ -70,11 +70,13 @@ const addProduct = async (req, res, next) => {
     return next(error);
   }
 
+  const today = new Date();
+
   const newProduct = new Product({
     createdByUserId,
     lastEditedByUserId: createdByUserId,
-    createdAt: new Date(),
-    lastEditedAt: createdAt,
+    createdAt: today,
+    lastEditedAt: today,
     inci,
     image1,
     image2,

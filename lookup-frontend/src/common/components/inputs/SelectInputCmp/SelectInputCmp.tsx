@@ -39,9 +39,9 @@ const SelectInputCmp: FC<SelectInputCmpProps> = ({ id, label, required, options,
           input(id, (event.target as HTMLInputElement).value);
         }}
       >
-        {options.map((option) => {
+        {options.map((option, index) => {
           return (
-            <MenuItem key={id} value={option.value}>
+            <MenuItem value={option.value} key={index}>
               {option.name}
             </MenuItem>
           );
