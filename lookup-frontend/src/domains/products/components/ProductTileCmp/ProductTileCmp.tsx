@@ -1,17 +1,14 @@
+import Product from "../../interfaces/Product.interface";
 import { FC, ReactNode, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { StarBorderRounded, StarHalfRounded, StarRateRounded } from "@mui/icons-material";
 import "./ProductTileCmp.scss";
 
 interface ProductTileCmpProps {
-  id: string;
-  name: string;
-  reviewsNumber: number;
-  rating: number;
-  imgSrc: string;
+  product: Product;
 }
 
-const ProductTileCmp: FC<ProductTileCmpProps> = ({ id, name, reviewsNumber, rating, imgSrc }) => {
+const ProductTileCmp: FC<ProductTileCmpProps> = ({ product }) => {
   const tileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,27 +33,26 @@ const ProductTileCmp: FC<ProductTileCmpProps> = ({ id, name, reviewsNumber, rati
   }, []);
 
   const starsArray: ReactNode[] = [];
-  for (let i = 0; i < 5; i++) {
-    starsArray.push(i < Math.round(rating) ? <StarRateRounded key={i} /> : <StarBorderRounded key={i} />);
-  }
+  for (let i = 0; i < 5; i++)
+    starsArray.push(i < Math.round(product.rating) ? <StarRateRounded key={i} /> : <StarBorderRounded key={i} />);
 
   return (
     <div className="product-tile-component" ref={tileRef}>
-      <Link to={id}>
+      <Link to={product.id}>
         <div className="product-tile-top">
           <div className="product-tile-img-wrapper">
-            <img src={`/assets/products/${imgSrc}`} alt={name} className="product-tile-img" />
+            <img src={`/assets/products/${product.image1}`} alt={product.name} className="product-tile-img" />
           </div>
 
           <div className="product-tile-rating">
-            <h5 className="product-tile-reviews">REVIEWS: {reviewsNumber}</h5>
+            <h5 className="product-tile-reviews">REVIEWS: {product.numberOfReviews}</h5>
             <div className="product-tile-starts-box">{starsArray}</div>
           </div>
         </div>
 
         <div className="product-tile-info">
-          <h5 className="product-tile-name" title={name}>
-            {name}
+          <h5 className="product-tile-name" title={product.name}>
+            {product.name}
           </h5>
         </div>
       </Link>

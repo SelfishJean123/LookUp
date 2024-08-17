@@ -5,7 +5,7 @@ const HttpError = require("../models/HttpError");
 
 const getProducts = async (req, res, next) => {
   const products = await Product.find().exec();
-  res.json(products);
+  res.json({ products: products.map((product) => product.toObject({ getters: true })) });
 };
 
 const getProductById = async (req, res, next) => {
@@ -42,14 +42,15 @@ const addProduct = async (req, res, next) => {
     image2,
     image3,
     name,
-    subname,
+    subName,
     producer,
     brand,
-    subbrand,
-    category,
-    subcategory,
+    subBrand,
+    categories,
+    subCategories,
     ean,
     volumes,
+    volumesUnit,
     vegan,
     crueltyFree,
     description,
@@ -69,35 +70,38 @@ const addProduct = async (req, res, next) => {
     return next(error);
   }
 
+  const today = new Date();
+
   const newProduct = new Product({
     createdByUserId,
     lastEditedByUserId: createdByUserId,
-    createdAt: new Date(),
-    lastEditAt: createdAt,
+    createdAt: today,
+    lastEditedAt: today,
     inci,
     image1,
     image2,
     image3,
     name,
-    subname,
+    subName,
     producer,
     brand,
-    subbrand,
-    category,
-    subcategory,
+    subBrand,
+    categories,
+    subCategories,
     ean,
     volumes,
+    volumesUnit,
     vegan,
     crueltyFree,
     description,
     howToUse,
     numberOfReviews: 0,
-    rating: undefined,
+    rating: 0,
   });
 
   try {
     const result = await newProduct.save();
-    res.status(201).json(result); // transaction & sessions - lesson 139
+    res.status(201).json({ product: result.toObject({ getters: true }) }); // transaction & sessions - lesson 139
   } catch (err) {
     const error = new HttpError("Adding new product faild.", 500);
     return next(error);
@@ -133,14 +137,15 @@ const editProduct = async (req, res, next) => {
     image2,
     image3,
     name,
-    subname,
+    subName,
     producer,
     brand,
-    subbrand,
-    category,
-    subcategory,
+    subBrand,
+    categories,
+    subCategories,
     ean,
     volumes,
+    volumesUnit,
     vegan,
     crueltyFree,
     description,
@@ -161,20 +166,21 @@ const editProduct = async (req, res, next) => {
   }
 
   editedProduct.lastEditedByUserId = lastEditedByUserId;
-  editedProduct.lastEditAt = new Date();
+  editedProduct.lastEditedAt = new Date();
   editedProduct.inci = inci;
   editedProduct.image1 = image1;
   editedProduct.image2 = image2;
   editedProduct.image3 = image3;
   editedProduct.name = name;
-  editedProduct.subname = subname;
+  editedProduct.subName = subName;
   editedProduct.producer = producer;
   editedProduct.brand = brand;
-  editedProduct.subbrand = subbrand;
-  editedProduct.category = category;
-  editedProduct.subcategory = subcategory;
+  editedProduct.subBrand = subBrand;
+  editedProduct.categories = categories;
+  editedProduct.subCategories = subCategories;
   editedProduct.ean = ean;
   editedProduct.volumes = volumes;
+  editedProduct.volumesUnit = volumesUnit;
   editedProduct.vegan = vegan;
   editedProduct.crueltyFree = crueltyFree;
   editedProduct.description = description;

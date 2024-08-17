@@ -20,7 +20,7 @@ const signUpUser = async (req, res, next) => {
   }
 
   if (alreadyExistingUserEmail) {
-    const error = new HttpError("User already exists. Login instead.", 500);
+    const error = new HttpError("User already exists. Login instead.", 422);
     return next(error);
   }
 
@@ -28,7 +28,7 @@ const signUpUser = async (req, res, next) => {
     firstName,
     lastName,
     userName,
-    avatar,
+    avatar: req.file.path,
     email,
     password,
     favourites: [],
@@ -41,7 +41,7 @@ const signUpUser = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ user: newUser.toObject({ getters: true }) });
+  res.status(201).json({ message: "User was successfully signed up", user: newUser.toObject({ getters: true }) });
 };
 
 const signInUser = async (req, res, next) => {
@@ -60,7 +60,9 @@ const signInUser = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ message: "User signed in." });
+  res
+    .status(201)
+    .json({ message: "User was successfully signed in", user: identifiedUser.toObject({ getters: true }) });
 };
 
 const signOutUser = (req, res, next) => {};

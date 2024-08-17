@@ -1,26 +1,24 @@
+import Ingredient from "../../interfaces/Ingredient.interface";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import "./IngredientTileCmp.scss";
 
 interface IngredientTileCmpProps {
-  id: string;
-  nameLatin: string;
-  namePolish: string;
-  nameEnglish: string;
+  ingredient: Ingredient;
 }
 
-const IngredientTileCmp: FC<IngredientTileCmpProps> = ({ id, nameLatin, namePolish, nameEnglish }) => {
+const IngredientTileCmp: FC<IngredientTileCmpProps> = ({ ingredient }) => {
   return (
     <div className="ingredient-tile-component">
-      <Link to={id}>
-        <h5 className="ingredient-tile-nameLatin" title={nameLatin}>
-          {nameLatin}
+      <Link to={ingredient.id}>
+        <h5 className="ingredient-tile-nameLatin" title={ingredient.nameLatin}>
+          {ingredient.nameLatin}
         </h5>
-        <h6 className="ingredient-tile-namePolish" title={namePolish}>
-          {namePolish}
+        <h6 className="ingredient-tile-namePolish" title={ingredient.namePolish}>
+          {ingredient.namePolish}
         </h6>
-        <h6 className="ingredient-tile-nameEnglish" title={nameEnglish}>
-          {nameEnglish}
+        <h6 className="ingredient-tile-nameEnglish" title={ingredient.nameEnglish}>
+          {ingredient.nameEnglish}
         </h6>
       </Link>
     </div>

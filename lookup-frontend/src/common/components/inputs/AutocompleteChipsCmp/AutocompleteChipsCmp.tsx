@@ -1,21 +1,18 @@
 import Autocomplete from "@mui/material/Autocomplete";
+import Option from "../../../interfaces/Option.interface";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { FC } from "react";
-
-interface Option {
-  value: string;
-  name: string;
-}
 
 interface AutocompleteChipsCmpProps {
   id: string;
   label: string;
   options: Option[];
   width: number;
+  input: (id: string, value: Option[]) => void;
 }
 
-const AutocompleteChipsCmp: FC<AutocompleteChipsCmpProps> = ({ id, label, options, width }) => {
+const AutocompleteChipsCmp: FC<AutocompleteChipsCmpProps> = ({ id, label, options, width, input }) => {
   return (
     <Stack
       className="autocomplete-input-component"
@@ -33,6 +30,7 @@ const AutocompleteChipsCmp: FC<AutocompleteChipsCmpProps> = ({ id, label, option
         getOptionLabel={(option) => option.name}
         filterSelectedOptions
         renderInput={(params) => <TextField {...params} label={label} />}
+        onChange={(_, newValue) => input(id, newValue)}
       />
     </Stack>
   );

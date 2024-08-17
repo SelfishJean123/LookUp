@@ -26,9 +26,9 @@ const ImageCarouselCmp: FC<ImageCarouselCmpProps> = ({ childrenSources }) => {
 
   return (
     <Slider className="image-carousel-component" {...settings}>
-      {childrenSources.map((childSource) => {
+      {childrenSources.map((childSource, index) => {
         return (
-          <div className="carousel-image">
+          <div className="carousel-image" key={index}>
             <img src={childSource} alt="" />
           </div>
         );

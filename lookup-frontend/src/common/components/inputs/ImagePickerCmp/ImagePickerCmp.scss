@@ -1,0 +1,40 @@
+@import "@styles/colors.scss";
+
+.image-picker-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+
+  .image-input {
+    display: none;
+  }
+
+  .image-picker {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .image-picker-preview {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+
+      img {
+        width: 100%;
+        max-width: 200px;
+      }
+
+      p {
+        color: $blue;
+        font-weight: 600;
+      }
+    }
+
+    .label-icon-button-component {
+      margin-right: 10px;
+    }
+  }
+}

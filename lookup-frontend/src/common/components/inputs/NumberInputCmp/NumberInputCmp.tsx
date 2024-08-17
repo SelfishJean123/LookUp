@@ -6,19 +6,19 @@ interface NumberInputCmpProps {
   label: string;
   required: boolean;
   width: number;
+  input: (id: string, value: number) => void;
 }
 
-const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required, width }) => {
-  const [value, setValue] = useState<number | string>("");
-  const [error, setError] = useState<string | null>(null);
+const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required, width, input }) => {
+  const [value, setValue] = useState<number | undefined>(undefined);
 
   const changeValue = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.valueAsNumber;
 
-    if (isNaN(newValue)) setError("Invalid number");
+    if (isNaN(newValue)) setValue(undefined);
     else {
-      setError(null);
       setValue(newValue);
+      input(id, newValue);
     }
   };
 
@@ -33,8 +33,6 @@ const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required, width })
       type="number"
       value={value}
       onChange={changeValue}
-      error={Boolean(error)}
-      helperText={error || ""}
       sx={{
         width: width < 100 ? `calc(${width}% - 5px)` : `${width}%`,
       }}

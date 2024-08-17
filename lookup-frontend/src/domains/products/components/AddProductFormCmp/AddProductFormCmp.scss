@@ -3,12 +3,14 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: end;
 
   .text-input-component,
   .number-input-component,
   .select-input-component,
-  .autocomplete-input-component {
-    margin: 5px 0;
+  .autocomplete-input-component,
+  .tags-component {
+    margin: 3px 0;
   }
 
   .add-product-form-buttons {

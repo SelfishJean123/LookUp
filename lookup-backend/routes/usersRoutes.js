@@ -10,14 +10,15 @@ const {
   deleteUser,
   getUserByUserId,
 } = require("../controllers/usersController");
+const fileUpload = require("./../middleware/fileUpload");
 
 router.post(
   "/signup",
+  fileUpload.single("avatar"),
   [
     check("firstName").notEmpty(),
     check("lastName").notEmpty(),
     check("userName").notEmpty(),
-    check("avatar").notEmpty(),
     check("email").normalizeEmail().isEmail(),
     check("password").isLength({ min: 6 }),
   ],
