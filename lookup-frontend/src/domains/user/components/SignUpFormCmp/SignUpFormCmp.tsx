@@ -1,3 +1,4 @@
+import ImagePickerCmp from "../../../../common/components/inputs/ImagePickerCmp/ImagePickerCmp";
 import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
 import SignContext from "../../../../common/contexts/SignContext";
@@ -31,7 +32,7 @@ const SignUpFormCmp: FC<SignUpFormCmpProps> = ({ close }) => {
         isValid: false,
       },
       avatar: {
-        value: "",
+        value: null,
         isValid: false,
       },
       email: {
@@ -50,21 +51,15 @@ const SignUpFormCmp: FC<SignUpFormCmpProps> = ({ close }) => {
     event.preventDefault();
 
     try {
-      const responseData = await sendRequest(
-        "http://localhost:5000/api/users/signup",
-        "POST",
-        JSON.stringify({
-          firstName: formState.inputs.firstName.value,
-          lastName: formState.inputs.lastName.value,
-          userName: formState.inputs.userName.value,
-          avatar: formState.inputs.avatar.value,
-          email: formState.inputs.email.value,
-          password: formState.inputs.password.value,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
+      const formData = new FormData();
+      formData.append("firstName", formState.inputs.firstName.value);
+      formData.append("lastName", formState.inputs.lastName.value);
+      formData.append("userName", formState.inputs.userName.value);
+      formData.append("avatar", formState.inputs.avatar.value);
+      formData.append("email", formState.inputs.email.value);
+      formData.append("password", formState.inputs.password.value);
+
+      const responseData = await sendRequest("http://localhost:5000/api/users/signup", "POST", formData);
       signContext.signIn(responseData.user.id);
     } catch (err) {}
   };
@@ -79,7 +74,7 @@ const SignUpFormCmp: FC<SignUpFormCmpProps> = ({ close }) => {
         <TextInputCmp id="firstName" label="First Name" required={true} type="text" width={100} input={inputHandler} />
         <TextInputCmp id="lastName" label="Last Name" required={true} type="text" width={100} input={inputHandler} />
         <TextInputCmp id="userName" label="User Name" required={true} type="text" width={100} input={inputHandler} />
-        <TextInputCmp id="avatar" label="Avatar" required={true} type="text" width={100} input={inputHandler} />
+        <ImagePickerCmp id="avatar" label="Upload" hintText="Pick an image for your avatar" required={true} width={100} input={inputHandler} />
         <TextInputCmp id="email" label="E-mail" required={true} type="email" width={100} input={inputHandler} />
         <TextInputCmp id="password" label="Password" required={true} type="password" width={100} input={inputHandler} />
 

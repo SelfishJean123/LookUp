@@ -1,9 +1,8 @@
 import AutocompleteChipsCmp from "../../../../common/components/inputs/AutocompleteChipsCmp/AutocompleteChipsCmp";
-import InciItemIngredient from "../../../ingredients/interfaces/InciItemIngredient.interface";
+import ImagePickerCmp from "../../../../common/components/inputs/ImagePickerCmp/ImagePickerCmp";
 import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import NumberInputCmp from "../../../../common/components/inputs/NumberInputCmp/NumberInputCmp";
-import ProductCategorie from "../../interfaces/ProductCategorie.interface";
-import ProductSubCategorie from "../../interfaces/ProductSubCategorie.interface";
+import Option from "../../../../common/interfaces/Option.interface";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
 import SelectInputCmp from "../../../../common/components/inputs/SelectInputCmp/SelectInputCmp";
 import SignContext from "../../../../common/contexts/SignContext";
@@ -21,7 +20,7 @@ interface AddProductFormCmpProps {
 }
 
 const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
-  const categories: ProductCategorie[] = [
+  const categories: Option[] = [
     { value: "wash", name: "wash" },
     { value: "care", name: "care" },
     { value: "stylization", name: "stylization" },
@@ -30,7 +29,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
     { value: "storage", name: "storage" },
   ];
 
-  const subCategories: ProductSubCategorie[] = [
+  const subCategories: Option[] = [
     { value: "face", name: "face" },
     { value: "eyes", name: "eyes" },
     { value: "lips", name: "lips" },
@@ -41,7 +40,22 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
     { value: "nails", name: "nails" },
   ];
 
-  const ingredients: InciItemIngredient[] = [
+  const volumes: Option[] = [
+    { value: "1", name: "1" },
+    { value: "5", name: "5" },
+    { value: "10", name: "10" },
+    { value: "15", name: "15" },
+    { value: "20", name: "20" },
+    { value: "30", name: "30" },
+    { value: "40", name: "40" },
+    { value: "50", name: "50" },
+    { value: "60", name: "60" },
+    { value: "75", name: "75" },
+    { value: "100", name: "100" },
+    { value: "200", name: "200" },
+  ];
+
+  const ingredients: Option[] = [
     { value: "0011", name: "Aqua" },
     { value: "0012", name: "Godfather" },
     { value: "0013", name: "Godfather Part II" },
@@ -51,7 +65,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
     { value: "0016", name: "Fiction" },
   ];
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const signContext = useContext(SignContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -62,15 +76,15 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
         isValid: false,
       },
       image1: {
-        value: "",
+        value: null,
         isValid: false,
       },
       image2: {
-        value: "",
+        value: null,
         isValid: false,
       },
       image3: {
-        value: "",
+        value: null,
         isValid: false,
       },
       name: {
@@ -153,9 +167,9 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           subBrand: formState.inputs.subBrand.value,
           categories: formState.inputs.categories.value,
           subCategories: formState.inputs.subCategories.value,
-          ean: formState.inputs.ean.value.value,
+          ean: formState.inputs.ean.value,
           volumes: formState.inputs.volumes.value,
-          volumesUnit: formState.inputs.volumes.value,
+          volumesUnit: formState.inputs.volumesUnit.value,
           vegan: formState.inputs.vegan.value,
           crueltyFree: formState.inputs.crueltyFree.value,
           description: formState.inputs.description.value,
@@ -165,8 +179,8 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           "Content-Type": "application/json",
         }
       );
-      console.log(responseData);
-      // navigate('/');
+
+      navigate(`/products-catalogue/${responseData.product.id}`);
     } catch (err) {}
   };
 
@@ -197,8 +211,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           input={inputHandler}
         />
         <NumberInputCmp id="ean" label="EAN" required={true} width={100} input={inputHandler} />
-
-        <TagsCmp id="volumes" label="Volumes" width={70} input={inputHandler} />
+        <TagsCmp id="volumes" label="Volumes" suggestions={volumes} width={75} input={inputHandler} />
         <SelectInputCmp
           id="volumesUnit"
           label="Unit"
@@ -210,7 +223,6 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           width={25}
           input={inputHandler}
         />
-
         <SelectInputCmp
           id="vegan"
           label="Vegan"
@@ -244,7 +256,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           input={inputHandler}
         />
         <TextInputCmp
-          id="how-to-use"
+          id="howToUse"
           label="How to use"
           required={true}
           multiline={true}
@@ -253,9 +265,30 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           input={inputHandler}
         />
 
-        {/* img
-      img
-      img */}
+        <ImagePickerCmp
+          id="image1"
+          label="Primary Image"
+          hintText="Pick an image"
+          required={true}
+          width={33.333}
+          input={inputHandler}
+        />
+        <ImagePickerCmp
+          id="image2"
+          label="Secondary Image"
+          hintText="Pick an image"
+          required={false}
+          width={33.333}
+          input={inputHandler}
+        />
+        <ImagePickerCmp
+          id="image3"
+          label="Tertiary Image"
+          hintText="Pick an image"
+          required={false}
+          width={33.333}
+          input={inputHandler}
+        />
 
         <div className="add-product-form-buttons">
           <LabelIconButton

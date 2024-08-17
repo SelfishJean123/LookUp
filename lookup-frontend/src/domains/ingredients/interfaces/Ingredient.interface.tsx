@@ -5,8 +5,8 @@ interface Ingredient {
   createdAt: Date;
   lastEditedAt: Date;
   image1: string;
-  image2: string;
-  image3: string;
+  image2?: string;
+  image3?: string;
   nameLatin: string;
   namePolish: string;
   nameEnglish: string;

@@ -1,11 +1,177 @@
+@import "@styles/colors.scss";
+
 .tags-component {
-  .MuiChip-root {
-    margin: 5px 0 10px 0;
+  position: relative;
+
+  .react-tags {
+    position: relative;
+    cursor: text;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    background: $white;
+    padding: 0 12px 1.5px 12px;
+    font-size: 16px;
+    line-height: 1;
+
+    &.is-active {
+      border: 2px solid $blue;
+    }
+
+    &.is-disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+      background-color: #eaeef2;
+      pointer-events: none;
+    }
+
+    &.is-invalid {
+      box-shadow: 0 0 0 2px $purple;
+      border-color: $red;
+    }
+
+    &__label {
+      display: none;
+    }
+
+    &__list {
+      display: inline;
+      padding: 0;
+    }
+
+    &__list-item {
+      display: inline;
+      list-style: none;
+    }
+
+    &__tag {
+      margin-right: 4px;
+      border: 0;
+      border-radius: 16px;
+      background-color: rgba(0, 0, 0, 0.08);
+      background-color: $beige;
+      padding: 5px 9px 4px 9px;
+      font-size: 13px;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &::after {
+        display: inline-block;
+        clip-path: polygon(
+          10% 0,
+          0 10%,
+          40% 50%,
+          0 90%,
+          10% 100%,
+          50% 60%,
+          90% 100%,
+          100% 90%,
+          60% 50%,
+          100% 10%,
+          90% 0,
+          50% 40%
+        );
+        margin-left: 0.5rem;
+        background-color: $brown_gray;
+        width: 0.65rem;
+        height: 0.65rem;
+        content: "";
+        font-size: 0.875rem;
+      }
+
+      &:hover::after {
+        background-color: $white;
+      }
+    }
+
+    &__combobox {
+      display: inline-block;
+      padding: 8.5px 0;
+    }
+
+    &__combobox-input {
+      margin: 0;
+      outline: none;
+      border: 0;
+      background: none;
+      padding: 0;
+      font-size: inherit;
+      line-height: inherit;
+
+      &::placeholder {
+        opacity: 1;
+        color: #7c7d86;
+      }
+    }
+
+    &__listbox {
+      position: absolute;
+      top: calc(100% + 5px);
+      right: -2px;
+      left: -2px;
+      z-index: 10;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -4px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+      border: 1px solid #afb8c1;
+      border-radius: 6px;
+      background: $white;
+      max-height: 12.5rem;
+      overflow-y: auto;
+    }
+
+    &__listbox-option {
+      padding: 4px 14px;
+    }
+
+    &__listbox-option:hover {
+      cursor: pointer;
+      background: #eaeef2;
+    }
+
+    &__listbox-option:not([aria-disabled="true"]).is-active {
+      background: $blue;
+      color: $white;
+    }
+
+    &__listbox-option[aria-disabled="true"] {
+      cursor: not-allowed;
+      pointer-events: none;
+      color: #7c7d86;
+    }
+
+    &__listbox-option[aria-selected="true"]::after {
+      margin-left: 0.5rem;
+      content: "✓";
+    }
+
+    &__listbox-option[aria-selected="true"]:not(.is-active)::after {
+      color: $blue;
+    }
   }
 
-  .tags-input {
+  .tag-group {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0.25rem 0.5rem 0.5rem 0.25rem;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    background-color: hsla(0, 0%, 0%, 0.012);
+    padding: 0;
+
+    ul {
+      margin: 0;
+    }
+
+    & > p {
+      margin: 0;
+      color: $black;
+      font-size: 14px;
+      line-height: 1.5rem;
+    }
   }
 }

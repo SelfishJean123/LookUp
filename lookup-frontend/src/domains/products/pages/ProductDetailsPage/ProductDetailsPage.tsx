@@ -60,11 +60,23 @@ const ProductDetailsPage = () => {
                     Brand: {loadedProduct.brand} ({loadedProduct.subBrand})
                   </h4>
                   <h4>
-                    Categories: {loadedProduct.categories} ({loadedProduct.subCategories})
+                    Categories:
+                    {loadedProduct.categories.map((categorie, index) => (
+                      <span key={index}>{categorie.name}</span>
+                    ))}
+                  </h4>
+                  <h4>
+                    Sub categories:
+                    {loadedProduct.subCategories.map((subCategorie, index) => (
+                      <span key={index}>{subCategorie.name}</span>
+                    ))}
                   </h4>
                   <h4>EAN: {loadedProduct.ean}</h4>
                   <h4>
-                    Volumes: {loadedProduct.volumes} {loadedProduct.volumesUnit}
+                    Volumes:
+                    {loadedProduct.volumes.map((volume, index) => (
+                      <span key={index}>{volume.name}</span>
+                    ))}
                   </h4>
                   <h4>Vegan: {loadedProduct.vegan}</h4>
                   <h4>Cruelty Free: {loadedProduct.crueltyFree}</h4>
@@ -72,9 +84,12 @@ const ProductDetailsPage = () => {
                   <h4>Reviews: {loadedProduct.numberOfReviews}</h4>
                 </div>
                 <div className="details-updates">
-                  <h5>Added: {loadedProduct.createdAt?.toDateString()}</h5>
+                  <h5>Added: {new Date(loadedProduct.createdAt).toLocaleDateString().replace(/\./g, " / ")}</h5>
                   <h5>by: {loadedProduct.createdByUserId}</h5>
-                  <h5>Last update: {loadedProduct.lastEditedAt?.toDateString()} </h5>
+
+                  <h5>
+                    Last update: {new Date(loadedProduct.lastEditedAt).toLocaleDateString().replace(/\./g, " / ")}
+                  </h5>
                   <h5>by {loadedProduct.lastEditedByUserId}</h5>
                 </div>
               </div>
@@ -114,10 +129,10 @@ const ProductDetailsPage = () => {
               {loadedProduct.inci.map((ingredient, index) => {
                 return (
                   <ChipButtonCmp
-                    label={ingredient.nameLatin}
+                    label={ingredient.name}
                     key={index}
                     component={"a"}
-                    href={`/inci-encyclopedia/${ingredient.id}`}
+                    href={`/inci-encyclopedia/${ingredient.value}`}
                     variant="filled"
                     onClick={() => {}}
                   />

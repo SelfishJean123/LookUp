@@ -1,4 +1,4 @@
-import Ingredient from "../../ingredients/interfaces/Ingredient.interface";
+import Option from "../../../common/interfaces/Option.interface";
 
 interface Product {
   id: string;
@@ -6,19 +6,19 @@ interface Product {
   lastEditedByUserId: string;
   createdAt: Date;
   lastEditedAt: Date;
-  inci: Ingredient[];
+  inci: Option[];
   image1: string;
-  image2: string;
-  image3: string;
+  image2?: string;
+  image3?: string;
   name: string;
   subName?: string;
   producer: string;
   brand: string;
   subBrand?: string;
-  categories: string[];
-  subCategories: string[];
+  categories: Option[];
+  subCategories: Option[];
   ean: number;
-  volumes: number[];
+  volumes: Option[];
   volumesUnit: string;
   vegan: boolean;
   crueltyFree: boolean;

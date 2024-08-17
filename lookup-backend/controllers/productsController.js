@@ -101,7 +101,7 @@ const addProduct = async (req, res, next) => {
 
   try {
     const result = await newProduct.save();
-    res.status(201).json(result); // transaction & sessions - lesson 139
+    res.status(201).json({ product: result.toObject({ getters: true }) }); // transaction & sessions - lesson 139
   } catch (err) {
     const error = new HttpError("Adding new product faild.", 500);
     return next(error);

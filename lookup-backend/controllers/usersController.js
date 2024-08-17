@@ -20,7 +20,7 @@ const signUpUser = async (req, res, next) => {
   }
 
   if (alreadyExistingUserEmail) {
-    const error = new HttpError("User already exists. Login instead.", 500);
+    const error = new HttpError("User already exists. Login instead.", 422);
     return next(error);
   }
 
@@ -28,7 +28,7 @@ const signUpUser = async (req, res, next) => {
     firstName,
     lastName,
     userName,
-    avatar,
+    avatar: req.file.path,
     email,
     password,
     favourites: [],
