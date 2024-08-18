@@ -151,35 +151,28 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
     event.preventDefault();
 
     try {
-      const responseData = await sendRequest(
-        "http://localhost:5000/api/products",
-        "POST",
-        JSON.stringify({
-          createdByUserId: signContext.userId,
-          inci: formState.inputs.inci.value,
-          image1: formState.inputs.image1.value,
-          image2: formState.inputs.image2.value,
-          image3: formState.inputs.image3.value,
-          name: formState.inputs.name.value,
-          subName: formState.inputs.subName.value,
-          producer: formState.inputs.producer.value,
-          brand: formState.inputs.brand.value,
-          subBrand: formState.inputs.subBrand.value,
-          categories: formState.inputs.categories.value,
-          subCategories: formState.inputs.subCategories.value,
-          ean: formState.inputs.ean.value,
-          volumes: formState.inputs.volumes.value,
-          volumesUnit: formState.inputs.volumesUnit.value,
-          vegan: formState.inputs.vegan.value,
-          crueltyFree: formState.inputs.crueltyFree.value,
-          description: formState.inputs.description.value,
-          howToUse: formState.inputs.howToUse.value,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
+      const formData = new FormData();
+      if (signContext.userId) formData.append("createdByUserId", signContext.userId);
+      formData.append("inci", JSON.stringify(formState.inputs.inci.value));
+      formData.append("image1", formState.inputs.image1.value);
+      formData.append("image2", formState.inputs.image2.value);
+      formData.append("image3", formState.inputs.image3.value);
+      formData.append("name", formState.inputs.name.value);
+      formData.append("subName", formState.inputs.subName.value);
+      formData.append("producer", formState.inputs.producer.value);
+      formData.append("brand", formState.inputs.brand.value);
+      formData.append("subBrand", formState.inputs.subBrand.value);
+      formData.append("categories", JSON.stringify(formState.inputs.categories.value));
+      formData.append("subCategories", JSON.stringify(formState.inputs.subCategories.value));
+      formData.append("ean", formState.inputs.ean.value);
+      formData.append("volumes", JSON.stringify(formState.inputs.volumes.value));
+      formData.append("volumesUnit", formState.inputs.volumesUnit.value);
+      formData.append("vegan", formState.inputs.vegan.value);
+      formData.append("crueltyFree", formState.inputs.crueltyFree.value);
+      formData.append("description", formState.inputs.description.value);
+      formData.append("howToUse", formState.inputs.howToUse.value);
 
+      const responseData = await sendRequest("http://localhost:5000/api/products", "POST", formData);
       navigate(`/products-catalogue/${responseData.product.id}`);
     } catch (err) {}
   };
@@ -194,6 +187,32 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
         <TextInputCmp id="name" label="Name" required={true} width={100} input={inputHandler} />
         <TextInputCmp id="subName" label="Sub name" required={true} width={100} input={inputHandler} />
         <TextInputCmp id="producer" label="Producer" required={true} width={100} input={inputHandler} />
+
+        <ImagePickerCmp
+          id="image1"
+          label="Image 1"
+          hintText="Pick an image"
+          required={true}
+          width={33.333}
+          input={inputHandler}
+        />
+        <ImagePickerCmp
+          id="image2"
+          label="Image 2"
+          hintText="Pick an image"
+          required={false}
+          width={33.333}
+          input={inputHandler}
+        />
+        <ImagePickerCmp
+          id="image3"
+          label="Image 3"
+          hintText="Pick an image"
+          required={false}
+          width={33.333}
+          input={inputHandler}
+        />
+
         <TextInputCmp id="brand" label="Brand" required={true} width={100} input={inputHandler} />
         <TextInputCmp id="subBrand" label="Sub brand" required={true} width={100} input={inputHandler} />
         <AutocompleteChipsCmp
@@ -262,31 +281,6 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           multiline={true}
           maxRows={20}
           width={100}
-          input={inputHandler}
-        />
-
-        <ImagePickerCmp
-          id="image1"
-          label="Primary Image"
-          hintText="Pick an image"
-          required={true}
-          width={33.333}
-          input={inputHandler}
-        />
-        <ImagePickerCmp
-          id="image2"
-          label="Secondary Image"
-          hintText="Pick an image"
-          required={false}
-          width={33.333}
-          input={inputHandler}
-        />
-        <ImagePickerCmp
-          id="image3"
-          label="Tertiary Image"
-          hintText="Pick an image"
-          required={false}
-          width={33.333}
           input={inputHandler}
         />
 

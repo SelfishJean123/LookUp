@@ -15,9 +15,11 @@ router.get("/", getProducts);
 router.get("/:productId", getProductById);
 router.post(
   "/",
-  fileUpload.single("image1"),
-  fileUpload.single("image2"),
-  fileUpload.single("image3"),
+  fileUpload.fields([
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+  ]),
   [check("name").notEmpty(), check("description").isLength({ min: 5 })],
   addProduct
 );

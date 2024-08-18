@@ -5,8 +5,13 @@ const productSchema = new Schema({
   lastEditedByUserId: { type: mongoose.Types.ObjectId, required: false, ref: "User" },
   createdAt: { type: Date, required: true },
   lastEditedAt: { type: Date, required: true },
-  // inci: [{ type: mongoose.Types.ObjectId, required: true, ref: "Ingredient" }],
-  inci: [{ value: { type: String || Number, required: true }, name: { type: String, required: true }, _id: false }],
+  inci: [
+    {
+      name: { type: String, required: true },
+      value: { type: Schema.Types.Mixed, required: true },
+      _id: false,
+    },
+  ],
   image1: { type: String, required: false },
   image2: { type: String, required: false },
   image3: { type: String, required: false },
@@ -16,13 +21,27 @@ const productSchema = new Schema({
   brand: { type: String, required: true },
   subBrand: { type: String, required: false },
   categories: [
-    { value: { type: String || Number, required: true }, name: { type: String, required: true }, _id: false },
+    {
+      name: { type: String, required: true },
+      value: { type: Schema.Types.Mixed, required: true },
+      _id: false,
+    },
   ],
   subCategories: [
-    { value: { type: String || Number, required: true }, name: { type: String, required: true }, _id: false },
+    {
+      name: { type: String, required: true },
+      value: { type: Schema.Types.Mixed, required: true },
+      _id: false,
+    },
   ],
   ean: { type: Number, required: true },
-  volumes: [{ value: { type: String || Number, required: true }, name: { type: String, required: true }, _id: false }],
+  volumes: [
+    {
+      name: { type: String, required: true },
+      value: { type: Schema.Types.Mixed, required: true },
+      _id: false,
+    },
+  ],
   volumesUnit: { type: String, required: true },
   vegan: { type: Boolean, required: true },
   crueltyFree: { type: Boolean, required: true },

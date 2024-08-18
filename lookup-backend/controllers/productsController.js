@@ -37,7 +37,6 @@ const addProduct = async (req, res, next) => {
 
   const {
     createdByUserId,
-    inci,
     image1,
     image2,
     image3,
@@ -46,16 +45,19 @@ const addProduct = async (req, res, next) => {
     producer,
     brand,
     subBrand,
-    categories,
-    subCategories,
     ean,
-    volumes,
     volumesUnit,
     vegan,
     crueltyFree,
     description,
     howToUse,
   } = req.body;
+
+  const inci = JSON.parse(req.body.inci);
+  const categories = JSON.parse(req.body.categories);
+  const subCategories = JSON.parse(req.body.subCategories);
+  const volumes = JSON.parse(req.body.volumes);
+  const createdAt = new Date();
 
   let user;
   try {
@@ -70,17 +72,15 @@ const addProduct = async (req, res, next) => {
     return next(error);
   }
 
-  const today = new Date();
-
   const newProduct = new Product({
     createdByUserId,
     lastEditedByUserId: createdByUserId,
-    createdAt: today,
-    lastEditedAt: today,
+    createdAt,
+    lastEditedAt: createdAt,
     inci,
-    image1,
-    image2,
-    image3,
+    image1: req.files.image1[0].path,
+    image2: req.files.image2[0].path,
+    image3: req.files.image3[0].path,
     name,
     subName,
     producer,

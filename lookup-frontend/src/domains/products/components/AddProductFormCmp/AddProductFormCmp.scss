@@ -13,6 +13,18 @@
     margin: 3px 0;
   }
 
+  .image-picker-component {
+    margin: 10px 0;
+
+    .image-picker {
+      flex-direction: column;
+
+      .label-icon-button-component {
+        margin: 10px 0 0 0;
+      }
+    }
+  }
+
   .add-product-form-buttons {
     display: flex;
     flex-direction: row;

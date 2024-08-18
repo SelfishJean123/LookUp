@@ -60,6 +60,11 @@ const ImagePickerCmp: FC<ImagePickerCmpProps> = ({ id, label, hintText, required
       />
 
       <div className="image-picker">
+        <div className="image-picker-preview">
+          {previewUrl && <img src={previewUrl} alt="Preview" />}
+          {!previewUrl && <p>{hintText}</p>}
+        </div>
+
         <LabelIconButton
           label={label}
           icon={<DriveFolderUploadSharp />}
@@ -71,11 +76,6 @@ const ImagePickerCmp: FC<ImagePickerCmpProps> = ({ id, label, hintText, required
           variant="outlined"
           onClick={onClickHandler}
         />
-
-        <div className="image-picker-preview">
-          {previewUrl && <img src={previewUrl} alt="Preview" />}
-          {!previewUrl && <p>{hintText}</p>}
-        </div>
       </div>
     </div>
   );
