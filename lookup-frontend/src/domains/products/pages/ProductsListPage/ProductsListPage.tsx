@@ -1,4 +1,5 @@
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
+import PaginationCmp from "../../../../common/components/navigation/PaginationCmp/PaginationCmp";
 import ProductsListCmp from "../../components/ProductsListCmp/ProductsListCmp";
 import ProductsListToolbarCmp from "../../components/ProductsListToolbarCmp/ProductsListToolbarCmp";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
@@ -9,17 +10,34 @@ import { useHttpClient } from "../../../../common/hooks/httpClientHook";
 
 const ProductsListPage = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [currentPage, setCurrentPage] = useState(1);
   const [loadedProducts, setLoadedProducts] = useState();
+  const [productsLength, setProductsLength] = useState(12);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const responseData = await sendRequest("http://localhost:5000/api/products", "GET");
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/products",
+          "POST",
+          JSON.stringify({
+            pageNumber: currentPage,
+            itemsPerPage: 12,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
         setLoadedProducts(responseData.products);
+        setProductsLength(responseData.productsLength);
       } catch (err) {}
     };
     fetchProducts();
-  }, [sendRequest]);
+  }, [sendRequest, currentPage]);
+
+  const onPaginationChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="products-list-page">
@@ -39,6 +57,16 @@ const ProductsListPage = () => {
       <ProductsListToolbarCmp />
 
       {!isLoading && loadedProducts && <ProductsListCmp products={loadedProducts} />}
+
+      <PaginationCmp
+        page={1}
+        count={Math.ceil(productsLength / 12)}
+        variant="outlined"
+        shape="rounded"
+        size="medium"
+        color="standard"
+        change={onPaginationChange}
+      />
     </div>
   );
 };

@@ -2,30 +2,30 @@ import { FC, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
 interface SelectOption {
-  value: string | number;
+  value: string | number | undefined;
   name: string;
 }
 
-interface SelectInputCmpProps {
+interface SingleSelectInputCmpProps {
   id: string;
   label: string;
   required: boolean;
   options: SelectOption[];
-  width: number;
+  width?: number;
   input: (id: string, value: string) => void;
 }
 
-const SelectInputCmp: FC<SelectInputCmpProps> = ({ id, label, required, options, width, input }) => {
+const SingleSelectInputCmp: FC<SingleSelectInputCmpProps> = ({ id, label, required, options, width, input }) => {
   const [value, setValue] = useState("");
 
   return (
     <FormControl
-      className="select-input-component"
+      className="single-select-input-component"
       variant="outlined"
       size="small"
       required={required}
       sx={{
-        width: width < 100 ? `calc(${width}% - 5px)` : `${width}%`,
+        width: width && width < 100 ? `calc(${width}% - 5px)` : `${width}%`,
       }}
     >
       <InputLabel id={`${id}-label`}>{label}</InputLabel>
@@ -51,4 +51,4 @@ const SelectInputCmp: FC<SelectInputCmpProps> = ({ id, label, required, options,
   );
 };
 
-export default SelectInputCmp;
+export default SingleSelectInputCmp;

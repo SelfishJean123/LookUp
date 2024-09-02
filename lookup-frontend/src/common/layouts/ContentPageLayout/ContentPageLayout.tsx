@@ -1,4 +1,4 @@
-import FooterCmp from "../../components/navbars/FooterCmp/FooterCmp";
+import FooterCmp from "../../components/navigation/FooterCmp/FooterCmp";
 import logo from "/assets/logo-mini-black.svg";
 import { Link, Outlet } from "react-router-dom";
 import "./ContentPageLayout.scss";

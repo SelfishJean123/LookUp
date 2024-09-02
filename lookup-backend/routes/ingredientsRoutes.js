@@ -12,7 +12,7 @@ const {
 
 router.get("/", getIngredients);
 router.get("/:ingredientId", getIngredientById);
-router.post("/", [check("name").notEmpty(), check("description").isLength({ min: 5 })], addIngredient);
+router.post("/addIngredient", [check("name").notEmpty(), check("description").isLength({ min: 5 })], addIngredient);
 router.patch("/:ingredientId", [check("name").notEmpty(), check("description").isLength({ min: 5 })], editIngredient);
 router.delete("/:ingredientId", deleteIngredient);
 router.get("/user/:userId", getIngredientsByUserId);

@@ -11,10 +11,10 @@ const {
 } = require("../controllers/productsController");
 const fileUpload = require("./../middleware/fileUpload");
 
-router.get("/", getProducts);
+router.post("/", [check("pageNumber").notEmpty(), check("itemsPerPage").notEmpty()], getProducts);
 router.get("/:productId", getProductById);
 router.post(
-  "/",
+  "/addProduct",
   fileUpload.fields([
     { name: "image1", maxCount: 1 },
     { name: "image2", maxCount: 1 },

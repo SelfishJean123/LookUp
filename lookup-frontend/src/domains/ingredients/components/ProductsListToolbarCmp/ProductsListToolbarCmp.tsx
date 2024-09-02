@@ -2,7 +2,7 @@ import AddIngredientFormCmp from "../AddIngredientFormCmp/AddIngredientFormCmp";
 import BasicModalCmp from "../../../../common/components/modals/BasicModalCmp/BasicModalCmp";
 import ChipButtonCmp from "../../../../common/components/buttons/ChipButtonCmp/ChipButtonCmp";
 import LabelIconButtonCmp from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
-import SearchBarCmp from "../../../../common/components/navbars/SearchBarCmp/SearchBarCmp";
+import SearchBarCmp from "../../../../common/components/navigation/SearchBarCmp/SearchBarCmp";
 import { FC, useState } from "react";
 import { FilterAlt, SwapVert } from "@mui/icons-material";
 import { Stack, Toolbar } from "@mui/material";

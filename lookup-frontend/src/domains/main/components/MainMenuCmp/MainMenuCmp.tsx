@@ -1,4 +1,4 @@
-import AuthModalCmp from "../../../user/components/AuthModalCmp/AuthModalCmp";
+import AuthModalCmp from "../../../users/components/AuthModalCmp/AuthModalCmp";
 import MuiDrawer from "@mui/material/Drawer";
 import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Icon } from "@mui/material";

@@ -53,9 +53,11 @@ const ImagePickerCmp: FC<ImagePickerCmpProps> = ({ id, label, hintText, required
         className="image-input"
         ref={imagePickerRef}
         id={id}
+        name={id}
         type="file"
         accept=".jpg, .jpeg, .png"
         required={required}
+        disabled
         onChange={onChangeHandler}
       />
 

@@ -1,0 +1,12 @@
+.sorting-products-component {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  .single-select-input-component {
+    width: 19%;
+    margin: 3px 5px;
+  }
+}

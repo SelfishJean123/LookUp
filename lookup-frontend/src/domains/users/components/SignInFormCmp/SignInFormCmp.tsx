@@ -45,6 +45,7 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
       }
     );
     signContext.signIn(responseData.user.id);
+    close();
   };
 
   return (

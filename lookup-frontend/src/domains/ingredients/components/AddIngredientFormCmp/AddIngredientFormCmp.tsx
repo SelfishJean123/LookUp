@@ -4,8 +4,8 @@ import IngredientForm from "../../interfaces/IngredientForm.interface";
 import IngredientOrigin from "../../interfaces/IngredientOrigin.interface";
 import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
-import SelectInputCmp from "../../../../common/components/inputs/SelectInputCmp/SelectInputCmp";
 import SignContext from "../../../../common/contexts/SignContext";
+import SingleSelectInputCmp from "../../../../common/components/inputs/SingleSelectInputCmp/SingleSelectInputCmp";
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import TextInputCmp from "../../../../common/components/inputs/TextInputCmp/TextInputCmp";
 import { FC, useContext } from "react";
@@ -124,7 +124,7 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
 
     try {
       const responseData = await sendRequest(
-        "http://localhost:5000/api/ingredient",
+        "http://localhost:5000/api/ingredient/addIngredient",
         "POST",
         JSON.stringify({
           createdByUserId: signContext.userId,
@@ -173,7 +173,7 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
         <AutocompleteChipsCmp id="origin" label="Origin" options={origin} width={100} input={inputHandler} />
         <AutocompleteChipsCmp id="forms" label="Forms" options={forms} width={100} input={inputHandler} />
 
-        <SelectInputCmp
+        <SingleSelectInputCmp
           id="potentially-allergenic"
           label="Potentially allergenic"
           required={true}
@@ -186,7 +186,7 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
           input={inputHandler}
         />
 
-        <SelectInputCmp
+        <SingleSelectInputCmp
           id="pregnancy-safe"
           label="Pregnancy safe"
           required={true}
@@ -199,7 +199,7 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
           input={inputHandler}
         />
 
-        <SelectInputCmp
+        <SingleSelectInputCmp
           id="vegan"
           label="Vegan"
           required={true}

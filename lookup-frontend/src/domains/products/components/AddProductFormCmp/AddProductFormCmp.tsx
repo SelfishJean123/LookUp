@@ -4,8 +4,8 @@ import LabelIconButton from "../../../../common/components/buttons/LabelIconButt
 import NumberInputCmp from "../../../../common/components/inputs/NumberInputCmp/NumberInputCmp";
 import Option from "../../../../common/interfaces/Option.interface";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
-import SelectInputCmp from "../../../../common/components/inputs/SelectInputCmp/SelectInputCmp";
 import SignContext from "../../../../common/contexts/SignContext";
+import SingleSelectInputCmp from "../../../../common/components/inputs/SingleSelectInputCmp/SingleSelectInputCmp";
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import TagsCmp from "../../../../common/components/inputs/TagsCmp/TagsCmp";
 import TextInputCmp from "../../../../common/components/inputs/TextInputCmp/TextInputCmp";
@@ -172,7 +172,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
       formData.append("description", formState.inputs.description.value);
       formData.append("howToUse", formState.inputs.howToUse.value);
 
-      const responseData = await sendRequest("http://localhost:5000/api/products", "POST", formData);
+      const responseData = await sendRequest("http://localhost:5000/api/products/addProduct", "POST", formData);
       navigate(`/products-catalogue/${responseData.product.id}`);
     } catch (err) {}
   };
@@ -231,7 +231,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
         />
         <NumberInputCmp id="ean" label="EAN" required={true} width={100} input={inputHandler} />
         <TagsCmp id="volumes" label="Volumes" suggestions={volumes} width={75} input={inputHandler} />
-        <SelectInputCmp
+        <SingleSelectInputCmp
           id="volumesUnit"
           label="Unit"
           required={true}
@@ -242,7 +242,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           width={25}
           input={inputHandler}
         />
-        <SelectInputCmp
+        <SingleSelectInputCmp
           id="vegan"
           label="Vegan"
           required={true}
@@ -253,7 +253,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           width={100}
           input={inputHandler}
         />
-        <SelectInputCmp
+        <SingleSelectInputCmp
           id="crueltyFree"
           label="Cruelty free"
           required={true}

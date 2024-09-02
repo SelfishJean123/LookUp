@@ -4,8 +4,15 @@ const User = require("../models/User");
 const HttpError = require("../models/HttpError");
 
 const getProducts = async (req, res, next) => {
-  const products = await Product.find().exec();
-  res.json({ products: products.map((product) => product.toObject({ getters: true })) });
+  const { pageNumber, itemsPerPage } = req.body;
+
+  const productsLength = await Product.countDocuments();
+  const products = await Product.find()
+    .skip((pageNumber - 1) * itemsPerPage)
+    .limit(itemsPerPage)
+    .exec();
+
+  res.json({ products: products.map((product) => product.toObject({ getters: true })), productsLength });
 };
 
 const getProductById = async (req, res, next) => {
