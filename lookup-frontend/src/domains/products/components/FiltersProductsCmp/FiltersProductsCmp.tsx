@@ -1,3 +1,4 @@
+import InciItem from "../../../ingredients/interfaces/InciItem.interface";
 import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import MultipleSelectInputCmp from "../../../../common/components/inputs/MultipleSelectInputCmp/MultipleSelectInputCmp";
 import Option from "../../../../common/interfaces/Option.interface";
@@ -12,7 +13,7 @@ interface FiltersProductsCmpProps {
   subCategories: Option[];
   vegan: Option[];
   crueltyFree: Option[];
-  inci: Option[];
+  inci: InciItem[];
   onFilter: (filters: ProductsFiltersType) => void;
 }
 
@@ -33,7 +34,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
     subCategories: [],
     vegan: [],
     crueltyFree: [],
-    inci: [],
+    inciIds: [],
   });
 
   return (
@@ -121,13 +122,16 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           id="inci"
           label="INCI"
           required={false}
-          options={inci}
+          options={inci?.map((item) => ({
+            value: item.id,
+            name: item.nameLatin,
+          }))}
           onInput={(id, value) => {
             setFilters({
               ...filters,
-              inci: value,
+              inciIds: value,
             });
-            onFilter({ ...filters, inci: value });
+            onFilter({ ...filters, inciIds: value });
           }}
         />
       </div>
@@ -148,7 +152,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
               subCategories: [],
               vegan: [],
               crueltyFree: [],
-              inci: [],
+              inciIds: [],
             })
           }
         />

@@ -1,20 +1,16 @@
 import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
+import Option from "../../../../common/interfaces/Option.interface";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FC, useState } from "react";
 import { FormControl, InputLabel, MenuItem } from "@mui/material";
 
-interface SelectOption {
-  value: string | number;
-  name: string;
-}
-
 interface MultipleSelectInputCmpProps {
   id: string;
   label: string;
   required: boolean;
-  options: SelectOption[];
+  options: Option[];
   onInput: (id: string, value: string[]) => void;
 }
 

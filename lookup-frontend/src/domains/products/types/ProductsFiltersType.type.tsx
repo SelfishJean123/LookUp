@@ -5,7 +5,7 @@ type ProductsFiltersType = {
   subCategories: string[];
   vegan: string[];
   crueltyFree: string[];
-  inci: string[];
+  inciIds: string[];
 };
 
 export default ProductsFiltersType;

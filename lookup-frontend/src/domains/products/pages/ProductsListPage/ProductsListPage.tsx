@@ -2,6 +2,7 @@ import AddProductFormCmp from "../../components/AddProductFormCmp/AddProductForm
 import BasicModalCmp from "../../../../common/components/modals/BasicModalCmp/BasicModalCmp";
 import ChipButtonCmp from "../../../../common/components/buttons/ChipButtonCmp/ChipButtonCmp";
 import FiltersProductsCmp from "../../components/FiltersProductsCmp/FiltersProductsCmp";
+import InciItem from "../../../ingredients/interfaces/InciItem.interface";
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
 import Option from "../../../../common/interfaces/Option.interface";
 import PaginationCmp from "../../../../common/components/navigation/PaginationCmp/PaginationCmp";
@@ -70,16 +71,6 @@ const crueltyFree: Option[] = [
   { value: "not_set", name: "not set" },
 ];
 
-const ingredients: Option[] = [
-  { value: "0011", name: "Aqua" },
-  { value: "0012", name: "Godfather" },
-  { value: "0013", name: "Godfather Part II" },
-  { value: "0014", name: "Dark Knight" },
-  { value: "0014", name: "12 Angry Men" },
-  { value: "0015", name: "Schindler List" },
-  { value: "0016", name: "Fiction" },
-];
-
 const sortByOptions: Option[] = [
   { value: "lastEditedAt", name: "lastEditedAt" },
   { value: "name", name: "name" },
@@ -91,6 +82,7 @@ const ProductsListPage = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [currentPage, setCurrentPage] = useState(1);
   const [loadedProducts, setLoadedProducts] = useState();
+  const [loadedInciItems, setLoadedInciItems] = useState<InciItem[]>([]);
   const [productsLength, setProductsLength] = useState(12);
 
   const [filters, setFilters] = useState<ProductsFiltersType>({
@@ -100,7 +92,7 @@ const ProductsListPage = () => {
     subCategories: [],
     crueltyFree: [],
     vegan: [],
-    inci: [],
+    inciIds: [],
   });
 
   const [sorting, setSorting] = useState<ProductsSortingType>({
@@ -119,6 +111,16 @@ const ProductsListPage = () => {
   const deleteChip = (chipToDelete: ChipData) => () => {
     setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
   };
+
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      try {
+        const responseData = await sendRequest("http://localhost:5000/api/ingredients/getInciItems");
+        setLoadedInciItems(responseData.inciItems);
+      } catch (err) {}
+    };
+    fetchIngredients();
+  }, [sendRequest]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -175,7 +177,10 @@ const ProductsListPage = () => {
             modalHeadingText="Add New Product"
             modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając okolice oczu. Dokładnie wmasuj do całkowitego wchłonięcia. Stosuj na oczyszczoną skórę rano lub/i wieczorem, w zależności od potrzeb. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
             InnerFormCmp={AddProductFormCmp}
-            // innerFormCmpProps={}
+            innerFormCmpProps={{
+              inciItems: loadedInciItems,
+              close,
+            }}
           />
         </div>
 
@@ -187,9 +192,8 @@ const ProductsListPage = () => {
             subCategories={subCategories}
             vegan={vegan}
             crueltyFree={crueltyFree}
-            inci={ingredients}
+            inci={loadedInciItems}
             onFilter={(filters: ProductsFiltersType) => {
-              console.log(filters);
               setFilters(filters);
             }}
           />
