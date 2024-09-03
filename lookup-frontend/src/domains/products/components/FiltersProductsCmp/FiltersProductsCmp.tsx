@@ -36,105 +36,103 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
     inci: [],
   });
 
-  const formSubmitHandler = (event: any) => {
-    event.preventDefault();
-  };
-
   return (
-    <form className="filter-products-component" onSubmit={formSubmitHandler}>
-      <MultipleSelectInputCmp
-        id="producers"
-        label="Producers"
-        required={false}
-        options={producers}
-        onInput={(id, value) => {
-          setFilters({
-            ...filters,
-            producers: value,
-          });
-          onFilter({ ...filters, producers: value });
-        }}
-      />
-      <MultipleSelectInputCmp
-        id="brands"
-        label="Brands"
-        required={false}
-        options={brands}
-        onInput={(id, value) => {
-          setFilters({
-            ...filters,
-            brands: value,
-          });
-          onFilter({ ...filters, brands: value });
-        }}
-      />
-      <MultipleSelectInputCmp
-        id="categories"
-        label="Categories"
-        required={false}
-        options={categories}
-        onInput={(id, value) => {
-          setFilters({
-            ...filters,
-            categories: value,
-          });
-          onFilter({ ...filters, categories: value });
-        }}
-      />
-      <MultipleSelectInputCmp
-        id="subCategories"
-        label="Sub Categories"
-        required={false}
-        options={subCategories}
-        onInput={(id, value) => {
-          setFilters({
-            ...filters,
-            subCategories: value,
-          });
-          onFilter({ ...filters, subCategories: value });
-        }}
-      />
-      <MultipleSelectInputCmp
-        id="vegan"
-        label="Vegan"
-        required={false}
-        options={vegan}
-        onInput={(id, value) => {
-          setFilters({
-            ...filters,
-            vegan: value,
-          });
-          onFilter({ ...filters, vegan: value });
-        }}
-      />
-      <MultipleSelectInputCmp
-        id="crueltyFree"
-        label="Cruelty Free"
-        required={false}
-        options={crueltyFree}
-        onInput={(id, value) => {
-          setFilters({
-            ...filters,
-            crueltyFree: value,
-          });
-          onFilter({ ...filters, crueltyFree: value });
-        }}
-      />
-      <MultipleSelectInputCmp
-        id="inci"
-        label="INCI"
-        required={false}
-        options={inci}
-        onInput={(id, value) => {
-          setFilters({
-            ...filters,
-            inci: value,
-          });
-          onFilter({ ...filters, inci: value });
-        }}
-      />
+    <div className="filters-products-component">
+      <div className="filters-wrapper">
+        <MultipleSelectInputCmp
+          id="producers"
+          label="Producers"
+          required={false}
+          options={producers}
+          onInput={(id, value) => {
+            setFilters({
+              ...filters,
+              producers: value,
+            });
+            onFilter({ ...filters, producers: value });
+          }}
+        />
+        <MultipleSelectInputCmp
+          id="brands"
+          label="Brands"
+          required={false}
+          options={brands}
+          onInput={(id, value) => {
+            setFilters({
+              ...filters,
+              brands: value,
+            });
+            onFilter({ ...filters, brands: value });
+          }}
+        />
+        <MultipleSelectInputCmp
+          id="categories"
+          label="Categories"
+          required={false}
+          options={categories}
+          onInput={(id, value) => {
+            setFilters({
+              ...filters,
+              categories: value,
+            });
+            onFilter({ ...filters, categories: value });
+          }}
+        />
+        <MultipleSelectInputCmp
+          id="subCategories"
+          label="Sub Categories"
+          required={false}
+          options={subCategories}
+          onInput={(id, value) => {
+            setFilters({
+              ...filters,
+              subCategories: value,
+            });
+            onFilter({ ...filters, subCategories: value });
+          }}
+        />
+        <MultipleSelectInputCmp
+          id="vegan"
+          label="Vegan"
+          required={false}
+          options={vegan}
+          onInput={(id, value) => {
+            setFilters({
+              ...filters,
+              vegan: value,
+            });
+            onFilter({ ...filters, vegan: value });
+          }}
+        />
+        <MultipleSelectInputCmp
+          id="crueltyFree"
+          label="Cruelty Free"
+          required={false}
+          options={crueltyFree}
+          onInput={(id, value) => {
+            setFilters({
+              ...filters,
+              crueltyFree: value,
+            });
+            onFilter({ ...filters, crueltyFree: value });
+          }}
+        />
+        <MultipleSelectInputCmp
+          id="inci"
+          label="INCI"
+          required={false}
+          options={inci}
+          onInput={(id, value) => {
+            setFilters({
+              ...filters,
+              inci: value,
+            });
+            onFilter({ ...filters, inci: value });
+          }}
+        />
+      </div>
 
-      <div className="filter-products-buttons">
+      <div className="filters-buttons">
         <LabelIconButton
           label="Reset Filters"
           color="#fff"
@@ -155,7 +153,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           }
         />
       </div>
-    </form>
+    </div>
   );
 };
 

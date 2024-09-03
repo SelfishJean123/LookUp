@@ -1,3 +1,5 @@
+import Option from "../../../common/interfaces/Option.interface";
+
 interface Ingredient {
   id: string;
   createdByUserId: string;
@@ -10,9 +12,9 @@ interface Ingredient {
   nameLatin: string;
   namePolish: string;
   nameEnglish: string;
-  categories: string[];
-  origin: string[];
-  forms: string[];
+  categories: Option[];
+  origin: Option[];
+  forms: Option[];
   potentiallyAllergenic?: boolean;
   pregnancySafe?: boolean;
   vegan?: boolean;

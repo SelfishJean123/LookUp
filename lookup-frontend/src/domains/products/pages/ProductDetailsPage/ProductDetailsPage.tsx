@@ -159,10 +159,10 @@ const ProductDetailsPage = () => {
               {loadedProduct.inci.map((ingredient, index) => {
                 return (
                   <ChipButtonCmp
-                    label={ingredient.name}
+                    label={ingredient.nameLatin}
                     key={index}
                     component={"a"}
-                    href={`/inci-encyclopedia/${ingredient.value}`}
+                    href={`/inci-encyclopedia/${ingredient.id}`}
                     variant="filled"
                     onClick={() => {}}
                   />

@@ -1,0 +1,15 @@
+.sorting-ingredients-component {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  justify-content: space-between;
+  margin: 25px 0 15px 0;
+
+  .single-select-input-component {
+    margin: 3px 5px;
+
+    .MuiInputLabel-root {
+      font-size: 14px;
+    }
+  }
+}

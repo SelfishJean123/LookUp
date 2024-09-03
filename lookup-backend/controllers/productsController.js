@@ -4,10 +4,27 @@ const User = require("../models/User");
 const HttpError = require("../models/HttpError");
 
 const getProducts = async (req, res, next) => {
-  const { pageNumber, itemsPerPage } = req.body;
+  const { pageNumber, itemsPerPage, productsFilters, productsSorting } = req.body;
+
+  let sortDirection = 1;
+  switch (productsSorting.sortDirection) {
+    case "ascending": {
+      sortDirection = 1;
+      break;
+    }
+    case "descending": {
+      sortDirection = -1;
+      break;
+    }
+    default: {
+      sortDirection = 1;
+      break;
+    }
+  }
 
   const productsLength = await Product.countDocuments();
   const products = await Product.find()
+    .sort({ [productsSorting.sortBy]: sortDirection })
     .skip((pageNumber - 1) * itemsPerPage)
     .limit(itemsPerPage)
     .exec();
@@ -19,7 +36,6 @@ const getProductById = async (req, res, next) => {
   const productId = req.params.productId;
 
   let product;
-
   try {
     product = await Product.findById(productId);
   } catch (err) {
@@ -110,7 +126,7 @@ const addProduct = async (req, res, next) => {
     const result = await newProduct.save();
     res.status(201).json({ product: result.toObject({ getters: true }) }); // transaction & sessions - lesson 139
   } catch (err) {
-    const error = new HttpError("Adding new product faild.", 500);
+    const error = new HttpError("Adding new product failed.", 500);
     return next(error);
   }
 };

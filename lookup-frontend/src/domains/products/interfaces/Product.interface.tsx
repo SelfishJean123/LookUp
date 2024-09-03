@@ -1,3 +1,4 @@
+import InciItem from "../../ingredients/interfaces/InciItem.interface";
 import Option from "../../../common/interfaces/Option.interface";
 
 interface Product {
@@ -6,7 +7,7 @@ interface Product {
   lastEditedByUserId: string;
   createdAt: Date;
   lastEditedAt: Date;
-  inci: Option[];
+  inci: InciItem[];
   image1: string;
   image2?: string;
   image3?: string;

@@ -1,5 +1,6 @@
 import AutocompleteChipsCmp from "../../../../common/components/inputs/AutocompleteChipsCmp/AutocompleteChipsCmp";
 import ImagePickerCmp from "../../../../common/components/inputs/ImagePickerCmp/ImagePickerCmp";
+import InciItem from "../../../ingredients/interfaces/InciItem.interface";
 import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import NumberInputCmp from "../../../../common/components/inputs/NumberInputCmp/NumberInputCmp";
 import Option from "../../../../common/interfaces/Option.interface";
@@ -9,65 +10,55 @@ import SingleSelectInputCmp from "../../../../common/components/inputs/SingleSel
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import TagsCmp from "../../../../common/components/inputs/TagsCmp/TagsCmp";
 import TextInputCmp from "../../../../common/components/inputs/TextInputCmp/TextInputCmp";
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useForm } from "../../../../common/hooks/formHook";
 import { useHttpClient } from "../../../../common/hooks/httpClientHook";
 import { useNavigate } from "react-router-dom";
 import "./AddProductFormCmp.scss";
+
+const categories: Option[] = [
+  { value: "wash", name: "wash" },
+  { value: "care", name: "care" },
+  { value: "stylization", name: "stylization" },
+  { value: "hair-removal", name: "hair removal" },
+  { value: "tools", name: "tools" },
+];
+
+const subCategories: Option[] = [
+  { value: "face", name: "face" },
+  { value: "eyes", name: "eyes" },
+  { value: "lips", name: "lips" },
+  { value: "body", name: "body" },
+  { value: "hands", name: "hands" },
+  { value: "feet", name: "feet" },
+  { value: "hair", name: "hair" },
+  { value: "nails", name: "nails" },
+];
+
+const volumes: Option[] = [
+  { value: "1", name: "1" },
+  { value: "5", name: "5" },
+  { value: "10", name: "10" },
+  { value: "15", name: "15" },
+  { value: "20", name: "20" },
+  { value: "30", name: "30" },
+  { value: "40", name: "40" },
+  { value: "50", name: "50" },
+  { value: "60", name: "60" },
+  { value: "75", name: "75" },
+  { value: "100", name: "100" },
+  { value: "200", name: "200" },
+];
 
 interface AddProductFormCmpProps {
   close: () => void;
 }
 
 const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
-  const categories: Option[] = [
-    { value: "wash", name: "wash" },
-    { value: "care", name: "care" },
-    { value: "stylization", name: "stylization" },
-    { value: "hair-removal", name: "hair-removal" },
-    { value: "tools", name: "tools" },
-    { value: "storage", name: "storage" },
-  ];
-
-  const subCategories: Option[] = [
-    { value: "face", name: "face" },
-    { value: "eyes", name: "eyes" },
-    { value: "lips", name: "lips" },
-    { value: "body", name: "body" },
-    { value: "hands", name: "hands" },
-    { value: "feet", name: "feet" },
-    { value: "hair", name: "hair" },
-    { value: "nails", name: "nails" },
-  ];
-
-  const volumes: Option[] = [
-    { value: "1", name: "1" },
-    { value: "5", name: "5" },
-    { value: "10", name: "10" },
-    { value: "15", name: "15" },
-    { value: "20", name: "20" },
-    { value: "30", name: "30" },
-    { value: "40", name: "40" },
-    { value: "50", name: "50" },
-    { value: "60", name: "60" },
-    { value: "75", name: "75" },
-    { value: "100", name: "100" },
-    { value: "200", name: "200" },
-  ];
-
-  const ingredients: Option[] = [
-    { value: "0011", name: "Aqua" },
-    { value: "0012", name: "Godfather" },
-    { value: "0013", name: "Godfather Part II" },
-    { value: "0014", name: "Dark Knight" },
-    { value: "0014", name: "12 Angry Men" },
-    { value: "0015", name: "Schindler List" },
-    { value: "0016", name: "Fiction" },
-  ];
-
   const navigate = useNavigate();
   const signContext = useContext(SignContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedInciItems, setLoadedInciItems] = useState<InciItem[]>([]);
 
   const [formState, inputHandler] = useForm(
     {
@@ -146,6 +137,16 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
     },
     false
   );
+
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      try {
+        const responseData = await sendRequest("http://localhost:5000/api/ingredients/getInciItems");
+        setLoadedInciItems(responseData.inciItems);
+      } catch (err) {}
+    };
+    fetchIngredients();
+  }, [sendRequest]);
 
   const addProductSubmitHandler = async (event: any) => {
     event.preventDefault();
@@ -264,7 +265,26 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           width={100}
           input={inputHandler}
         />
-        <AutocompleteChipsCmp id="inci" label="INCI" options={ingredients} width={100} input={inputHandler} />
+        <AutocompleteChipsCmp
+          id="inci"
+          label="INCI"
+          options={loadedInciItems?.map((item) => ({
+            value: item.id,
+            name: item.nameLatin,
+          }))}
+          width={100}
+          input={(id, value) => {
+            const inciItems = value.map((item) => {
+              const inciItem: InciItem = {
+                id: item.value as string,
+                nameLatin: item.name,
+              };
+
+              return inciItem;
+            });
+            return inputHandler(id, inciItems);
+          }}
+        />
         <TextInputCmp
           id="description"
           label="Description"

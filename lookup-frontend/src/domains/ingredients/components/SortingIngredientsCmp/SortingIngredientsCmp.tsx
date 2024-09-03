@@ -1,12 +1,12 @@
+import IngredientsSortingType from "../../types/IngredientsSorting.type";
 import Option from "../../../../common/interfaces/Option.interface";
-import ProductsSortingType from "../../types/ProductsSorting.type";
 import SingleSelectInputCmp from "../../../../common/components/inputs/SingleSelectInputCmp/SingleSelectInputCmp";
 import { FC, useState } from "react";
-import "./SortingProductsCmp.scss";
+import "./SortingIngredientsCmp.scss";
 
-interface SortingProductsCmpProps {
+interface SortingIngredientsCmpProps {
   sortByOptions: Option[];
-  onSort: (sorting: ProductsSortingType) => void;
+  onSort: (sorting: IngredientsSortingType) => void;
 }
 
 const sortDirectionOption: Option[] = [
@@ -14,18 +14,14 @@ const sortDirectionOption: Option[] = [
   { value: "descending", name: "descending" },
 ];
 
-const formSubmitHandler = (event: any) => {
-  event.preventDefault();
-};
-
-const SortingProductsCmp: FC<SortingProductsCmpProps> = ({ sortByOptions, onSort }) => {
-  const [sorting, setSorting] = useState<ProductsSortingType>({
-    sortBy: "name",
+const SortingIngredientsCmp: FC<SortingIngredientsCmpProps> = ({ sortByOptions, onSort }) => {
+  const [sorting, setSorting] = useState<IngredientsSortingType>({
+    sortBy: "namePolish",
     sortDirection: "ascending",
   });
 
   return (
-    <form className="sorting-products-component" onSubmit={formSubmitHandler}>
+    <div className="sorting-ingredients-component">
       <SingleSelectInputCmp
         id="sortBy"
         label="Sort By"
@@ -34,9 +30,9 @@ const SortingProductsCmp: FC<SortingProductsCmpProps> = ({ sortByOptions, onSort
         input={(id, value) => {
           setSorting({
             ...sorting,
-            sortBy: value as ProductsSortingType["sortBy"],
+            sortBy: value as IngredientsSortingType["sortBy"],
           });
-          onSort({ ...sorting, sortBy: value as ProductsSortingType["sortBy"] });
+          onSort({ ...sorting, sortBy: value as IngredientsSortingType["sortBy"] });
         }}
       />
 
@@ -48,13 +44,13 @@ const SortingProductsCmp: FC<SortingProductsCmpProps> = ({ sortByOptions, onSort
         input={(id, value) => {
           setSorting({
             ...sorting,
-            sortDirection: value as ProductsSortingType["sortDirection"],
+            sortDirection: value as IngredientsSortingType["sortDirection"],
           });
-          onSort({ ...sorting, sortDirection: value as ProductsSortingType["sortDirection"] });
+          onSort({ ...sorting, sortDirection: value as IngredientsSortingType["sortDirection"] });
         }}
       />
-    </form>
+    </div>
   );
 };
 
-export default SortingProductsCmp;
+export default SortingIngredientsCmp;

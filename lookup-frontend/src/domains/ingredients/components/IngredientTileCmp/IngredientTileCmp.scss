@@ -14,14 +14,24 @@
     width: 100%;
     text-decoration: none;
 
-    h5.ingredient-tile-nameLatin,
-    h6.ingredient-tile-namePolish,
-    h6.ingredient-tile-nameEnglish {
-      color: $chocolate;
-    }
+    .ingredient-tile-info {
+      position: relative;
+      z-index: 100;
+      background-color: $apricot;
+      padding: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
-    h5.ingredient-tile-nameLatin {
-      margin: 0 0 5px 0;
+      h5.ingredient-tile-nameLatin,
+      h6.ingredient-tile-namePolish,
+      h6.ingredient-tile-nameEnglish {
+        color: $chocolate;
+      }
+
+      h5.ingredient-tile-nameLatin {
+        margin: 0 0 5px 0;
+      }
     }
   }
 }

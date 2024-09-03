@@ -7,7 +7,7 @@ const HttpError = require("./models/HttpError");
 
 const usersRoutes = require("./routes/usersRoutes");
 const productsRoutes = require("./routes/productsRoutes");
-// const ingredientsRoutes = require("./routes/ingredientsRoutes");
+const ingredientsRoutes = require("./routes/ingredientsRoutes");
 // const reviewsRoutes = require("./routes/reviewsRoutes");
 
 const server = express();
@@ -23,7 +23,7 @@ server.use((req, res, next) => {
 
 server.use("/api/users", usersRoutes);
 server.use("/api/products", productsRoutes);
-// server.use("/api/ingredients", ingredientsRoutes);
+server.use("/api/ingredients", ingredientsRoutes);
 // server.use("/api/reviews", reviewsRoutes);
 
 server.use((req, res, next) => {
@@ -32,9 +32,9 @@ server.use((req, res, next) => {
 
 server.use((error, req, res, next) => {
   if (req.file) fs.unlink(req.file.path, (err) => console.log("err ", err));
-  if (req.files.image1[0]) fs.unlink(req.files.image1[0].path, (err) => console.log("err ", err));
-  if (req.files.image2[0]) fs.unlink(req.files.image2[0].path, (err) => console.log("err ", err));
-  if (req.files.image3[0]) fs.unlink(req.files.image3[0].path, (err) => console.log("err ", err));
+  if (req.files?.image1[0]) fs.unlink(req.files?.image1[0].path, (err) => console.log("err ", err));
+  if (req.files?.image2[0]) fs.unlink(req.files?.image2[0].path, (err) => console.log("err ", err));
+  if (req.files?.image3[0]) fs.unlink(req.files?.image3[0].path, (err) => console.log("err ", err));
 
   if (res.headerSent) return next(error);
   res.status(error.code || 500);
