@@ -51,14 +51,14 @@ const volumes: Option[] = [
 ];
 
 interface AddProductFormCmpProps {
+  inciItems: InciItem[];
   close: () => void;
 }
 
-const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
+const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ inciItems, close }) => {
   const navigate = useNavigate();
   const signContext = useContext(SignContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [loadedInciItems, setLoadedInciItems] = useState<InciItem[]>([]);
 
   const [formState, inputHandler] = useForm(
     {
@@ -137,16 +137,6 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
     },
     false
   );
-
-  useEffect(() => {
-    const fetchIngredients = async () => {
-      try {
-        const responseData = await sendRequest("http://localhost:5000/api/ingredients/getInciItems");
-        setLoadedInciItems(responseData.inciItems);
-      } catch (err) {}
-    };
-    fetchIngredients();
-  }, [sendRequest]);
 
   const addProductSubmitHandler = async (event: any) => {
     event.preventDefault();
@@ -268,7 +258,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
         <AutocompleteChipsCmp
           id="inci"
           label="INCI"
-          options={loadedInciItems?.map((item) => ({
+          options={inciItems?.map((item) => ({
             value: item.id,
             name: item.nameLatin,
           }))}
