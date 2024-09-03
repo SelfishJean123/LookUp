@@ -11,15 +11,17 @@ const IngredientTileCmp: FC<IngredientTileCmpProps> = ({ ingredient }) => {
   return (
     <div className="ingredient-tile-component">
       <Link to={ingredient.id}>
-        <h5 className="ingredient-tile-nameLatin" title={ingredient.nameLatin}>
-          {ingredient.nameLatin}
-        </h5>
-        <h6 className="ingredient-tile-namePolish" title={ingredient.namePolish}>
-          {ingredient.namePolish}
-        </h6>
-        <h6 className="ingredient-tile-nameEnglish" title={ingredient.nameEnglish}>
-          {ingredient.nameEnglish}
-        </h6>
+        <div className="ingredient-tile-info">
+          <h5 className="ingredient-tile-nameLatin" title={ingredient.nameLatin}>
+            {ingredient.nameLatin}
+          </h5>
+          <h6 className="ingredient-tile-namePolish" title={ingredient.namePolish}>
+            {ingredient.namePolish}
+          </h6>
+          <h6 className="ingredient-tile-nameEnglish" title={ingredient.nameEnglish}>
+            {ingredient.nameEnglish}
+          </h6>
+        </div>
       </Link>
     </div>
   );

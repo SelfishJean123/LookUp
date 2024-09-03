@@ -28,6 +28,7 @@ const AutocompleteChipsCmp: FC<AutocompleteChipsCmpProps> = ({ id, label, option
         fullWidth
         options={options}
         getOptionLabel={(option) => option.name}
+        isOptionEqualToValue={(option, value) => option.value === value.value}
         filterSelectedOptions
         renderInput={(params) => <TextField {...params} label={label} />}
         onChange={(_, newValue) => input(id, newValue)}

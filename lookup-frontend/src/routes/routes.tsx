@@ -8,7 +8,7 @@ import MainPageLayout from "../domains/main/layouts/MainPageLayout/MainPageLayou
 import ProductDetailsPage from "../domains/products/pages/ProductDetailsPage/ProductDetailsPage";
 import ProductReviewsPage from "../domains/products/pages/ProductReviewsPage/ProductReviewsPage";
 import ProductsListPage from "../domains/products/pages/ProductsListPage/ProductsListPage";
-import UserAccountPage from "../domains/user/pages/UserAccountPage/UserAccountPage";
+import UserAccountPage from "../domains/users/pages/UserAccountPage/UserAccountPage";
 import { createBrowserRouter } from "react-router-dom";
 
 const routes = createBrowserRouter([

@@ -10,12 +10,12 @@ interface NumberInputCmpProps {
 }
 
 const NumberInputCmp: FC<NumberInputCmpProps> = ({ id, label, required, width, input }) => {
-  const [value, setValue] = useState<number | undefined>(undefined);
+  const [value, setValue] = useState<number | string>("");
 
   const changeValue = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.valueAsNumber;
 
-    if (isNaN(newValue)) setValue(undefined);
+    if (isNaN(newValue)) setValue("");
     else {
       setValue(newValue);
       input(id, newValue);

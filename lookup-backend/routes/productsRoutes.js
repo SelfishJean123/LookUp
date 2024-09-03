@@ -11,13 +11,15 @@ const {
 } = require("../controllers/productsController");
 const fileUpload = require("./../middleware/fileUpload");
 
-router.get("/", getProducts);
+router.post("/", [check("pageNumber").notEmpty(), check("itemsPerPage").notEmpty()], getProducts);
 router.get("/:productId", getProductById);
 router.post(
-  "/",
-  fileUpload.single("image1"),
-  fileUpload.single("image2"),
-  fileUpload.single("image3"),
+  "/addProduct",
+  fileUpload.fields([
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+  ]),
   [check("name").notEmpty(), check("description").isLength({ min: 5 })],
   addProduct
 );

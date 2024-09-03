@@ -7,10 +7,22 @@
 
   .text-input-component,
   .number-input-component,
-  .select-input-component,
+  .single-select-input-component,
   .autocomplete-input-component,
   .tags-component {
     margin: 3px 0;
+  }
+
+  .image-picker-component {
+    margin: 10px 0;
+
+    .image-picker {
+      flex-direction: column;
+
+      .label-icon-button-component {
+        margin: 10px 0 0 0;
+      }
+    }
   }
 
   .add-product-form-buttons {

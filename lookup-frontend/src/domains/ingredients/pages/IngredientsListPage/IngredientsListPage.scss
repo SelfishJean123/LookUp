@@ -1,0 +1,39 @@
+@import "@styles/colors.scss";
+
+.ingredients-list-page {
+  .ingredients-list-toolbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .toolbar-search-add {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      align-items: center;
+      border-bottom: 1px solid $gray;
+      padding: 0 5px 15px 0;
+      width: 100%;
+
+      .label-icon-button-component {
+        margin: 0 0 0 10px;
+      }
+    }
+
+    .toolbar-filters {
+      width: 100%;
+      margin: 15px 0 0 0;
+    }
+
+    .toolbar-sorting {
+      width: 100%;
+    }
+
+    .toolbar-chips {
+      padding: 15px 5px 0 5px;
+      border-top: 1px solid $gray;
+      width: 100%;
+    }
+  }
+}

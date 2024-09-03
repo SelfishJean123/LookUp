@@ -46,51 +46,81 @@ const ProductDetailsPage = () => {
               <div className="details-main-images-wrapper">
                 <ImageCarouselCmp
                   childrenSources={[
-                    `/assets/products/${loadedProduct.image1}`,
-                    `/assets/products/${loadedProduct.image2}`,
-                    `/assets/products/${loadedProduct.image3}`,
+                    `http://localhost:5000/${loadedProduct.image1}`,
+                    `http://localhost:5000/${loadedProduct.image2}`,
+                    `http://localhost:5000/${loadedProduct.image3}`,
                   ]}
                 />
               </div>
 
               <div className="details-main-info">
                 <div className="details-basic-info">
-                  <h4>Producer: {loadedProduct.producer}</h4>
                   <h4>
-                    Brand: {loadedProduct.brand} ({loadedProduct.subBrand})
+                    Producer: <span>{loadedProduct.producer}</span>
+                  </h4>
+                  <h4>
+                    Brand:
+                    <span>{loadedProduct.brand}</span>
+                    <span>({loadedProduct.subBrand})</span>
                   </h4>
                   <h4>
                     Categories:
                     {loadedProduct.categories.map((categorie, index) => (
-                      <span key={index}>{categorie.name}</span>
+                      <span key={index}>
+                        {index ? " / " : ""}
+                        {categorie.name}
+                      </span>
                     ))}
                   </h4>
                   <h4>
                     Sub categories:
                     {loadedProduct.subCategories.map((subCategorie, index) => (
-                      <span key={index}>{subCategorie.name}</span>
+                      <span key={index}>
+                        {index ? " / " : ""}
+                        {subCategorie.name}
+                      </span>
                     ))}
                   </h4>
-                  <h4>EAN: {loadedProduct.ean}</h4>
+                  <h4>
+                    EAN: <span>{loadedProduct.ean}</span>
+                  </h4>
                   <h4>
                     Volumes:
                     {loadedProduct.volumes.map((volume, index) => (
-                      <span key={index}>{volume.name}</span>
+                      <span key={index}>
+                        {index ? " / " : ""}
+                        {volume.name}
+                      </span>
                     ))}
+                    <span>{loadedProduct.volumesUnit}</span>
                   </h4>
-                  <h4>Vegan: {loadedProduct.vegan}</h4>
-                  <h4>Cruelty Free: {loadedProduct.crueltyFree}</h4>
-                  <h4>Rating: {loadedProduct.rating}</h4>
-                  <h4>Reviews: {loadedProduct.numberOfReviews}</h4>
+                  <h4>
+                    Vegan: <span>{loadedProduct.vegan ? "YES" : "NO"}</span>
+                  </h4>
+                  <h4>
+                    Cruelty Free: <span>{loadedProduct.crueltyFree ? "YES" : "NO"}</span>
+                  </h4>
+                  <h4>
+                    Rating: <span>{loadedProduct.rating}</span>
+                  </h4>
+                  <h4>
+                    Reviews: <span>{loadedProduct.numberOfReviews}</span>
+                  </h4>
                 </div>
                 <div className="details-updates">
-                  <h5>Added: {new Date(loadedProduct.createdAt).toLocaleDateString().replace(/\./g, " / ")}</h5>
-                  <h5>by: {loadedProduct.createdByUserId}</h5>
-
                   <h5>
-                    Last update: {new Date(loadedProduct.lastEditedAt).toLocaleDateString().replace(/\./g, " / ")}
+                    Added: <span>{new Date(loadedProduct.createdAt).toLocaleDateString().replace(/\./g, " / ")}</span>
                   </h5>
-                  <h5>by {loadedProduct.lastEditedByUserId}</h5>
+                  <h5>
+                    by: <span>{loadedProduct.createdByUserId}</span>
+                  </h5>
+                  <h5>
+                    Last update:
+                    <span>{new Date(loadedProduct.lastEditedAt).toLocaleDateString().replace(/\./g, " / ")}</span>
+                  </h5>
+                  <h5>
+                    by <span>{loadedProduct.lastEditedByUserId}</span>
+                  </h5>
                 </div>
               </div>
             </div>
@@ -129,10 +159,10 @@ const ProductDetailsPage = () => {
               {loadedProduct.inci.map((ingredient, index) => {
                 return (
                   <ChipButtonCmp
-                    label={ingredient.name}
+                    label={ingredient.nameLatin}
                     key={index}
                     component={"a"}
-                    href={`/inci-encyclopedia/${ingredient.value}`}
+                    href={`/inci-encyclopedia/${ingredient.id}`}
                     variant="filled"
                     onClick={() => {}}
                   />

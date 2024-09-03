@@ -86,10 +86,16 @@
           h4,
           h5 {
             color: $white;
+            font-weight: 400;
 
             @media (min-width: 768px) {
               text-align: left;
             }
+          }
+
+          span {
+            font-weight: 300;
+            margin-left: 4px;
           }
         }
 

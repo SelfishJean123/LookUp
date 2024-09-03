@@ -43,27 +43,67 @@ const IngredientDetailsPage = () => {
             <div className="ingredient-details-main">
               <div className="details-main-info">
                 <div className="details-basic-info">
-                  <h4>Categories: {loadedIngredient.categories}</h4>
-                  <h4>Origin: {loadedIngredient.origin}</h4>
-                  <h4>Forms: {loadedIngredient.forms}</h4>
-                  <h4>Potentially allergenic: {loadedIngredient.potentiallyAllergenic}</h4>
-                  <h4>Pregnancy safe: {loadedIngredient.pregnancySafe}</h4>
-                  <h4>Vegan: {loadedIngredient.vegan}</h4>
+                  <h4>
+                    Categories:
+                    {loadedIngredient.categories.map((categorie, index) => (
+                      <span key={index}>
+                        {index ? " / " : ""}
+                        {categorie.name}
+                      </span>
+                    ))}
+                  </h4>
+                  <h4>
+                    Origin:
+                    {loadedIngredient.origin.map((origin, index) => (
+                      <span key={index}>
+                        {index ? " / " : ""}
+                        {origin.name}
+                      </span>
+                    ))}
+                  </h4>
+                  <h4>
+                    Forms:
+                    {loadedIngredient.forms.map((form, index) => (
+                      <span key={index}>
+                        {index ? " / " : ""}
+                        {form.name}
+                      </span>
+                    ))}
+                  </h4>
+                  <h4>
+                    Potentially allergenic: <span>{loadedIngredient.potentiallyAllergenic}</span>
+                  </h4>
+                  <h4>
+                    Pregnancy safe: <span>{loadedIngredient.pregnancySafe}</span>
+                  </h4>
+                  <h4>
+                    Vegan: <span>{loadedIngredient.vegan}</span>
+                  </h4>
                 </div>
                 <div className="details-updates">
-                  <h5>Added: {loadedIngredient.createdAt?.toDateString()}</h5>
-                  <h5>by: {loadedIngredient.createdByUserId}</h5>
-                  <h5>Last update: {loadedIngredient.lastEditedAt?.toDateString()} </h5>
-                  <h5>by {loadedIngredient.lastEditedByUserId}</h5>
+                  <h5>
+                    Added:
+                    <span>{new Date(loadedIngredient.createdAt).toLocaleDateString().replace(/\./g, " / ")}</span>
+                  </h5>
+                  <h5>
+                    by: <span>{loadedIngredient.createdByUserId}</span>
+                  </h5>
+                  <h5>
+                    Last update:
+                    <span>{new Date(loadedIngredient.lastEditedAt).toLocaleDateString().replace(/\./g, " / ")}</span>
+                  </h5>
+                  <h5>
+                    by <span>{loadedIngredient.lastEditedByUserId}</span>
+                  </h5>
                 </div>
               </div>
 
               <div className="details-main-images-wrapper">
                 <ImageCarouselCmp
                   childrenSources={[
-                    `/assets/ingredients/${loadedIngredient.image1}`,
-                    `/assets/ingredients/${loadedIngredient.image2}`,
-                    `/assets/ingredients/${loadedIngredient.image3}`,
+                    `http://localhost:5000/${loadedIngredient.image1}`,
+                    `http://localhost:5000/${loadedIngredient.image2}`,
+                    `http://localhost:5000/${loadedIngredient.image3}`,
                   ]}
                 />
               </div>

@@ -1,11 +1,10 @@
 import AutocompleteChipsCmp from "../../../../common/components/inputs/AutocompleteChipsCmp/AutocompleteChipsCmp";
-import IngredientCategorie from "../../interfaces/IngredientCategorie.interface";
-import IngredientForm from "../../interfaces/IngredientForm.interface";
-import IngredientOrigin from "../../interfaces/IngredientOrigin.interface";
+import ImagePickerCmp from "../../../../common/components/inputs/ImagePickerCmp/ImagePickerCmp";
 import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
+import Option from "../../../../common/interfaces/Option.interface";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
-import SelectInputCmp from "../../../../common/components/inputs/SelectInputCmp/SelectInputCmp";
 import SignContext from "../../../../common/contexts/SignContext";
+import SingleSelectInputCmp from "../../../../common/components/inputs/SingleSelectInputCmp/SingleSelectInputCmp";
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import TextInputCmp from "../../../../common/components/inputs/TextInputCmp/TextInputCmp";
 import { FC, useContext } from "react";
@@ -19,10 +18,10 @@ interface AddIngredientFormCmpProps {
 }
 
 const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
-  const categories: IngredientCategorie[] = [
+  const categories: Option[] = [
     { value: "emollients", name: "emollients" },
     { value: "humectants", name: "humectants" },
-    { value: "active-substances", name: "active-substances" },
+    { value: "active-substances", name: "active substances" },
     { value: "preservatives", name: "preservatives" },
     { value: "emulsifiers", name: "emulsifiers" },
     { value: "colorants", name: "colorants" },
@@ -30,10 +29,10 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
     { value: "sunscreens", name: "sunscreens" },
     { value: "surfactants", name: "surfactants" },
     { value: "antioxidants", name: "antioxidants" },
-    { value: "film-formers", name: "film-formers" },
+    { value: "film-formers", name: "film formers" },
   ];
 
-  const origin: IngredientOrigin[] = [
+  const origin: Option[] = [
     { value: "plant", name: "plant" },
     { value: "animal", name: "animal" },
     { value: "mineral", name: "mineral" },
@@ -41,7 +40,7 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
     { value: "biotechnological", name: "biotechnological" },
   ];
 
-  const forms: IngredientForm[] = [
+  const forms: Option[] = [
     { value: "liquid", name: "liquid" },
     { value: "powder", name: "powder" },
     { value: "gel", name: "gel" },
@@ -55,20 +54,21 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
   ];
 
   const signContext = useContext(SignContext);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
   const [formState, inputHandler] = useForm(
     {
       image1: {
-        value: "",
+        value: null,
         isValid: false,
       },
       image2: {
-        value: "",
+        value: null,
         isValid: false,
       },
       image3: {
-        value: "",
+        value: null,
         isValid: false,
       },
       nameLatin: {
@@ -123,32 +123,24 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
     event.preventDefault();
 
     try {
-      const responseData = await sendRequest(
-        "http://localhost:5000/api/ingredient",
-        "POST",
-        JSON.stringify({
-          createdByUserId: signContext.userId,
-          image1: formState.inputs.image1.value,
-          image2: formState.inputs.image2.value,
-          image3: formState.inputs.image3.value,
-          nameLatin: formState.inputs.nameLatin.value,
-          namePolish: formState.inputs.namePolish.value,
-          nameEnglish: formState.inputs.nameEnglish.value,
-          categories: formState.inputs.categories,
-          origin: formState.inputs.origin,
-          forms: formState.inputs.forms,
-          potentiallyAllergenic: formState.inputs.potentiallyAllergenic.value,
-          pregnancySafe: formState.inputs.pregnancySafe.value,
-          vegan: formState.inputs.vegan.value,
-          description: formState.inputs.description.value,
-          concerns: formState.inputs.concerns.value,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-      console.log(responseData);
-      // navigate('/');
+      const formData = new FormData();
+      if (signContext.userId) formData.append("createdByUserId", signContext.userId);
+      formData.append("image1", formState.inputs.image1.value);
+      formData.append("image2", formState.inputs.image2.value);
+      formData.append("image3", formState.inputs.image3.value);
+      formData.append("nameLatin", formState.inputs.nameLatin.value);
+      formData.append("namePolish", formState.inputs.namePolish.value);
+      formData.append("nameEnglish", formState.inputs.nameEnglish.value);
+      formData.append("categories", JSON.stringify(formState.inputs.categories.value));
+      formData.append("origin", JSON.stringify(formState.inputs.origin.value));
+      formData.append("forms", JSON.stringify(formState.inputs.forms.value));
+      formData.append("potentiallyAllergenic", formState.inputs.potentiallyAllergenic.value);
+      formData.append("vegan", formState.inputs.vegan.value);
+      formData.append("description", formState.inputs.description.value);
+      formData.append("concerns", formState.inputs.concerns.value);
+
+      const responseData = await sendRequest("http://localhost:5000/api/ingredients/addIngredient", "POST", formData);
+      navigate(`/inci-encyclopedia/${responseData.ingredient.id}`);
     } catch (err) {}
   };
 
@@ -159,9 +151,9 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
       )}
       <form className="add-ingredient-form-component" onSubmit={addIngredientSubmitHandler}>
         {isLoading && <ProgressSpinnerCmp asOverlay />}
-        <TextInputCmp id="name-polish" label="Name (Polish)" required={true} width={100} input={inputHandler} />
-        <TextInputCmp id="name-english" label="Name (English)" required={true} width={100} input={inputHandler} />
-        <TextInputCmp id="name-latin" label="Name (Latin)" required={true} width={100} input={inputHandler} />
+        <TextInputCmp id="namePolish" label="Name (Polish)" required={true} width={100} input={inputHandler} />
+        <TextInputCmp id="nameEnglish" label="Name (English)" required={true} width={100} input={inputHandler} />
+        <TextInputCmp id="nameLatin" label="Name (Latin)" required={true} width={100} input={inputHandler} />
 
         <AutocompleteChipsCmp
           id="categories"
@@ -173,33 +165,33 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
         <AutocompleteChipsCmp id="origin" label="Origin" options={origin} width={100} input={inputHandler} />
         <AutocompleteChipsCmp id="forms" label="Forms" options={forms} width={100} input={inputHandler} />
 
-        <SelectInputCmp
-          id="potentially-allergenic"
+        <SingleSelectInputCmp
+          id="potentiallyAllergenic"
           label="Potentially allergenic"
           required={true}
           options={[
             { value: "yes", name: "YES" },
             { value: "no", name: "NO" },
-            { value: "no data", name: "NO DATA" },
+            { value: "no-data", name: "NO DATA" },
           ]}
           width={100}
           input={inputHandler}
         />
 
-        <SelectInputCmp
-          id="pregnancy-safe"
+        <SingleSelectInputCmp
+          id="pregnancySafe"
           label="Pregnancy safe"
           required={true}
           options={[
             { value: "yes", name: "YES" },
             { value: "no", name: "NO" },
-            { value: "no data", name: "NO DATA" },
+            { value: "no-data", name: "NO DATA" },
           ]}
           width={100}
           input={inputHandler}
         />
 
-        <SelectInputCmp
+        <SingleSelectInputCmp
           id="vegan"
           label="Vegan"
           required={true}
@@ -230,9 +222,30 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
           input={inputHandler}
         />
 
-        {/* img
-      img
-      img */}
+        <ImagePickerCmp
+          id="image1"
+          label="Image 1"
+          hintText="Pick an image"
+          required={true}
+          width={33.333}
+          input={inputHandler}
+        />
+        <ImagePickerCmp
+          id="image2"
+          label="Image 2"
+          hintText="Pick an image"
+          required={false}
+          width={33.333}
+          input={inputHandler}
+        />
+        <ImagePickerCmp
+          id="image3"
+          label="Image 3"
+          hintText="Pick an image"
+          required={false}
+          width={33.333}
+          input={inputHandler}
+        />
 
         <div className="add-ingredient-form-buttons">
           <LabelIconButton

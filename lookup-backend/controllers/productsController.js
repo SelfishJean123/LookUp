@@ -4,15 +4,38 @@ const User = require("../models/User");
 const HttpError = require("../models/HttpError");
 
 const getProducts = async (req, res, next) => {
-  const products = await Product.find().exec();
-  res.json({ products: products.map((product) => product.toObject({ getters: true })) });
+  const { pageNumber, itemsPerPage, productsFilters, productsSorting } = req.body;
+
+  let sortDirection = 1;
+  switch (productsSorting.sortDirection) {
+    case "ascending": {
+      sortDirection = 1;
+      break;
+    }
+    case "descending": {
+      sortDirection = -1;
+      break;
+    }
+    default: {
+      sortDirection = 1;
+      break;
+    }
+  }
+
+  const productsLength = await Product.countDocuments();
+  const products = await Product.find()
+    .sort({ [productsSorting.sortBy]: sortDirection })
+    .skip((pageNumber - 1) * itemsPerPage)
+    .limit(itemsPerPage)
+    .exec();
+
+  res.json({ products: products.map((product) => product.toObject({ getters: true })), productsLength });
 };
 
 const getProductById = async (req, res, next) => {
   const productId = req.params.productId;
 
   let product;
-
   try {
     product = await Product.findById(productId);
   } catch (err) {
@@ -37,7 +60,6 @@ const addProduct = async (req, res, next) => {
 
   const {
     createdByUserId,
-    inci,
     image1,
     image2,
     image3,
@@ -46,16 +68,19 @@ const addProduct = async (req, res, next) => {
     producer,
     brand,
     subBrand,
-    categories,
-    subCategories,
     ean,
-    volumes,
     volumesUnit,
     vegan,
     crueltyFree,
     description,
     howToUse,
   } = req.body;
+
+  const inci = JSON.parse(req.body.inci);
+  const categories = JSON.parse(req.body.categories);
+  const subCategories = JSON.parse(req.body.subCategories);
+  const volumes = JSON.parse(req.body.volumes);
+  const createdAt = new Date();
 
   let user;
   try {
@@ -70,17 +95,15 @@ const addProduct = async (req, res, next) => {
     return next(error);
   }
 
-  const today = new Date();
-
   const newProduct = new Product({
     createdByUserId,
     lastEditedByUserId: createdByUserId,
-    createdAt: today,
-    lastEditedAt: today,
+    createdAt,
+    lastEditedAt: createdAt,
     inci,
-    image1,
-    image2,
-    image3,
+    image1: req.files.image1[0].path,
+    image2: req.files.image2[0].path,
+    image3: req.files.image3[0].path,
     name,
     subName,
     producer,
@@ -103,7 +126,7 @@ const addProduct = async (req, res, next) => {
     const result = await newProduct.save();
     res.status(201).json({ product: result.toObject({ getters: true }) }); // transaction & sessions - lesson 139
   } catch (err) {
-    const error = new HttpError("Adding new product faild.", 500);
+    const error = new HttpError("Adding new product failed.", 500);
     return next(error);
   }
 };
