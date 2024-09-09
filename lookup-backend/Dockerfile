@@ -22,8 +22,13 @@ RUN npm run build
 # Set permissions (if necessary)
 RUN chmod -R 777 ./node_modules
 
+RUN ls -ltr dist
+
+RUN pwd
+
 # Expose the default live-server port (8080)
 EXPOSE 5000
 
 # Use live-server to serve the built files with auto-reload
-CMD ["node", "./dist/final.js"]
+CMD ["live-server", "."]
+#CMD ["node", "./dist/final.js"]

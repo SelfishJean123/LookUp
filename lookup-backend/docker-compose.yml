@@ -6,8 +6,11 @@ services:
       - '8888:5000'
     volumes:
       - .:/usr/src/app
+      - myapp:/usr/src/dist
     networks:
       - app-network
-
+volumes:
+  myapp:
+    external: true
 networks:
   app-network:
