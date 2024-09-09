@@ -124,7 +124,7 @@ const ProductsListPage = () => {
     const fetchProducts = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5000/api/products",
+          "https://lookup-backend.joanna-hornung.art/api/products",
           "POST",
           JSON.stringify({
             pageNumber: currentPage,

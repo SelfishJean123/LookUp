@@ -141,7 +141,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const responseData = await sendRequest("http://localhost:5000/api/ingredients/getInciItems");
+        const responseData = await sendRequest("https://lookup-backend.joanna-hornung.art/api/ingredients/getInciItems");
         setLoadedInciItems(responseData.inciItems);
       } catch (err) {
         console.error(err);
@@ -175,7 +175,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
       formData.append("description", formState.inputs.description.value);
       formData.append("howToUse", formState.inputs.howToUse.value);
 
-      const responseData = await sendRequest("http://localhost:5000/api/products/addProduct", "POST", formData);
+      const responseData = await sendRequest("https://lookup-backend.joanna-hornung.art/api/products/addProduct", "POST", formData);
       navigate(`/products-catalogue/${responseData.product.id}`);
     } catch (err) {}
   };
