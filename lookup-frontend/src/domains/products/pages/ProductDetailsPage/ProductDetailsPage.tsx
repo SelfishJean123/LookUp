@@ -22,7 +22,7 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:5000/api/products/${productId}`, "GET");
+        const responseData = await sendRequest(`https://lookup-backend.joanna-hornung.art/api/products/${productId}`, "GET");
         setLoadedProduct(responseData.product);
       } catch (err) {}
     };
@@ -46,9 +46,9 @@ const ProductDetailsPage = () => {
               <div className="details-main-images-wrapper">
                 <ImageCarouselCmp
                   childrenSources={[
-                    `http://localhost:5000/${loadedProduct.image1}`,
-                    `http://localhost:5000/${loadedProduct.image2}`,
-                    `http://localhost:5000/${loadedProduct.image3}`,
+                    `https://lookup-backend.joanna-hornung.art/${loadedProduct.image1}`,
+                    `https://lookup-backend.joanna-hornung.art/${loadedProduct.image2}`,
+                    `https://lookup-backend.joanna-hornung.art/${loadedProduct.image3}`,
                   ]}
                 />
               </div>

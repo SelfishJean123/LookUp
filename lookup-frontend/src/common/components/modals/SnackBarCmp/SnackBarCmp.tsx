@@ -18,7 +18,7 @@ const SnackBarCmp: FC<SnackBarCmpProps> = ({ isSnackBarOpen, message, severity, 
     setIsOpen(isSnackBarOpen);
   }, [isSnackBarOpen]);
 
-  const closeSnackBar = (event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+  const closeSnackBar = (_: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
     onClear();
     if (reason === "clickaway") return;
     setIsOpen(false);

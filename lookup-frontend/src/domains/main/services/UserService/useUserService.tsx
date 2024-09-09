@@ -1,7 +1,4 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-const useUserService = (close: () => void) => {
+const useUserService = (_: () => void) => {
   //   const methods = useForm<signInValidationType>({
   //     resolver: zodResolver(signInValidationType),
   //   });
@@ -19,3 +16,5 @@ const useUserService = (close: () => void) => {
   //   });
   //   return { methods, signIn };
 };
+
+export default useUserService;

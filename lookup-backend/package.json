@@ -5,20 +5,37 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "webpack"
   },
   "author": "Joanna Hornung",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/credential-providers": "^3.645.0",
+    "@mongodb-js/zstd": "^1.2.1",
+    "aws4": "^1.13.2",
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
+    "gcp-metadata": "^5.3.0",
+    "kerberos": "^2.1.2",
     "mongodb": "^6.8.0",
+    "mongodb-client-encryption": "^6.1.0",
     "mongoose": "^8.5.1",
     "mongoose-unique-validator": "^5.0.1",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.4",
+    "snappy": "^7.2.2",
+    "socks": "^2.8.3",
     "uninstall": "^0.0.0",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "node-loader": "^2.0.0",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
   }
 }

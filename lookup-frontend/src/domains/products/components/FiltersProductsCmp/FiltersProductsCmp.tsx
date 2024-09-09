@@ -44,7 +44,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           label="Producers"
           required={false}
           options={producers}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               producers: value,
@@ -57,7 +57,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           label="Brands"
           required={false}
           options={brands}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               brands: value,
@@ -70,7 +70,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           label="Categories"
           required={false}
           options={categories}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               categories: value,
@@ -83,7 +83,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           label="Sub Categories"
           required={false}
           options={subCategories}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               subCategories: value,
@@ -96,7 +96,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           label="Vegan"
           required={false}
           options={vegan}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               vegan: value,
@@ -109,7 +109,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           label="Cruelty Free"
           required={false}
           options={crueltyFree}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               crueltyFree: value,
@@ -122,7 +122,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
           label="INCI"
           required={false}
           options={inci}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               inci: value,

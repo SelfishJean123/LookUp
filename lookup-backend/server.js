@@ -40,11 +40,10 @@ server.use((error, req, res, next) => {
   res.status(error.code || 500);
   res.json({ message: error.message || "An unknown error occured" });
 });
-
 const url =
   "mongodb+srv://JoannaHornung:Masakajmakowa231@cluster0.97yar0o.mongodb.net/LookUp?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose
   .connect(url)
-  .then(() => server.listen(5000))
+  .then(() => server.listen(5000, "0.0.0.0", () => console.log("Server is running on port 5000")))
   .catch((err) => console.log(err));

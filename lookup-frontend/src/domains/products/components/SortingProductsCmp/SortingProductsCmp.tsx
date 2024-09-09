@@ -27,7 +27,7 @@ const SortingProductsCmp: FC<SortingProductsCmpProps> = ({ sortByOptions, onSort
         label="Sort By"
         required={false}
         options={sortByOptions}
-        input={(id, value) => {
+        input={(_, value) => {
           setSorting({
             ...sorting,
             sortBy: value as ProductsSortingType["sortBy"],
@@ -41,7 +41,7 @@ const SortingProductsCmp: FC<SortingProductsCmpProps> = ({ sortByOptions, onSort
         label="Sort Direction"
         required={false}
         options={sortDirectionOption}
-        input={(id, value) => {
+        input={(_, value) => {
           setSorting({
             ...sorting,
             sortDirection: value as ProductsSortingType["sortDirection"],

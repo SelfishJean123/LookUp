@@ -19,7 +19,7 @@ const IngredientDetailsPage = () => {
   useEffect(() => {
     const fetchIngredient = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:5000/api/ingredients/${ingredientId}`, "GET");
+        const responseData = await sendRequest(`https://lookup-backend.joanna-hornung.art/api/ingredients/${ingredientId}`, "GET");
         setLoadedIngredient(responseData.ingredient);
       } catch (err) {}
     };
@@ -101,9 +101,9 @@ const IngredientDetailsPage = () => {
               <div className="details-main-images-wrapper">
                 <ImageCarouselCmp
                   childrenSources={[
-                    `http://localhost:5000/${loadedIngredient.image1}`,
-                    `http://localhost:5000/${loadedIngredient.image2}`,
-                    `http://localhost:5000/${loadedIngredient.image3}`,
+                    `https://lookup-backend.joanna-hornung.art/${loadedIngredient.image1}`,
+                    `https://lookup-backend.joanna-hornung.art/${loadedIngredient.image2}`,
+                    `https://lookup-backend.joanna-hornung.art/${loadedIngredient.image3}`,
                   ]}
                 />
               </div>

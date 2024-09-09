@@ -24,7 +24,7 @@ const PaginationCmp: FC<PaginationCmpProps> = ({ page, count, variant, shape, si
         shape={shape}
         size={size}
         color={color}
-        onChange={(event: any, page: number) => {
+        onChange={(_: any, page: number) => {
           setCurrentPage(page);
           change(page);
         }}

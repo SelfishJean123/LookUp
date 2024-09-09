@@ -27,7 +27,7 @@ const SortingIngredientsCmp: FC<SortingIngredientsCmpProps> = ({ sortByOptions, 
         label="Sort By"
         required={false}
         options={sortByOptions}
-        input={(id, value) => {
+        input={(_, value) => {
           setSorting({
             ...sorting,
             sortBy: value as IngredientsSortingType["sortBy"],
@@ -41,7 +41,7 @@ const SortingIngredientsCmp: FC<SortingIngredientsCmpProps> = ({ sortByOptions, 
         label="Sort Direction"
         required={false}
         options={sortDirectionOption}
-        input={(id, value) => {
+        input={(_, value) => {
           setSorting({
             ...sorting,
             sortDirection: value as IngredientsSortingType["sortDirection"],

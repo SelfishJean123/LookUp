@@ -3,11 +3,15 @@ import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/M
 import TopDescriptionCmp from "../../../../common/components/texts/TopDescriptionCmp/TopDescriptionCmp";
 import { Call, FacebookOutlined, Instagram, MailOutline } from "@mui/icons-material";
 import "./ContactPage.scss";
+import ContactUsFormCmp from "../../components/ContactUsFormCmp/ContactUsFormCmp";
 
 const ContactPage = () => {
+ 
   return (
     <div className="contact-page">
+      
       <MainHeadingCmp headingText="Contact Us" />
+
       <TopDescriptionCmp
         descriptionText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -39,6 +43,7 @@ const ContactPage = () => {
           link="https://www.instagram.com/"
         />
       </div>
+      <ContactUsFormCmp />
     </div>
   );
 };
