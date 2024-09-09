@@ -1,15 +1,5 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import InputBase from "@mui/material/InputBase";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import parse from "autosuggest-highlight/parse";
 import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import { debounce } from "@mui/material/utils";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -87,9 +77,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchBarCmp = () => {
-  const [value, setValue] = useState<PlaceType | null>(null);
-  const [inputValue, setInputValue] = useState("");
-  const [options, setOptions] = useState<readonly PlaceType[]>([]);
+  const [value] = useState<PlaceType | null>(null);
+  const [inputValue] = useState("");
+  const [_, setOptions] = useState<readonly PlaceType[]>([]);
   const loaded = useRef(false);
 
   if (typeof window !== "undefined" && !loaded.current) {

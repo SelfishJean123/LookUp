@@ -25,7 +25,7 @@ const FiltersIngredientsCmp: FC<FiltersIngredientsCmpProps> = ({ categories, veg
           label="Categories"
           required={false}
           options={categories}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               categories: value,
@@ -38,7 +38,7 @@ const FiltersIngredientsCmp: FC<FiltersIngredientsCmpProps> = ({ categories, veg
           label="Vegan"
           required={false}
           options={vegan}
-          onInput={(id, value) => {
+          onInput={(_, value) => {
             setFilters({
               ...filters,
               vegan: value,

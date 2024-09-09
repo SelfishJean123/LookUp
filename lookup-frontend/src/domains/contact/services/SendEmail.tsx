@@ -9,7 +9,7 @@ const useSendEmail =  (): {send: any, errors: any, setData: any, values: any}  =
     const [errors, setErrors] = useState<null | Map<string, string>>(null);
     const [values, setValues] = useState({email: "", message: "", name: ""});
 
-    const setData = (e) => {
+    const setData = (e: any) => {
         setValues(x => ({...x, [e.target.name]: e.target.value}));
     }
     const send = async (e: any): Promise<void> => {
