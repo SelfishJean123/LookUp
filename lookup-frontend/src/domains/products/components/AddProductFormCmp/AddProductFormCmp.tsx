@@ -143,7 +143,9 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
       try {
         const responseData = await sendRequest("http://localhost:5000/api/ingredients/getInciItems");
         setLoadedInciItems(responseData.inciItems);
-      } catch (err) {}
+      } catch (err) {
+        console.error(err);
+      }
     };
     fetchIngredients();
   }, [sendRequest]);
