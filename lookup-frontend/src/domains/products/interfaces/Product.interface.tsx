@@ -21,8 +21,8 @@ interface Product {
   ean: number;
   volumes: Option[];
   volumesUnit: string;
-  vegan: boolean;
-  crueltyFree: boolean;
+  vegan: string;
+  crueltyFree: string;
   description: string;
   howToUse: string;
   numberOfReviews: number;

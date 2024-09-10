@@ -22,7 +22,10 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const responseData = await sendRequest(`https://lookup-backend.joanna-hornung.art/api/products/${productId}`, "GET");
+        const responseData = await sendRequest(
+          `https://lookup-backend.joanna-hornung.art/api/products/${productId}`,
+          "GET"
+        );
         setLoadedProduct(responseData.product);
       } catch (err) {}
     };
@@ -95,10 +98,10 @@ const ProductDetailsPage = () => {
                     <span>{loadedProduct.volumesUnit}</span>
                   </h4>
                   <h4>
-                    Vegan: <span>{loadedProduct.vegan ? "YES" : "NO"}</span>
+                    Vegan: <span>{loadedProduct.vegan.toUpperCase()}</span>
                   </h4>
                   <h4>
-                    Cruelty Free: <span>{loadedProduct.crueltyFree ? "YES" : "NO"}</span>
+                    Cruelty Free: <span>{loadedProduct.crueltyFree.toUpperCase()}</span>
                   </h4>
                   <h4>
                     Rating: <span>{loadedProduct.rating}</span>

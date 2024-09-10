@@ -10,11 +10,12 @@ import Option from "../../../../common/interfaces/Option.interface";
 import PaginationCmp from "../../../../common/components/navigation/PaginationCmp/PaginationCmp";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
 import SearchBarCmp from "../../../../common/components/navigation/SearchBarCmp/SearchBarCmp";
+import SignContext from "../../../../common/contexts/SignContext";
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import SortingIngredientsCmp from "../../components/SortingIngredientsCmp/SortingIngredientsCmp";
 import TopDescriptionCmp from "../../../../common/components/texts/TopDescriptionCmp/TopDescriptionCmp";
 import { Stack, Toolbar } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHttpClient } from "../../../../common/hooks/httpClientHook";
 import "./IngredientsListPage.scss";
 
@@ -35,7 +36,6 @@ const categories: Option[] = [
 const vegan: Option[] = [
   { value: "yes", name: "yes" },
   { value: "no", name: "no" },
-  { value: "not_set", name: "not set" },
 ];
 
 const sortByOptions: Option[] = [
@@ -46,6 +46,7 @@ const sortByOptions: Option[] = [
 ];
 
 const IngredientsListPage = () => {
+  const signContext = useContext(SignContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [currentPage, setCurrentPage] = useState(1);
   const [loadedIngredients, setLoadedIngredients] = useState();
@@ -55,11 +56,11 @@ const IngredientsListPage = () => {
     categories: [],
     vegan: [],
   });
-
   const [sorting, setSorting] = useState<IngredientsSortingType>({
     sortBy: "namePolish",
     sortDirection: "ascending",
   });
+  const [searchString, setSearchString] = useState<string>("");
 
   const [chipData, setChipData] = useState<readonly ChipData[]>([
     { key: 0, label: "Face cream" },
@@ -84,6 +85,7 @@ const IngredientsListPage = () => {
             itemsPerPage: 12,
             ingredientsFilters: filters,
             ingredientsSorting: sorting,
+            ingredientsSearchString: searchString,
           }),
           {
             "Content-Type": "application/json",
@@ -94,7 +96,7 @@ const IngredientsListPage = () => {
       } catch (err) {}
     };
     fetchIngredients();
-  }, [sendRequest, currentPage, filters, sorting]);
+  }, [sendRequest, currentPage, filters, sorting, searchString]);
 
   const onPaginationChange = (page: number) => {
     setCurrentPage(page);
@@ -118,18 +120,21 @@ const IngredientsListPage = () => {
 
       <Toolbar className="ingredients-list-toolbar">
         <div className="toolbar-search-add">
-          <SearchBarCmp />
-          <BasicModalCmp
-            modalOpenButtonText="Add Ingredient"
-            modalOpenButtonTextColor="#fff"
-            modalOpenButtonBgColor="#387323"
-            modalOpenButtonBgHoverColor="#124500"
-            modalOpenButtonVariant="contained"
-            modalHeadingText="Add New Ingredient"
-            modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając okolice oczu. Dokładnie wmasuj do całkowitego wchłonięcia. Stosuj na oczyszczoną skórę rano lub/i wieczorem, w zależności od potrzeb. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
-            InnerFormCmp={AddIngredientFormCmp}
-            // innerFormCmpProps={}
-          />
+          <SearchBarCmp onSearch={(searchString) => setSearchString(searchString)} />
+
+          {signContext.userId && (
+            <BasicModalCmp
+              modalOpenButtonText="Add Ingredient"
+              modalOpenButtonTextColor="#fff"
+              modalOpenButtonBgColor="#387323"
+              modalOpenButtonBgHoverColor="#124500"
+              modalOpenButtonVariant="contained"
+              modalHeadingText="Add New Ingredient"
+              modalDescriptionText="Niewielką ilość kremu nałóż na twarz, szyję i dekolt, omijając okolice oczu. Dokładnie wmasuj do całkowitego wchłonięcia. Stosuj na oczyszczoną skórę rano lub/i wieczorem, w zależności od potrzeb. Dla kompleksowej ochrony skóry twarzy na dzień, po użyciu rekomendowane jest nałożenie kremu z filtrem SPF. Sprawdź nasz lekki krem lub lekką emulsję."
+              InnerFormCmp={AddIngredientFormCmp}
+              // innerFormCmpProps={}
+            />
+          )}
         </div>
 
         <div className="toolbar-filters">

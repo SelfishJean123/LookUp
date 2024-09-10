@@ -10,7 +10,7 @@ import SingleSelectInputCmp from "../../../../common/components/inputs/SingleSel
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import TagsCmp from "../../../../common/components/inputs/TagsCmp/TagsCmp";
 import TextInputCmp from "../../../../common/components/inputs/TextInputCmp/TextInputCmp";
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext } from "react";
 import { useForm } from "../../../../common/hooks/formHook";
 import { useHttpClient } from "../../../../common/hooks/httpClientHook";
 import { useNavigate } from "react-router-dom";
@@ -51,14 +51,14 @@ const volumes: Option[] = [
 ];
 
 interface AddProductFormCmpProps {
+  inci: Option[];
   close: () => void;
 }
 
-const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
+const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ inci, close }) => {
   const navigate = useNavigate();
   const signContext = useContext(SignContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [loadedInciItems, setLoadedInciItems] = useState<InciItem[]>([]);
 
   const [formState, inputHandler] = useForm(
     {
@@ -119,11 +119,11 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
         isValid: false,
       },
       vegan: {
-        value: false,
+        value: "no",
         isValid: false,
       },
       crueltyFree: {
-        value: false,
+        value: "no",
         isValid: false,
       },
       description: {
@@ -137,18 +137,6 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
     },
     false
   );
-
-  useEffect(() => {
-    const fetchIngredients = async () => {
-      try {
-        const responseData = await sendRequest("https://lookup-backend.joanna-hornung.art/api/ingredients/getInciItems");
-        setLoadedInciItems(responseData.inciItems);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchIngredients();
-  }, [sendRequest]);
 
   const addProductSubmitHandler = async (event: any) => {
     event.preventDefault();
@@ -175,7 +163,11 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
       formData.append("description", formState.inputs.description.value);
       formData.append("howToUse", formState.inputs.howToUse.value);
 
-      const responseData = await sendRequest("https://lookup-backend.joanna-hornung.art/api/products/addProduct", "POST", formData);
+      const responseData = await sendRequest(
+        "https://lookup-backend.joanna-hornung.art/api/products/addProduct",
+        "POST",
+        formData
+      );
       navigate(`/products-catalogue/${responseData.product.id}`);
     } catch (err) {}
   };
@@ -250,8 +242,8 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           label="Vegan"
           required={true}
           options={[
-            { value: "yes", name: "YES" },
-            { value: "no", name: "NO" },
+            { value: "yes", name: "yes" },
+            { value: "no", name: "no" },
           ]}
           width={100}
           input={inputHandler}
@@ -261,8 +253,8 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
           label="Cruelty free"
           required={true}
           options={[
-            { value: "yes", name: "YES" },
-            { value: "no", name: "NO" },
+            { value: "yes", name: "yes" },
+            { value: "no", name: "no" },
           ]}
           width={100}
           input={inputHandler}
@@ -270,10 +262,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ close }) => {
         <AutocompleteChipsCmp
           id="inci"
           label="INCI"
-          options={loadedInciItems?.map((item) => ({
-            value: item.id,
-            name: item.nameLatin,
-          }))}
+          options={inci}
           width={100}
           input={(id, value) => {
             const inciItems = value.map((item) => {

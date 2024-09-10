@@ -1,7 +1,7 @@
 .sorting-products-component {
-  width: 100%;
+  width: 50%;
   display: grid;
-  grid-template-columns: repeat(4, 25%);
+  grid-template-columns: repeat(2, 50%);
   justify-content: space-between;
   margin: 25px 0 15px 0;
 

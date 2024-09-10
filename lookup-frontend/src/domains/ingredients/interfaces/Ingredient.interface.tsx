@@ -17,7 +17,7 @@ interface Ingredient {
   forms: Option[];
   potentiallyAllergenic?: boolean;
   pregnancySafe?: boolean;
-  vegan?: boolean;
+  vegan?: string;
   description: string;
   concerns: string;
 }

@@ -5,7 +5,7 @@ const User = require("../models/User");
 const HttpError = require("../models/HttpError");
 
 const getIngredients = async (req, res, next) => {
-  const { pageNumber, itemsPerPage, IngredientFilters, ingredientsSorting } = req.body;
+  const { pageNumber, itemsPerPage, ingredientFilters, ingredientsSorting, ingredientsSearchString } = req.body;
 
   let sortDirection = 1;
   switch (ingredientsSorting.sortDirection) {
@@ -24,7 +24,30 @@ const getIngredients = async (req, res, next) => {
   }
 
   const ingredientsLength = await Ingredient.countDocuments();
-  const ingredients = await Ingredient.find()
+
+  const query = {
+    $and: [
+      {
+        $or: [
+          { namePolish: { $regex: `${ingredientsSearchString}`, $options: "i" } },
+          { nameEnglish: { $regex: `${ingredientsSearchString}`, $options: "i" } },
+          { nameLatin: { $regex: `${ingredientsSearchString}`, $options: "i" } },
+        ],
+      },
+    ],
+  };
+
+  if (ingredientFilters.categories.length > 0)
+    query.$and.unshift({
+      categories: {
+        $elemMatch: {
+          value: { $in: ingredientFilters.categories },
+        },
+      },
+    });
+  if (ingredientFilters.vegan.length > 0) query.$and.unshift({ vegan: { $in: ingredientFilters.vegan } });
+
+  const ingredients = await Ingredient.find(query)
     .sort({ [ingredientsSorting.sortBy]: sortDirection })
     .skip((pageNumber - 1) * itemsPerPage)
     .limit(itemsPerPage)
