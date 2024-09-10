@@ -4,7 +4,7 @@ const User = require("../models/User");
 const HttpError = require("../models/HttpError");
 
 const getProducts = async (req, res, next) => {
-  const { pageNumber, itemsPerPage, productsFilters, productsSorting } = req.body;
+  const { pageNumber, itemsPerPage, productsFilters, productsSorting, productsSearchString } = req.body;
 
   let sortDirection = 1;
   switch (productsSorting.sortDirection) {
@@ -23,7 +23,48 @@ const getProducts = async (req, res, next) => {
   }
 
   const productsLength = await Product.countDocuments();
-  const products = await Product.find()
+
+  const query = {
+    $and: [
+      {
+        $or: [
+          { name: { $regex: `${productsSearchString}`, $options: "i" } },
+          { subName: { $regex: `${productsSearchString}`, $options: "i" } },
+        ],
+      },
+    ],
+  };
+
+  if (productsFilters.producers.length > 0) query.$and.unshift({ producer: { $in: productsFilters.producers } });
+  if (productsFilters.brands.length > 0) query.$and.unshift({ brand: { $in: productsFilters.brands } });
+  if (productsFilters.categories.length > 0)
+    query.$and.unshift({
+      categories: {
+        $elemMatch: {
+          value: { $in: productsFilters.categories },
+        },
+      },
+    });
+  if (productsFilters.subCategories.length > 0)
+    query.$and.unshift({
+      subCategories: {
+        $elemMatch: {
+          value: { $in: productsFilters.subCategories },
+        },
+      },
+    });
+  if (productsFilters.crueltyFree.length > 0) query.$and.unshift({ crueltyFree: { $in: productsFilters.crueltyFree } });
+  if (productsFilters.vegan.length > 0) query.$and.unshift({ vegan: { $in: productsFilters.vegan } });
+  if (productsFilters.inci.length > 0)
+    query.$and.unshift({
+      inci: {
+        $all: productsFilters.inci.map((inciEl) => ({
+          $elemMatch: { id: inciEl },
+        })),
+      },
+    });
+
+  const products = await Product.find(query)
     .sort({ [productsSorting.sortBy]: sortDirection })
     .skip((pageNumber - 1) * itemsPerPage)
     .limit(itemsPerPage)

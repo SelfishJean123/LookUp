@@ -34,7 +34,7 @@ const ingredientSchema = new Schema({
   ],
   potentiallyAllergenic: { type: Boolean, required: false },
   pregnancySafe: { type: Boolean, required: false },
-  vegan: { type: Boolean, required: false },
+  vegan: { type: String, required: false },
   description: { type: String, required: true },
   concerns: { type: String, required: false },
 });

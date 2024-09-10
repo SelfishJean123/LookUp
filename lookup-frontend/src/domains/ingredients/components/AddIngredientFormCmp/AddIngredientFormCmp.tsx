@@ -104,7 +104,7 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
         isValid: false,
       },
       vegan: {
-        value: false,
+        value: "no",
         isValid: false,
       },
       description: {
@@ -196,8 +196,8 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
           label="Vegan"
           required={true}
           options={[
-            { value: "yes", name: "YES" },
-            { value: "no", name: "NO" },
+            { value: "yes", name: "yes" },
+            { value: "no", name: "no" },
           ]}
           width={100}
           input={inputHandler}

@@ -1,3 +1,5 @@
+@import "@styles/colors.scss";
+
 .filters-products-component {
   width: 100%;
   position: relative;
@@ -6,6 +8,7 @@
     display: grid;
     grid-template-columns: repeat(4, 25%);
     justify-content: space-between;
+    margin: 0 0 15px 0;
 
     .multiple-select-input-component {
       margin: 3px 5px;
@@ -16,17 +19,19 @@
     }
   }
 
-  .filters-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    position: absolute;
-    right: 5px;
-    bottom: 3px;
+  .toolbar-chips {
+    border-top: 1px solid $gray;
+    padding: 15px 5px 0 5px;
+    width: 100%;
+  }
+}
 
-    button {
-      margin: 0 0 0 5px;
-    }
+.MuiMenu-list {
+  .MuiCheckbox-root {
+    padding: 0 6px;
+  }
+
+  .MuiTypography-root {
+    font-size: 14px;
   }
 }

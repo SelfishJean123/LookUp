@@ -1,9 +1,12 @@
-import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
 import MultipleSelectInputCmp from "../../../../common/components/inputs/MultipleSelectInputCmp/MultipleSelectInputCmp";
 import Option from "../../../../common/interfaces/Option.interface";
 import ProductsFiltersType from "../../types/ProductsFiltersType.type";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import "./FiltersProductsCmp.scss";
+// import ChipButtonCmp from "../../../../common/components/buttons/ChipButtonCmp/ChipButtonCmp";
+// import ChipData from "../../../../common/interfaces/ChipData.interface";
+// import LabelIconButton from "../../../../common/components/buttons/LabelIconButtonCmp/LabelIconButtonCmp";
+// import { Stack } from "@mui/material";
 
 interface FiltersProductsCmpProps {
   producers: Option[];
@@ -26,6 +29,7 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
   inci,
   onFilter,
 }) => {
+  // const [chipData, setChipData] = useState<ChipData[]>([]);
   const [filters, setFilters] = useState<ProductsFiltersType>({
     producers: [],
     brands: [],
@@ -35,6 +39,21 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
     crueltyFree: [],
     inci: [],
   });
+
+  // useEffect(() => {
+  //   const chipData = Object.values(filters)
+  //     .flat()
+  //     .map((chip, index) => ({
+  //       key: index,
+  //       label: chip,
+  //     }));
+
+  //   setChipData(chipData);
+  // }, [filters]);
+
+  // const deleteChip = (chipToDelete: ChipData) => () => {
+  //   setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+  // };
 
   return (
     <div className="filters-products-component">
@@ -132,27 +151,19 @@ const FiltersProductsCmp: FC<FiltersProductsCmpProps> = ({
         />
       </div>
 
-      <div className="filters-buttons">
-        <LabelIconButton
-          label="Reset Filters"
-          color="#fff"
-          bgColor="#387323"
-          hoverBgColor="#124500"
-          type="button"
-          variant="contained"
-          onClick={() =>
-            setFilters({
-              producers: [],
-              brands: [],
-              categories: [],
-              subCategories: [],
-              vegan: [],
-              crueltyFree: [],
-              inci: [],
-            })
-          }
-        />
-      </div>
+      {/* <Stack spacing={1} direction="row" useFlexGap flexWrap="wrap" className="toolbar-chips">
+        {chipData.map((chip) => {
+          return (
+            <ChipButtonCmp
+              key={chip.key}
+              label={chip.label}
+              component={"div"}
+              variant="outlined"
+              onDelete={deleteChip(chip)}
+            />
+          );
+        })}
+      </Stack> */}
     </div>
   );
 };

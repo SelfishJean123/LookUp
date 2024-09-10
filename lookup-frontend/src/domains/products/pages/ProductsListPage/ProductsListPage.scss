@@ -6,15 +6,24 @@
     justify-content: space-between;
     align-items: center;
 
-    .toolbar-search-add {
+    .toolbar-top {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid $gray;
-      padding: 0 5px 15px 0;
       width: 100%;
+
+      .toolbar-search-add {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0 5px 0 0;
+        width: 50%;
+      }
 
       .label-icon-button-component {
         margin: 0 0 0 10px;
@@ -22,17 +31,7 @@
     }
 
     .toolbar-filters {
-      width: 100%;
       margin: 15px 0 0 0;
-    }
-
-    .toolbar-sorting {
-      width: 100%;
-    }
-
-    .toolbar-chips {
-      padding: 15px 5px 0 5px;
-      border-top: 1px solid $gray;
       width: 100%;
     }
   }

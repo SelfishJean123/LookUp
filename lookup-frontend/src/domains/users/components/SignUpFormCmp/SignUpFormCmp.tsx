@@ -74,7 +74,14 @@ const SignUpFormCmp: FC<SignUpFormCmpProps> = ({ close }) => {
         <TextInputCmp id="firstName" label="First Name" required={true} type="text" width={100} input={inputHandler} />
         <TextInputCmp id="lastName" label="Last Name" required={true} type="text" width={100} input={inputHandler} />
         <TextInputCmp id="userName" label="User Name" required={true} type="text" width={100} input={inputHandler} />
-        <ImagePickerCmp id="avatar" label="Upload" hintText="Pick an image for your avatar" required={true} width={100} input={inputHandler} />
+        <ImagePickerCmp
+          id="avatar"
+          label="Upload"
+          hintText="Pick an image for your avatar"
+          required={true}
+          width={100}
+          input={inputHandler}
+        />
         <TextInputCmp id="email" label="E-mail" required={true} type="email" width={100} input={inputHandler} />
         <TextInputCmp id="password" label="Password" required={true} type="password" width={100} input={inputHandler} />
 

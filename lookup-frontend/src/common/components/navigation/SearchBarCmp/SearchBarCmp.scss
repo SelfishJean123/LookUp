@@ -2,15 +2,45 @@
 
 .search-bar-component {
   display: flex;
+  position: relative;
   align-items: center;
+  transition: 0.5s;
   border: 1px solid $gray;
+  border-radius: 4px;
+  background-color: $white;
+  height: 38px;
 
-  @media (min-width: 768px) {
-    height: 38px;
+  &:hover {
+    background-color: $beige;
   }
 
-  input {
-    font-weight: 700;
-    font-size: 14px;
+  .search-bar-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 2px 6px 2px 8px;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .search-bar-input-wrapper {
+    border: none;
+    outline: none;
+
+    .search-bar-input {
+      transition: width 0.5s;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      padding: 2px;
+      width: 12ch;
+      font-weight: 700;
+      font-size: 14px;
+
+      &:focus {
+        width: 20ch;
+      }
+    }
   }
 }
