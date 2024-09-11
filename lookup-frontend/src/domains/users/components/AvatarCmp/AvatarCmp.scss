@@ -1,0 +1,13 @@
+.avatar-component {
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+  overflow: hidden;
+
+  img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}

@@ -164,7 +164,7 @@ const AddProductFormCmp: FC<AddProductFormCmpProps> = ({ inci, close }) => {
       formData.append("howToUse", formState.inputs.howToUse.value);
 
       const responseData = await sendRequest(
-        "https://lookup-backend.joanna-hornung.art/api/products/addProduct",
+        "http://localhost:5000/api/products/addProduct",
         "POST",
         formData
       );

@@ -3,6 +3,7 @@ const { check } = require("express-validator");
 const router = express.Router();
 const {
   getProducts,
+  getFavourites,
   getProductById,
   addProduct,
   editProduct,
@@ -12,6 +13,7 @@ const {
 const fileUpload = require("./../middleware/fileUpload");
 
 router.post("/", [check("pageNumber").notEmpty(), check("itemsPerPage").notEmpty()], getProducts);
+router.post("/favourites", getFavourites);
 router.get("/:productId", getProductById);
 router.post(
   "/addProduct",

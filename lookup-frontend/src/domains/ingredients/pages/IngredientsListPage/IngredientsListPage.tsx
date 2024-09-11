@@ -78,7 +78,7 @@ const IngredientsListPage = () => {
     const fetchIngredients = async () => {
       try {
         const responseData = await sendRequest(
-          "https://lookup-backend.joanna-hornung.art/api/ingredients",
+          "http://localhost:5000/api/ingredients",
           "POST",
           JSON.stringify({
             pageNumber: currentPage,

@@ -139,7 +139,7 @@ const AddIngredientFormCmp: FC<AddIngredientFormCmpProps> = ({ close }) => {
       formData.append("description", formState.inputs.description.value);
       formData.append("concerns", formState.inputs.concerns.value);
 
-      const responseData = await sendRequest("https://lookup-backend.joanna-hornung.art/api/ingredients/addIngredient", "POST", formData);
+      const responseData = await sendRequest("http://localhost:5000/api/ingredients/addIngredient", "POST", formData);
       navigate(`/inci-encyclopedia/${responseData.ingredient.id}`);
     } catch (err) {}
   };

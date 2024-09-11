@@ -73,6 +73,14 @@ const getProducts = async (req, res, next) => {
   res.json({ products: products.map((product) => product.toObject({ getters: true })), productsLength });
 };
 
+const getFavourites = async (req, res, next) => {
+  const { favourites } = req.body;
+  const productsLength = await Product.countDocuments();
+
+  const products = await Product.find({ _id: { $in: favourites } }).exec();
+  res.json({ products: products.map((product) => product.toObject({ getters: true })), productsLength });
+};
+
 const getProductById = async (req, res, next) => {
   const productId = req.params.productId;
 
@@ -295,6 +303,7 @@ const getProductsByUserId = async (req, res, next) => {
 };
 
 exports.getProducts = getProducts;
+exports.getFavourites = getFavourites;
 exports.getProductById = getProductById;
 exports.addProduct = addProduct;
 exports.editProduct = editProduct;

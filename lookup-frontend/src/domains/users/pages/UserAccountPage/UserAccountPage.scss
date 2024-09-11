@@ -1,0 +1,39 @@
+@import "@styles/colors.scss";
+
+.user-account-page {
+  .user-info-wrapper {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    .main-heading-component {
+      padding: 0 10px 0 0;
+    }
+
+    .user-actions-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
+
+      .label-icon-button-component {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .user-favourites-wrapper,
+  .user-added-wrapper {
+    padding: 50px 0 20px 0;
+
+    h4 {
+      text-align: left;
+      color: $chocolate;
+      margin: 0 0 15px 15px;
+    }
+  }
+}
