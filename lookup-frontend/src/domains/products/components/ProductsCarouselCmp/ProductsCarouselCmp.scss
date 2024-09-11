@@ -1,0 +1,110 @@
+@import "@styles/colors.scss";
+
+.product-carousel-component {
+  .product-carousel-item {
+    margin: 5px;
+    width: 100%;
+
+    .carousel-item-img {
+      margin: 0 auto;
+      padding: 0 5px;
+      width: 150px;
+      height: 150px;
+
+      img {
+        display: block;
+        background-color: $white;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .carousel-item-title {
+      width: 100%;
+
+      a {
+        display: block;
+        width: 140px;
+        position: relative;
+        z-index: 100;
+        background-color: $apricot;
+        padding: 5px;
+        margin: 0 auto;
+        overflow: hidden;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        h6 {
+          display: inline;
+          color: $brick;
+        }
+      }
+    }
+  }
+
+  .slick-slide {
+    width: 20%;
+    height: 200px;
+  }
+
+  .slick-arrow {
+    &::before {
+      color: #555;
+      font-size: 24px;
+    }
+
+    &.slick-prev {
+      left: -35px;
+    }
+
+    &.slick-next {
+      right: -30px;
+    }
+  }
+}
+
+.product-no-carousel-component {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  .product-no-carousel-item {
+    width: 150px;
+    height: 180px;
+    margin-right: 10px;
+
+    .no-carousel-item-img {
+      width: 100%;
+      height: 150px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .no-carousel-item-title {
+      width: 100%;
+
+      a {
+        display: block;
+        width: 140px;
+        position: relative;
+        z-index: 100;
+        background-color: $apricot;
+        padding: 5px;
+        margin: 0 auto;
+        overflow: hidden;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        h6 {
+          display: inline;
+          color: $brick;
+        }
+      }
+    }
+  }
+}

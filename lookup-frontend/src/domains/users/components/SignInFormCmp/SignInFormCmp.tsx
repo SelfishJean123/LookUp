@@ -34,7 +34,7 @@ const SignInFormCmp: FC<SignInFormCmpProps> = ({ close }) => {
     event.preventDefault();
 
     const responseData = await sendRequest(
-      "https://lookup-backend.joanna-hornung.art/api/users/signin",
+      "http://localhost:5000/api/users/signin",
       "POST",
       JSON.stringify({
         email: formState.inputs.email.value,

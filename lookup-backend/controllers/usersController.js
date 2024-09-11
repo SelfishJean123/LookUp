@@ -87,7 +87,27 @@ const getUserByUserId = async (req, res, next) => {
 
   let user;
   try {
-    user = await user.findById(userId);
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError("Fetching user failed.", 500);
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError("Could not find user for provided user id.", 404);
+    return next(error);
+  }
+
+  res.json({ user: user.toObject({ getters: true }) });
+};
+
+const addToFavourites = async (req, res, next) => {
+  const userId = req.params.userId;
+  const { favouriteId } = req.body;
+
+  let user;
+  try {
+    user = await User.findOneAndUpdate({ _id: userId }, { $push: { favourites: favouriteId } }, { returnOriginal: true });
   } catch (err) {
     const error = new HttpError("Fetching user failed.", 500);
     return next(error);
@@ -108,3 +128,4 @@ exports.recoverUserPassword = recoverUserPassword;
 exports.changeUserPassword = changeUserPassword;
 exports.deleteUser = deleteUser;
 exports.getUserByUserId = getUserByUserId;
+exports.addToFavourites = addToFavourites;

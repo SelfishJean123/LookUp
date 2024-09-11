@@ -9,6 +9,7 @@ const {
   changeUserPassword,
   deleteUser,
   getUserByUserId,
+  addToFavourites,
 } = require("../controllers/usersController");
 const fileUpload = require("./../middleware/fileUpload");
 
@@ -30,5 +31,6 @@ router.post("/recoverpassword", recoverUserPassword);
 router.patch("/changepassword", changeUserPassword);
 router.delete("/:userId", deleteUser);
 router.get("/:userId", getUserByUserId);
+router.post("/:userId/favourites", addToFavourites);
 
 module.exports = router;

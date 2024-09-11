@@ -5,27 +5,46 @@ import LabelIconButtonCmp from "../../../../common/components/buttons/LabelIconB
 import MainHeadingCmp from "../../../../common/components/texts/MainHeadingCmp/MainHeadingCmp";
 import Product from "../../interfaces/Product.interface";
 import ProgressSpinnerCmp from "../../../../common/components/modals/ProgressSpinnerCmp/ProgressSpinnerCmp";
+import SignContext from "../../../../common/contexts/SignContext";
 import SnackBarCmp from "../../../../common/components/modals/SnackBarCmp/SnackBarCmp";
 import SubHeadingCmp from "../../../../common/components/texts/SubHeadingCmp/SubHeadingCmp";
-import { FavoriteBorder, RateReviewSharp, VisibilitySharp } from "@mui/icons-material";
+import { Favorite, FavoriteBorder, RateReviewSharp, VisibilitySharp } from "@mui/icons-material";
 import { Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHttpClient } from "../../../../common/hooks/httpClientHook";
 import { useParams } from "react-router-dom";
 import "./ProductDetailsPage.scss";
 
 const ProductDetailsPage = () => {
+  const signContext = useContext(SignContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedProduct, setLoadedProduct] = useState<Product | undefined>(undefined);
   const productId = useParams().productId;
+  const [favButton, setFavButton] = useState(<FavoriteBorder />);
+
+  const addToFavouritesHandler = async () => {
+    try {
+      const updatedUser = await sendRequest(
+        `http://localhost:5000/api/users/${signContext.userId}/favourites`,
+        "POST",
+        JSON.stringify({
+          favouriteId: loadedProduct?.id,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+
+      setFavButton(<Favorite />);
+
+      console.log(updatedUser);
+    } catch (err) {}
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const responseData = await sendRequest(
-          `https://lookup-backend.joanna-hornung.art/api/products/${productId}`,
-          "GET"
-        );
+        const responseData = await sendRequest(`http://localhost:5000/api/products/${productId}`, "GET");
         setLoadedProduct(responseData.product);
       } catch (err) {}
     };
@@ -49,9 +68,9 @@ const ProductDetailsPage = () => {
               <div className="details-main-images-wrapper">
                 <ImageCarouselCmp
                   childrenSources={[
-                    `https://lookup-backend.joanna-hornung.art/${loadedProduct.image1}`,
-                    `https://lookup-backend.joanna-hornung.art/${loadedProduct.image2}`,
-                    `https://lookup-backend.joanna-hornung.art/${loadedProduct.image3}`,
+                    `http://localhost:5000/${loadedProduct.image1}`,
+                    `http://localhost:5000/${loadedProduct.image2}`,
+                    `http://localhost:5000/${loadedProduct.image3}`,
                   ]}
                 />
               </div>
@@ -129,7 +148,7 @@ const ProductDetailsPage = () => {
             </div>
 
             <div className="details-actions">
-              <IconButtonCmp icon={<FavoriteBorder />} />
+              <IconButtonCmp icon={favButton} onClick={addToFavouritesHandler} />
               <LabelIconButtonCmp
                 label="Report"
                 icon={<RateReviewSharp />}

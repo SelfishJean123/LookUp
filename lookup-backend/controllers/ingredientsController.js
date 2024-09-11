@@ -5,7 +5,7 @@ const User = require("../models/User");
 const HttpError = require("../models/HttpError");
 
 const getIngredients = async (req, res, next) => {
-  const { pageNumber, itemsPerPage, ingredientFilters, ingredientsSorting, ingredientsSearchString } = req.body;
+  const { pageNumber, itemsPerPage, ingredientsFilters, ingredientsSorting, ingredientsSearchString } = req.body;
 
   let sortDirection = 1;
   switch (ingredientsSorting.sortDirection) {
@@ -37,15 +37,15 @@ const getIngredients = async (req, res, next) => {
     ],
   };
 
-  if (ingredientFilters.categories.length > 0)
+  if (ingredientsFilters.categories.length > 0)
     query.$and.unshift({
       categories: {
         $elemMatch: {
-          value: { $in: ingredientFilters.categories },
+          value: { $in: ingredientsFilters.categories },
         },
       },
     });
-  if (ingredientFilters.vegan.length > 0) query.$and.unshift({ vegan: { $in: ingredientFilters.vegan } });
+  if (ingredientsFilters.vegan.length > 0) query.$and.unshift({ vegan: { $in: ingredientsFilters.vegan } });
 
   const ingredients = await Ingredient.find(query)
     .sort({ [ingredientsSorting.sortBy]: sortDirection })

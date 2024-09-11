@@ -59,7 +59,7 @@ const SignUpFormCmp: FC<SignUpFormCmpProps> = ({ close }) => {
       formData.append("email", formState.inputs.email.value);
       formData.append("password", formState.inputs.password.value);
 
-      const responseData = await sendRequest("https://lookup-backend.joanna-hornung.art/api/users/signup", "POST", formData);
+      const responseData = await sendRequest("http://localhost:5000/api/users/signup", "POST", formData);
       signContext.signIn(responseData.user.id);
     } catch (err) {}
   };
