@@ -27,7 +27,7 @@ const ProductsCarouselCmp: FC<ProductsCarouselCmpProps> = ({ productItems }) => 
             return (
               <div className="product-carousel-item" key={index}>
                 <div className="carousel-item-img">
-                  <img src={`http://localhost:5000/${product.image1}`} />
+                  <img src={`https://lookup-backend.joanna-hornung.art/${product.image1}`} />
                 </div>
 
                 <div className="carousel-item-title">
@@ -45,7 +45,7 @@ const ProductsCarouselCmp: FC<ProductsCarouselCmpProps> = ({ productItems }) => 
             return (
               <div className="product-no-carousel-item" key={index}>
                 <div className="no-carousel-item-img">
-                  <img src={`http://localhost:5000/${product.image1}`} />
+                  <img src={`https://lookup-backend.joanna-hornung.art/${product.image1}`} />
                 </div>
 
                 <div className="no-carousel-item-title">

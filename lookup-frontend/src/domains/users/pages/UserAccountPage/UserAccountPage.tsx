@@ -21,7 +21,7 @@ const UserAccountPage = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:5000/api/users/${signContext.userId}`, "GET");
+        const responseData = await sendRequest(`https://lookup-backend.joanna-hornung.art/api/users/${signContext.userId}`, "GET");
         setLoadedUser(responseData.user);
       } catch (err) {}
     };
@@ -32,7 +32,7 @@ const UserAccountPage = () => {
     const fetchFavourites = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5000/api/products/favourites",
+          "https://lookup-backend.joanna-hornung.art/api/products/favourites",
           "POST",
           JSON.stringify({
             favourites: loadedUser?.favourites,
@@ -50,7 +50,7 @@ const UserAccountPage = () => {
   useEffect(() => {
     const userAddedProducts = async () => {
       try {
-        const responseData = await sendRequest(`http://localhost:5000/api/products/user/${signContext.userId}`, "GET");
+        const responseData = await sendRequest(`https://lookup-backend.joanna-hornung.art/api/products/user/${signContext.userId}`, "GET");
         setLoadedAdded(responseData.products);
       } catch (err) {}
     };
@@ -68,7 +68,7 @@ const UserAccountPage = () => {
         <>
           <div className="user-info-wrapper">
             <MainHeadingCmp headingText={`${loadedUser.firstName} ${loadedUser.lastName}` || ""} />
-            <AvatarCmp imgSrc={`http://localhost:5000/${loadedUser.avatar}`} />
+            <AvatarCmp imgSrc={`https://lookup-backend.joanna-hornung.art/${loadedUser.avatar}`} />
 
             <div className="user-actions-wrapper">
               <LabelIconButton

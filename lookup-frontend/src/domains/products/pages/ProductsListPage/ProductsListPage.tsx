@@ -97,7 +97,7 @@ const ProductsListPage = () => {
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const responseData = await sendRequest("http://localhost:5000/api/ingredients/getInciItems");
+        const responseData = await sendRequest("https://lookup-backend.joanna-hornung.art/api/ingredients/getInciItems");
         setLoadedInciItems(responseData.inciItems);
       } catch (err) {
         console.error(err);
@@ -110,7 +110,7 @@ const ProductsListPage = () => {
     const fetchProducts = async () => {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5000/api/products",
+          "https://lookup-backend.joanna-hornung.art/api/products",
           "POST",
           JSON.stringify({
             pageNumber: currentPage,

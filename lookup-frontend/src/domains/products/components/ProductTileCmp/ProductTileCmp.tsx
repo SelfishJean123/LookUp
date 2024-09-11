@@ -41,7 +41,7 @@ const ProductTileCmp: FC<ProductTileCmpProps> = ({ product }) => {
       <Link to={product.id}>
         <div className="product-tile-top">
           <div className="product-tile-img-wrapper">
-            <img src={`http://localhost:5000/${product.image1}`} alt={product.name} className="product-tile-img" />
+            <img src={`https://lookup-backend.joanna-hornung.art/${product.image1}`} alt={product.name} className="product-tile-img" />
           </div>
 
           <div className="product-tile-rating">
